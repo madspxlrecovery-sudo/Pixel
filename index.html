@@ -1,191 +1,139 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#0b0f10">
-  <title>Pixel — Banner Vault</title>
+  <meta name="theme-color" content="#111217">
+  <title>Pixel — Banner Select</title>
   <link rel="stylesheet" href="assets/css/main.css">
 </head>
 <body>
-  <div class="dungeon-bg" aria-hidden="true">
-    <div class="fog fog-a"></div>
-    <div class="fog fog-b"></div>
-    <div class="torch-glow torch-left"></div>
-    <div class="torch-glow torch-right"></div>
-    <div class="stone-shape stone-a"></div>
-    <div class="stone-shape stone-b"></div>
-    <div class="stone-shape stone-c"></div>
+  <div class="world-scene" aria-hidden="true">
+    <div class="world-haze"></div>
+    <div class="world-light light-a"></div>
+    <div class="world-light light-b"></div>
+    <div class="world-block block-a"></div>
+    <div class="world-block block-b"></div>
+    <div class="world-block block-c"></div>
+    <div class="world-block block-d"></div>
+    <div class="world-floor"></div>
   </div>
 
-  <div class="screen-frame">
-    <header class="game-header">
-      <button class="dungeon-icon back-button" type="button" aria-label="Volver">
-        <span>‹</span>
+  <div class="screen-shade" aria-hidden="true"></div>
+
+  <header class="hud-top">
+    <div class="emerald-counter" aria-label="Emeralds">
+      <span class="emerald-sprite" aria-hidden="true"></span>
+      <strong>3373</strong>
+    </div>
+
+    <button class="close-box" type="button" aria-label="Close">×</button>
+  </header>
+
+  <main class="banner-select" aria-labelledby="screen-title">
+    <div class="title-plaque">
+      <h1 id="screen-title">SELECT BANNER</h1>
+    </div>
+
+    <section class="banner-grid" aria-label="Banner selection">
+      <article class="banner-panel d-frame selected" tabindex="0" aria-current="true" data-banner="active">
+        <div class="banner-visual active-visual" aria-hidden="true">
+          <div class="pixel-sky"></div>
+          <div class="banner-mountain mountain-left"></div>
+          <div class="banner-mountain mountain-right"></div>
+          <div class="banner-platform"></div>
+          <div class="banner-portal">
+            <span></span>
+          </div>
+          <div class="banner-particle particle-a"></div>
+          <div class="banner-particle particle-b"></div>
+          <div class="banner-particle particle-c"></div>
+        </div>
+
+        <div class="panel-content">
+          <div class="panel-icon pixel-diamond" aria-hidden="true"></div>
+          <h2>ROTATION 01</h2>
+          <ul class="panel-points">
+            <li><span class="bullet-diamond"></span>Current featured banner</li>
+            <li><span class="bullet-diamond"></span>Temporary test rotation</li>
+            <li><span class="bullet-diamond"></span>Rewards will be added later</li>
+          </ul>
+        </div>
+
+        <div class="panel-bottom">
+          <div class="selected-mark" aria-hidden="true">
+            <span class="check-shape"></span>
+          </div>
+          <span class="panel-state active-state">ACTIVE</span>
+        </div>
+      </article>
+
+      <article class="banner-panel d-frame locked" aria-disabled="true">
+        <div class="banner-visual locked-visual" aria-hidden="true">
+          <div class="locked-symbol">?</div>
+        </div>
+
+        <div class="panel-content">
+          <div class="panel-icon pixel-skull" aria-hidden="true">
+            <i></i><b></b>
+          </div>
+          <h2>COMING SOON</h2>
+          <ul class="panel-points">
+            <li><span class="bullet-diamond"></span>Future banner slot</li>
+            <li><span class="bullet-diamond"></span>Content unavailable</li>
+            <li><span class="bullet-diamond"></span>More rotations later</li>
+          </ul>
+        </div>
+
+        <div class="panel-bottom">
+          <div class="pixel-lock" aria-hidden="true"><span></span></div>
+          <span class="panel-state">LOCKED</span>
+        </div>
+      </article>
+
+      <article class="banner-panel d-frame locked" aria-disabled="true">
+        <div class="banner-visual locked-visual alternate" aria-hidden="true">
+          <div class="locked-symbol">?</div>
+        </div>
+
+        <div class="panel-content">
+          <div class="panel-icon pixel-skull horned" aria-hidden="true">
+            <i></i><b></b>
+          </div>
+          <h2>COMING SOON</h2>
+          <ul class="panel-points">
+            <li><span class="bullet-diamond"></span>Future banner slot</li>
+            <li><span class="bullet-diamond"></span>Content unavailable</li>
+            <li><span class="bullet-diamond"></span>More rotations later</li>
+          </ul>
+        </div>
+
+        <div class="panel-bottom">
+          <div class="pixel-lock" aria-hidden="true"><span></span></div>
+          <span class="panel-state">LOCKED</span>
+        </div>
+      </article>
+    </section>
+
+    <div class="screen-action">
+      <button class="dungeons-action" id="openBanner" type="button">
+        <span>VIEW BANNER</span>
+        <kbd>A</kbd>
       </button>
+      <p id="actionStatus" aria-live="polite">Rotation 01 selected</p>
+    </div>
+  </main>
 
-      <div class="brand-plaque">
-        <span class="brand-small">PIXEL NETWORK</span>
-        <strong>BANNER VAULT</strong>
-      </div>
-
-      <div class="header-center">
-        <span class="chapter-mark">I</span>
-        <span class="chapter-text">BANNERS</span>
-      </div>
-
-      <div class="wallet-row" aria-label="Recursos de prueba">
-        <div class="wallet-box">
-          <span class="emerald-icon" aria-hidden="true"></span>
-          <strong>1 240</strong>
-        </div>
-        <div class="profile-stone" aria-hidden="true">
-          <span class="profile-rune">P</span>
-        </div>
-      </div>
-    </header>
-
-    <main class="banner-menu">
-      <aside class="menu-rail" aria-label="Navegación de banners">
-        <div class="rail-cap"></div>
-        <button class="rail-item active" type="button" aria-current="page">
-          <span class="rail-rune">◆</span>
-          <span>BANNERS</span>
-        </button>
-        <div class="rail-divider"></div>
-        <div class="rail-ornament">✦</div>
-        <div class="rail-ornament dim">✦</div>
-        <div class="rail-ornament dim">✦</div>
-      </aside>
-
-      <section class="banner-browser" aria-labelledby="menu-title">
-        <div class="title-row">
-          <div>
-            <span class="section-kicker">SELECCIÓN ACTUAL</span>
-            <h1 id="menu-title">BANNERS</h1>
-          </div>
-          <div class="title-ornament" aria-hidden="true">
-            <span></span><i></i><span></span>
-          </div>
-        </div>
-
-        <div class="banner-stage-wrap">
-          <button class="stage-arrow stage-arrow-left" type="button" aria-label="Banner anterior" data-direction="-1">‹</button>
-
-          <article class="banner-stage" data-banner-index="0">
-            <div class="banner-art" aria-hidden="true">
-              <div class="sky-glow"></div>
-              <div class="dungeon-cliff cliff-left"></div>
-              <div class="dungeon-cliff cliff-right"></div>
-              <div class="dungeon-floor"></div>
-              <div class="portal-arch">
-                <div class="portal-inner">
-                  <span class="portal-rune rune-1">◆</span>
-                  <span class="portal-rune rune-2">◆</span>
-                  <span class="portal-rune rune-3">◆</span>
-                </div>
-              </div>
-              <div class="ember ember-1"></div>
-              <div class="ember ember-2"></div>
-              <div class="ember ember-3"></div>
-              <div class="banner-silhouette silhouette-a"></div>
-              <div class="banner-silhouette silhouette-b"></div>
-            </div>
-
-            <div class="stage-vignette"></div>
-            <div class="stage-corner corner-tl"></div>
-            <div class="stage-corner corner-tr"></div>
-            <div class="stage-corner corner-bl"></div>
-            <div class="stage-corner corner-br"></div>
-
-            <div class="banner-label">
-              <span class="banner-overline">ROTACIÓN DE PRUEBA</span>
-              <h2>ROTACIÓN 01</h2>
-              <p>Espacio reservado para el arte del banner.</p>
-            </div>
-
-            <div class="stage-status">
-              <span class="status-gem"></span>
-              <span>DISPONIBLE</span>
-            </div>
-          </article>
-
-          <button class="stage-arrow stage-arrow-right" type="button" aria-label="Banner siguiente" data-direction="1">›</button>
-        </div>
-
-        <div class="banner-slots" role="tablist" aria-label="Lista de banners">
-          <button class="banner-slot selected" type="button" role="tab" aria-selected="true" data-slot="0">
-            <span class="slot-image slot-image-active">
-              <i class="slot-portal"></i>
-            </span>
-            <span class="slot-copy">
-              <b>ROTACIÓN 01</b>
-              <small>BANNER ACTIVO</small>
-            </span>
-            <span class="selection-notch"></span>
-          </button>
-
-          <button class="banner-slot locked" type="button" role="tab" aria-selected="false" data-slot="1" disabled>
-            <span class="slot-image"><i class="locked-mark">?</i></span>
-            <span class="slot-copy">
-              <b>PRÓXIMAMENTE</b>
-              <small>ESPACIO DE BANNER</small>
-            </span>
-          </button>
-
-          <button class="banner-slot locked" type="button" role="tab" aria-selected="false" data-slot="2" disabled>
-            <span class="slot-image"><i class="locked-mark">?</i></span>
-            <span class="slot-copy">
-              <b>PRÓXIMAMENTE</b>
-              <small>ESPACIO DE BANNER</small>
-            </span>
-          </button>
-        </div>
-      </section>
-
-      <aside class="banner-info">
-        <div class="info-cap">
-          <span class="cap-rivet"></span>
-          <span>DETALLES</span>
-          <span class="cap-rivet"></span>
-        </div>
-
-        <div class="crest-frame">
-          <div class="crest-empty">
-            <span>◆</span>
-          </div>
-        </div>
-
-        <div class="info-copy">
-          <span class="info-eyebrow">BANNER ACTUAL</span>
-          <h3>ROTACIÓN 01</h3>
-          <p>Este panel queda preparado para mostrar la información del banner más adelante.</p>
-        </div>
-
-        <div class="info-separator"><span></span><i></i><span></span></div>
-
-        <div class="info-stat">
-          <span>ESTADO</span>
-          <b>ACTIVO</b>
-        </div>
-        <div class="info-stat">
-          <span>CONTENIDO</span>
-          <b>PRUEBA</b>
-        </div>
-
-        <button class="dungeon-button" type="button" id="enterBanner">
-          <span>ABRIR BANNER</span>
-          <i class="button-glint"></i>
-        </button>
-      </aside>
-    </main>
-
-    <footer class="game-footer">
-      <div class="footer-hint"><span class="keycap">A</span><span>SELECCIONAR</span></div>
-      <div class="footer-hint"><span class="keycap">Q</span><span class="keycap">E</span><span>CAMBIAR BANNER</span></div>
-      <div class="footer-hint"><span class="keycap">ESC</span><span>VOLVER</span></div>
-    </footer>
-  </div>
+  <footer class="hud-bottom">
+    <div class="control-hint">
+      <span>Back</span>
+      <kbd class="key-red">B</kbd>
+    </div>
+    <div class="control-hint right-hint">
+      <span>Select</span>
+      <kbd class="key-green">A</kbd>
+    </div>
+  </footer>
 
   <script src="assets/js/app.js"></script>
 </body>
