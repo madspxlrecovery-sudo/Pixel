@@ -1,0 +1,136 @@
+/*
+  Pixel shell v2
+
+  This file only adapts the official-source shell established in official-shell.css.
+  It does not replace the Mojang navbar metrics there.
+
+  Official source roles:
+  - Mojang web-theme-bootstrap: navbar metrics, Minecraft logo, pixel carets, CTA arrow.
+  - minecraft.net: Minecoin artwork and live shell reference.
+  - Microsoft Fluent System Icons: temporary official-source fallback for search/person
+    glyphs while the exact current minecraft.net glyph assets remain unresolved.
+
+  IMPORTANT: the Fluent search/person glyphs are official Microsoft assets, but are NOT
+  claimed to be the exact current minecraft.net header glyphs. See OFFICIAL_ASSET_GATE.md.
+*/
+
+.pixel-shell-v2 .pixel-shell-identity {
+  flex: 0 0 128px;
+  width: 128px;
+  padding-left: 14px;
+  margin-right: 4px;
+}
+
+.pixel-shell-v2 .pixel-shell-identity strong {
+  font-size: 11px;
+  letter-spacing: .8px;
+}
+
+.pixel-shell-v2 .pixel-shell-identity span {
+  font-size: 8px;
+  letter-spacing: .65px;
+}
+
+.pixel-shell-nav {
+  flex: 1 1 auto;
+  overflow: hidden;
+}
+
+.pixel-shell-nav .mc-shell-nav__item {
+  flex: 0 0 auto;
+}
+
+.pixel-shell-actions {
+  flex: 0 0 auto;
+  gap: 12px;
+}
+
+.mc-shell-search-group {
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: #fff;
+}
+
+.mc-shell-search-slot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/*
+  Official Microsoft Fluent System Icons — Search 16 Regular.
+  Remote source is used as a mask so the shell can render it white/currentColor.
+*/
+.mc-shell-search-icon {
+  width: 16px;
+  height: 16px;
+  display: block;
+  background: currentColor;
+  -webkit-mask: url("https://raw.githubusercontent.com/microsoft/fluentui-system-icons/main/assets/Search/SVG/ic_fluent_search_16_regular.svg") center / contain no-repeat;
+  mask: url("https://raw.githubusercontent.com/microsoft/fluentui-system-icons/main/assets/Search/SVG/ic_fluent_search_16_regular.svg") center / contain no-repeat;
+}
+
+.mc-shell-search-caret {
+  margin-left: 0;
+}
+
+/* Official Microsoft Fluent System Icons — Person 16 Regular. */
+.mc-shell-person-icon {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
+  display: inline-block;
+  background: currentColor;
+  -webkit-mask: url("https://raw.githubusercontent.com/microsoft/fluentui-system-icons/main/assets/Person/SVG/ic_fluent_person_16_regular.svg") center / contain no-repeat;
+  mask: url("https://raw.githubusercontent.com/microsoft/fluentui-system-icons/main/assets/Person/SVG/ic_fluent_person_16_regular.svg") center / contain no-repeat;
+}
+
+/* Keep the official-source navbar link metrics; only project content/order changes. */
+.pixel-shell-nav .mc-shell-nav__item--link {
+  white-space: nowrap;
+}
+
+@media (max-width: 1390px) {
+  .minecraft-web-shell__inner.pixel-shell-v2 {
+    width: calc(100% - 32px);
+  }
+
+  .pixel-shell-v2 .mc-shell-logo {
+    width: 180px;
+    flex-basis: 180px;
+    margin-right: 10px;
+  }
+
+  .pixel-shell-v2 .mc-shell-logo img {
+    width: 180px;
+  }
+
+  .pixel-shell-v2 .pixel-shell-identity {
+    flex-basis: 112px;
+    width: 112px;
+    padding-left: 10px;
+  }
+
+  .pixel-shell-nav .mc-shell-nav__item {
+    padding-inline: .55rem;
+    font-size: 11px;
+  }
+
+  .pixel-shell-actions {
+    gap: 9px;
+  }
+}
+
+@media (max-width: 1180px) {
+  .pixel-shell-nav .mc-shell-nav__item:last-child {
+    display: none;
+  }
+}
+
+@media (max-width: 1060px) {
+  .pixel-shell-nav {
+    display: none;
+  }
+}
