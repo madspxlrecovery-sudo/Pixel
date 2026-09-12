@@ -1,52 +1,62 @@
-const activeChoice = document.querySelector('.banner-choice.is-active');
-const openBanner = document.getElementById('openBanner');
-const actionStatus = document.getElementById('actionStatus');
+const cards = [...document.querySelectorAll('.banner-card:not(:disabled)')];
+const openButton = document.getElementById('openBanner');
+const status = document.getElementById('actionStatus');
 
-function pulseSelection() {
-  if (!activeChoice) return;
-  activeChoice.animate(
-    [
-      { filter: 'brightness(1)' },
-      { filter: 'brightness(1.1)' },
-      { filter: 'brightness(1)' }
-    ],
-    { duration: 190, easing: 'ease-out' }
-  );
+let selectedIndex = Math.max(0, cards.findIndex((card) => card.classList.contains('is-selected')));
+
+function selectCard(index, { focus = false } = {}) {
+  if (!cards.length) return;
+
+  selectedIndex = (index + cards.length) % cards.length;
+
+  cards.forEach((card, cardIndex) => {
+    const selected = cardIndex === selectedIndex;
+    card.classList.toggle('is-selected', selected);
+    card.setAttribute('aria-selected', String(selected));
+
+    if (selected && focus) card.focus();
+  });
+
+  if (status) status.textContent = 'Ready';
 }
 
-function openPrototypeBanner() {
-  pulseSelection();
-  if (!openBanner || !actionStatus) return;
+cards.forEach((card, index) => {
+  card.addEventListener('click', () => selectCard(index));
+  card.addEventListener('keydown', (event) => {
+    if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
+      event.preventDefault();
+      selectCard(index + 1, { focus: true });
+    }
 
-  const label = openBanner.querySelector('span');
-  if (!label) return;
+    if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
+      event.preventDefault();
+      selectCard(index - 1, { focus: true });
+    }
+  });
+});
 
-  const previous = label.textContent;
-  label.textContent = 'BANNER IN DEVELOPMENT';
-  actionStatus.textContent = 'Menu test complete — gacha screen is not connected yet';
-  openBanner.disabled = true;
+function openSelectedBanner() {
+  if (!status || !openButton) return;
+
+  status.textContent = 'Banner screen is intentionally not connected yet';
+  openButton.disabled = true;
 
   window.setTimeout(() => {
-    label.textContent = previous;
-    actionStatus.textContent = 'Rotation 01 selected';
-    openBanner.disabled = false;
+    status.textContent = 'Ready';
+    openButton.disabled = false;
   }, 1100);
 }
 
-activeChoice?.addEventListener('click', pulseSelection);
-openBanner?.addEventListener('click', openPrototypeBanner);
+if (openButton) {
+  openButton.addEventListener('click', openSelectedBanner);
+}
 
 document.addEventListener('keydown', (event) => {
-  const key = event.key.toLowerCase();
-
-  if (event.key === 'Enter' || key === 'a') {
-    event.preventDefault();
-    openPrototypeBanner();
+  if (event.key === 'Enter' && document.activeElement !== openButton) {
+    openSelectedBanner();
   }
 
-  if (event.key === 'Escape' || key === 'b') {
-    event.preventDefault();
-    pulseSelection();
-    if (actionStatus) actionStatus.textContent = 'Back is not connected in this prototype';
+  if (event.key === 'Escape') {
+    if (status) status.textContent = 'Back action is not connected yet';
   }
 });

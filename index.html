@@ -4,123 +4,91 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#1d1e1e">
-  <title>Pixel — Select Banner</title>
-  <link rel="stylesheet" href="assets/css/foundation/tokens.css">
-  <link rel="stylesheet" href="assets/css/foundation/typography.css">
-  <link rel="stylesheet" href="assets/css/foundation/dungeons-core.css">
+  <title>Pixel — Dungeons Marketplace</title>
   <link rel="stylesheet" href="assets/css/main.css">
 </head>
 <body>
-  <div class="world-scene" aria-hidden="true">
-    <div class="scene-sky"></div>
-    <div class="scene-cliff cliff-left"></div>
-    <div class="scene-cliff cliff-mid"></div>
-    <div class="scene-cliff cliff-right"></div>
-    <div class="scene-fire fire-left"></div>
-    <div class="scene-fire fire-right"></div>
-    <div class="scene-ground"></div>
-  </div>
-  <div class="scene-shade" aria-hidden="true"></div>
+  <header class="marketplace-header">
+    <div class="marketplace-header__inner">
+      <a class="project-brand" href="#main" aria-label="Pixel home">
+        <span class="project-brand__name">PIXEL</span>
+        <span class="project-brand__context">DUNGEONS MARKETPLACE</span>
+      </a>
 
-  <div class="emerald-hud" aria-label="Emerald balance">
-    <span class="emerald-gem" aria-hidden="true"></span>
-    <strong>3373</strong>
-  </div>
+      <nav class="primary-nav" aria-label="Primary navigation">
+        <a class="primary-nav__item is-active" href="#banners" aria-current="page">BANNERS</a>
+      </nav>
 
-  <main class="select-screen" aria-labelledby="screen-title">
-    <header class="screen-heading">
-      <div class="du-title-plaque title-plaque">
-        <h1 id="screen-title">SELECT BANNER</h1>
+      <div class="currency-text" aria-label="Emerald balance">
+        <span>EMERALDS</span>
+        <strong>3373</strong>
       </div>
+    </div>
+  </header>
+
+  <main id="main" class="page-shell">
+    <header class="page-intro">
+      <p class="eyebrow">MARKETPLACE / DUNGEONS</p>
+      <h1>BANNERS</h1>
+      <p class="page-intro__copy">Choose a banner rotation. Official visual assets are added only after source and usage approval.</p>
     </header>
 
-    <section class="banner-columns" aria-label="Banner selection">
-      <button class="banner-choice du-panel du-frame du-state--selected is-active" type="button" data-banner="rotation-01" aria-current="true">
-        <div class="choice-art art-active" aria-hidden="true">
-          <span class="portal portal-outer"></span>
-          <span class="portal portal-inner"></span>
-          <span class="art-block block-one"></span>
-          <span class="art-block block-two"></span>
-          <span class="art-block block-three"></span>
+    <section id="banners" class="catalog" aria-label="Banner rotations">
+      <div class="catalog-grid" role="listbox" aria-label="Available banner rotations">
+        <button class="banner-card is-selected" type="button" role="option" aria-selected="true" data-banner="rotation-01" data-state="available">
+          <span class="banner-card__media" aria-hidden="true">
+            <span class="asset-placeholder">OFFICIAL ART PENDING</span>
+          </span>
+          <span class="banner-card__body">
+            <span class="banner-card__state">AVAILABLE</span>
+            <span class="banner-card__title">ROTATION 01</span>
+            <span class="banner-card__meta">CURRENT BANNER</span>
+          </span>
+        </button>
+
+        <button class="banner-card is-locked" type="button" role="option" aria-selected="false" data-banner="rotation-02" data-state="locked" disabled>
+          <span class="banner-card__media" aria-hidden="true">
+            <span class="asset-placeholder">OFFICIAL ART PENDING</span>
+          </span>
+          <span class="banner-card__body">
+            <span class="banner-card__state">LOCKED</span>
+            <span class="banner-card__title">COMING SOON</span>
+            <span class="banner-card__meta">ROTATION 02</span>
+          </span>
+        </button>
+
+        <button class="banner-card is-locked" type="button" role="option" aria-selected="false" data-banner="rotation-03" data-state="locked" disabled>
+          <span class="banner-card__media" aria-hidden="true">
+            <span class="asset-placeholder">OFFICIAL ART PENDING</span>
+          </span>
+          <span class="banner-card__body">
+            <span class="banner-card__state">LOCKED</span>
+            <span class="banner-card__title">COMING SOON</span>
+            <span class="banner-card__meta">ROTATION 03</span>
+          </span>
+        </button>
+      </div>
+
+      <section class="selection-panel" aria-labelledby="selection-title">
+        <div class="selection-panel__copy">
+          <p class="selection-panel__label">SELECTED BANNER</p>
+          <h2 id="selection-title">ROTATION 01</h2>
+          <p>This is the structural test for the Marketplace extension. Banner artwork, currency icons and Dungeons-specific visual assets remain intentionally absent until approved official resources are available.</p>
         </div>
 
-        <div class="choice-body">
-          <div class="choice-icon active-icon" aria-hidden="true"><span></span></div>
-          <h2>ROTATION 01</h2>
-          <div class="choice-points">
-            <p><i></i>Current banner rotation</p>
-            <p><i></i>Test menu layout</p>
-            <p><i></i>Rewards added later</p>
-          </div>
+        <div class="selection-panel__action">
+          <button class="minecraft-action" id="openBanner" type="button">OPEN BANNER</button>
+          <p class="interaction-status" id="actionStatus" aria-live="polite">Ready</p>
         </div>
-
-        <div class="choice-foot">
-          <div class="select-badge" aria-hidden="true"><span></span></div>
-          <strong>ACTIVE</strong>
-        </div>
-      </button>
-
-      <article class="banner-choice du-panel du-state--disabled" aria-disabled="true">
-        <div class="choice-art art-muted" aria-hidden="true">
-          <span class="silhouette silhouette-a"></span>
-          <span class="silhouette silhouette-b"></span>
-        </div>
-
-        <div class="choice-body">
-          <div class="choice-icon skull-icon" aria-hidden="true"><span></span></div>
-          <h2>COMING SOON</h2>
-          <div class="choice-points">
-            <p><i></i>Future rotation</p>
-            <p><i></i>Banner unavailable</p>
-            <p><i></i>Content locked</p>
-          </div>
-        </div>
-
-        <div class="choice-foot locked-foot">
-          <div class="lock-icon" aria-hidden="true"><span></span></div>
-          <strong>LOCKED</strong>
-        </div>
-      </article>
-
-      <article class="banner-choice du-panel du-frame du-state--locked" aria-disabled="true">
-        <div class="choice-art art-locked" aria-hidden="true">
-          <span class="silhouette silhouette-c"></span>
-          <span class="silhouette silhouette-d"></span>
-        </div>
-
-        <div class="choice-body">
-          <div class="choice-icon skull-icon horned" aria-hidden="true"><span></span></div>
-          <h2>COMING SOON</h2>
-          <div class="choice-points">
-            <p><i></i>Future rotation</p>
-            <p><i></i>Banner unavailable</p>
-            <p><i></i>Content locked</p>
-          </div>
-        </div>
-
-        <div class="choice-foot locked-foot">
-          <div class="lock-icon" aria-hidden="true"><span></span></div>
-          <strong>LOCKED</strong>
-        </div>
-      </article>
+      </section>
     </section>
-
-    <div class="confirm-zone">
-      <button class="du-action confirm-button" id="openBanner" type="button">
-        <span>OPEN BANNER</span>
-        <span class="button-key">A</span>
-      </button>
-      <p class="selection-status" id="actionStatus" aria-live="polite">Rotation 01 selected</p>
-    </div>
   </main>
 
-  <footer class="control-bar">
-    <div class="du-hint-row">
-      <span class="du-hint"><span>Back</span><kbd class="du-key key-b">B</kbd></span>
-    </div>
-    <span class="prototype-label">PIXEL — UI PROTOTYPE</span>
-    <div class="du-hint-row">
-      <span class="du-hint"><span>Select</span><kbd class="du-key key-a">A</kbd></span>
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <span>PIXEL</span>
+      <span class="site-footer__disclaimer">NOT AN OFFICIAL MINECRAFT PRODUCT. NOT APPROVED BY OR ASSOCIATED WITH MOJANG OR MICROSOFT.</span>
+      <span class="keyboard-hint">ENTER SELECT · ESC BACK</span>
     </div>
   </footer>
 

@@ -19,6 +19,8 @@
   --mc-scorpion: #5a5a5a;
   --mc-gravel: #757575;
   --mc-dusty-gray: #949494;
+  --mc-hint-of-red: #f8f5f4;
+  --mc-ebb: #f1edec;
   --mc-cloud: #d1cfce;
   --mc-white: #ffffff;
   --mc-black: #000000;
@@ -40,7 +42,7 @@
   --mc-dungeons-secondary: var(--mc-eucalyptus);
   --mc-dungeons-tertiary: var(--mc-golden-tainoi);
 
-  /* Pixel mappings derived from Dungeons screenshots + official Mojang tokens. */
+  /* Legacy Pixel mappings. Do not use these as evidence of official Mojang values. */
   --px-ui-panel: rgba(29, 30, 30, 0.91);
   --px-ui-panel-soft: rgba(49, 49, 49, 0.82);
   --px-ui-line: rgba(255, 255, 255, 0.58);
