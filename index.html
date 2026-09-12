@@ -11,30 +11,60 @@
 <body>
   <div class="marketplace-bg" aria-hidden="true"></div>
 
-  <!-- Minecraft.net website-shell layer. No homemade search/account icons. -->
-  <header class="minecraft-web-shell" aria-label="Minecraft website shell reference">
-    <div class="minecraft-web-shell__left">
-      <a class="mc-web-cta" href="https://www.minecraft.net/es-es/store/minecraft-dungeons" aria-label="Comprar ahora">
-        <span>COMPRAR AHORA</span>
+  <!-- Minecraft.net web-shell layer: composition follows the current official desktop header. -->
+  <header class="minecraft-web-shell" aria-label="Minecraft website navigation">
+    <div class="minecraft-web-shell__inner">
+      <a class="mc-shell-logo" href="https://www.minecraft.net/es-es" aria-label="Minecraft">
         <img
-          class="mc-web-cta__arrow"
-          src="https://raw.githubusercontent.com/Mojang/web-theme-bootstrap/main/assets/svg/icons/pixel-arrow-right.svg"
-          alt=""
+          src="https://raw.githubusercontent.com/Mojang/web-theme-bootstrap/main/assets/svg/logos/minecraft.svg"
+          alt="Minecraft"
         >
       </a>
-    </div>
 
-    <nav class="minecraft-web-shell__right" aria-label="Website controls">
-      <span class="mc-shell-pending" title="Exact official search icon asset still pending gate verification">BUSCAR</span>
-      <span class="mc-shell-pending mc-shell-account" title="Exact official account icon asset still pending gate verification">
-        <span>CUENTA</span>
-        <img
-          class="mc-shell-caret"
-          src="https://raw.githubusercontent.com/Mojang/web-theme-bootstrap/main/assets/svg/icons/pixel-caret.svg"
-          alt=""
-        >
-      </span>
-    </nav>
+      <nav class="mc-shell-nav" aria-label="Minecraft navigation">
+        <button class="mc-shell-nav__item" type="button">
+          <span>JUEGOS</span>
+          <img src="https://raw.githubusercontent.com/Mojang/web-theme-bootstrap/main/assets/svg/icons/pixel-caret.svg" alt="">
+        </button>
+        <button class="mc-shell-nav__item" type="button">
+          <span>TIENDA</span>
+          <img src="https://raw.githubusercontent.com/Mojang/web-theme-bootstrap/main/assets/svg/icons/pixel-caret.svg" alt="">
+        </button>
+        <button class="mc-shell-nav__item" type="button">
+          <span>EXPLORACIÓN</span>
+          <img src="https://raw.githubusercontent.com/Mojang/web-theme-bootstrap/main/assets/svg/icons/pixel-caret.svg" alt="">
+        </button>
+        <button class="mc-shell-nav__item" type="button">
+          <span>APRENDER</span>
+          <img src="https://raw.githubusercontent.com/Mojang/web-theme-bootstrap/main/assets/svg/icons/pixel-caret.svg" alt="">
+        </button>
+        <a class="mc-shell-nav__item mc-shell-nav__item--link" href="https://help.minecraft.net/" target="_blank" rel="noreferrer">SOPORTE TÉCNICO</a>
+      </nav>
+
+      <div class="mc-shell-actions">
+        <a class="mc-web-cta" href="https://www.minecraft.net/es-es/store/minecraft-dungeons" aria-label="Comprar ahora">
+          <span>COMPRAR AHORA</span>
+          <img
+            class="mc-web-cta__arrow"
+            src="https://raw.githubusercontent.com/Mojang/web-theme-bootstrap/main/assets/svg/icons/pixel-arrow-right.svg"
+            alt=""
+          >
+        </a>
+
+        <!-- Exact current search pictogram is intentionally not recreated. Slot preserves measured shell geometry. -->
+        <button class="mc-shell-search-slot" type="button" aria-label="Buscar" title="Buscar"></button>
+
+        <button class="mc-shell-account" type="button" aria-label="Cuenta">
+          <span class="mc-shell-account__icon-slot" aria-hidden="true"></span>
+          <span>CUENTA</span>
+          <img
+            class="mc-shell-caret"
+            src="https://raw.githubusercontent.com/Mojang/web-theme-bootstrap/main/assets/svg/icons/pixel-caret.svg"
+            alt=""
+          >
+        </button>
+      </div>
+    </div>
   </header>
 
   <!-- Marketplace / Bedrock Store layer -->
