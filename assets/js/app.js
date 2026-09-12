@@ -1,4 +1,4 @@
-const cards = [...document.querySelectorAll('.banner-card:not(:disabled)')];
+const cards = [...document.querySelectorAll('.offer-card:not(:disabled)')];
 const openButton = document.getElementById('openBanner');
 const status = document.getElementById('actionStatus');
 
@@ -38,13 +38,13 @@ cards.forEach((card, index) => {
 function openSelectedBanner() {
   if (!status || !openButton) return;
 
-  status.textContent = 'Banner screen is intentionally not connected yet';
+  status.textContent = 'Banner screen will be connected after this menu is approved';
   openButton.disabled = true;
 
   window.setTimeout(() => {
     status.textContent = 'Ready';
     openButton.disabled = false;
-  }, 1100);
+  }, 1200);
 }
 
 if (openButton) {
