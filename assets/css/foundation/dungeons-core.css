@@ -1,4 +1,8 @@
-/* Original Pixel components constrained by official Dungeons/Minecraft references. */
+/*
+  Pixel-authored reusable components.
+  Geometry and behavior are constrained by official Minecraft/Minecraft Dungeons references.
+  No restricted Mojang bitmap assets are copied here.
+*/
 
 .du-panel {
   position: relative;
@@ -7,32 +11,37 @@
 }
 
 .du-frame {
+  --du-frame-color: var(--px-ui-line);
   position: relative;
-  border: 2px solid var(--px-ui-line);
+  border: 2px solid var(--du-frame-color);
 }
 
-/* Pixel-authored stepped corners: intentionally not copied from Mojang's restricted border bitmap. */
-.du-frame::before,
+/* Four-corner stepped line treatment, authored for Pixel from the observed Dungeons grammar. */
+.du-frame::before {
+  content: "";
+  position: absolute;
+  inset: 7px;
+  z-index: 5;
+  pointer-events: none;
+  background:
+    linear-gradient(var(--du-frame-color), var(--du-frame-color)) left top / 18px 2px no-repeat,
+    linear-gradient(var(--du-frame-color), var(--du-frame-color)) left top / 2px 18px no-repeat,
+    linear-gradient(var(--du-frame-color), var(--du-frame-color)) right top / 18px 2px no-repeat,
+    linear-gradient(var(--du-frame-color), var(--du-frame-color)) right top / 2px 18px no-repeat,
+    linear-gradient(var(--du-frame-color), var(--du-frame-color)) left bottom / 18px 2px no-repeat,
+    linear-gradient(var(--du-frame-color), var(--du-frame-color)) left bottom / 2px 18px no-repeat,
+    linear-gradient(var(--du-frame-color), var(--du-frame-color)) right bottom / 18px 2px no-repeat,
+    linear-gradient(var(--du-frame-color), var(--du-frame-color)) right bottom / 2px 18px no-repeat;
+  opacity: .92;
+}
+
 .du-frame::after {
   content: "";
   position: absolute;
-  width: 12px;
-  height: 12px;
+  inset: 3px;
+  z-index: 4;
   pointer-events: none;
-}
-
-.du-frame::before {
-  top: -5px;
-  left: -5px;
-  border-top: 3px solid currentColor;
-  border-left: 3px solid currentColor;
-}
-
-.du-frame::after {
-  right: -5px;
-  bottom: -5px;
-  border-right: 3px solid currentColor;
-  border-bottom: 3px solid currentColor;
+  border: 1px solid rgba(0,0,0,.5);
 }
 
 .du-title-plaque {
@@ -45,8 +54,8 @@
   background: var(--mc-white);
   font-family: var(--font-du-title);
   text-transform: uppercase;
-  letter-spacing: 0.02em;
-  box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.24);
+  letter-spacing: .02em;
+  box-shadow: 8px 8px 0 rgba(0,0,0,.24);
 }
 
 .du-action {
@@ -54,8 +63,11 @@
   border: 0;
   border-radius: 0;
   padding: 14px 28px;
-  color: #fff;
+  color: var(--mc-white);
   background: var(--px-ui-action);
+  font-family: var(--font-du-title);
+  text-transform: uppercase;
+  letter-spacing: .02em;
   box-shadow:
     inset 0 4px rgba(255,255,255,.35),
     inset 0 -4px rgba(0,0,0,.25),
@@ -68,7 +80,7 @@
 .du-action:hover,
 .du-action:focus-visible {
   background: var(--mc-soil);
-  outline: 2px solid #fff;
+  outline: 2px solid var(--mc-white);
   outline-offset: 2px;
 }
 
@@ -79,21 +91,27 @@
     inset 0 -2px rgba(255,255,255,.18);
 }
 
-.du-action:disabled,
-.du-state--disabled {
+.du-action:disabled {
   cursor: default;
   color: var(--mc-scorpion);
-  background: #d1cfce;
+  background: var(--mc-cloud);
   box-shadow: none;
 }
 
 .du-state--selected {
-  border-color: var(--px-ui-highlight);
-  box-shadow: inset 0 0 0 2px rgba(255,203,86,.26);
+  --du-frame-color: var(--px-ui-selection);
+  border-color: var(--px-ui-selection);
+  box-shadow: inset 0 0 0 1px rgba(92,174,224,.2);
+}
+
+.du-state--disabled {
+  opacity: .25;
+  filter: grayscale(.4) saturate(.35);
+  pointer-events: none;
 }
 
 .du-state--locked {
-  opacity: .42;
+  opacity: .62;
   filter: saturate(.45);
 }
 
@@ -118,7 +136,8 @@
   padding: 0 5px;
   background: #171717;
   border: 2px solid #666;
-  color: #fff;
+  color: var(--mc-white);
   font-family: var(--font-du-title);
   line-height: 1;
+  box-shadow: 2px 2px 0 rgba(0,0,0,.45);
 }
