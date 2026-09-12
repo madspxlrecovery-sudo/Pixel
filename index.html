@@ -3,135 +3,124 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#111217">
-  <title>Pixel — Banner Select</title>
+  <meta name="theme-color" content="#1d1e1e">
+  <title>Pixel — Select Banner</title>
+  <link rel="stylesheet" href="assets/css/foundation/tokens.css">
+  <link rel="stylesheet" href="assets/css/foundation/typography.css">
+  <link rel="stylesheet" href="assets/css/foundation/dungeons-core.css">
   <link rel="stylesheet" href="assets/css/main.css">
 </head>
 <body>
   <div class="world-scene" aria-hidden="true">
-    <div class="world-haze"></div>
-    <div class="world-light light-a"></div>
-    <div class="world-light light-b"></div>
-    <div class="world-block block-a"></div>
-    <div class="world-block block-b"></div>
-    <div class="world-block block-c"></div>
-    <div class="world-block block-d"></div>
-    <div class="world-floor"></div>
+    <div class="scene-sky"></div>
+    <div class="scene-cliff cliff-left"></div>
+    <div class="scene-cliff cliff-mid"></div>
+    <div class="scene-cliff cliff-right"></div>
+    <div class="scene-fire fire-left"></div>
+    <div class="scene-fire fire-right"></div>
+    <div class="scene-ground"></div>
+  </div>
+  <div class="scene-shade" aria-hidden="true"></div>
+
+  <div class="emerald-hud" aria-label="Emerald balance">
+    <span class="emerald-gem" aria-hidden="true"></span>
+    <strong>3373</strong>
   </div>
 
-  <div class="screen-shade" aria-hidden="true"></div>
+  <main class="select-screen" aria-labelledby="screen-title">
+    <header class="screen-heading">
+      <div class="du-title-plaque title-plaque">
+        <h1 id="screen-title">SELECT BANNER</h1>
+      </div>
+    </header>
 
-  <header class="hud-top">
-    <div class="emerald-counter" aria-label="Emeralds">
-      <span class="emerald-sprite" aria-hidden="true"></span>
-      <strong>3373</strong>
-    </div>
-
-    <button class="close-box" type="button" aria-label="Close">×</button>
-  </header>
-
-  <main class="banner-select" aria-labelledby="screen-title">
-    <div class="title-plaque">
-      <h1 id="screen-title">SELECT BANNER</h1>
-    </div>
-
-    <section class="banner-grid" aria-label="Banner selection">
-      <article class="banner-panel d-frame selected" tabindex="0" aria-current="true" data-banner="active">
-        <div class="banner-visual active-visual" aria-hidden="true">
-          <div class="pixel-sky"></div>
-          <div class="banner-mountain mountain-left"></div>
-          <div class="banner-mountain mountain-right"></div>
-          <div class="banner-platform"></div>
-          <div class="banner-portal">
-            <span></span>
-          </div>
-          <div class="banner-particle particle-a"></div>
-          <div class="banner-particle particle-b"></div>
-          <div class="banner-particle particle-c"></div>
+    <section class="banner-columns" aria-label="Banner selection">
+      <button class="banner-choice du-panel du-frame du-state--selected is-active" type="button" data-banner="rotation-01" aria-current="true">
+        <div class="choice-art art-active" aria-hidden="true">
+          <span class="portal portal-outer"></span>
+          <span class="portal portal-inner"></span>
+          <span class="art-block block-one"></span>
+          <span class="art-block block-two"></span>
+          <span class="art-block block-three"></span>
         </div>
 
-        <div class="panel-content">
-          <div class="panel-icon pixel-diamond" aria-hidden="true"></div>
+        <div class="choice-body">
+          <div class="choice-icon active-icon" aria-hidden="true"><span></span></div>
           <h2>ROTATION 01</h2>
-          <ul class="panel-points">
-            <li><span class="bullet-diamond"></span>Current featured banner</li>
-            <li><span class="bullet-diamond"></span>Temporary test rotation</li>
-            <li><span class="bullet-diamond"></span>Rewards will be added later</li>
-          </ul>
+          <div class="choice-points">
+            <p><i></i>Current banner rotation</p>
+            <p><i></i>Test menu layout</p>
+            <p><i></i>Rewards added later</p>
+          </div>
         </div>
 
-        <div class="panel-bottom">
-          <div class="selected-mark" aria-hidden="true">
-            <span class="check-shape"></span>
+        <div class="choice-foot">
+          <div class="select-badge" aria-hidden="true"><span></span></div>
+          <strong>ACTIVE</strong>
+        </div>
+      </button>
+
+      <article class="banner-choice du-panel du-state--disabled" aria-disabled="true">
+        <div class="choice-art art-muted" aria-hidden="true">
+          <span class="silhouette silhouette-a"></span>
+          <span class="silhouette silhouette-b"></span>
+        </div>
+
+        <div class="choice-body">
+          <div class="choice-icon skull-icon" aria-hidden="true"><span></span></div>
+          <h2>COMING SOON</h2>
+          <div class="choice-points">
+            <p><i></i>Future rotation</p>
+            <p><i></i>Banner unavailable</p>
+            <p><i></i>Content locked</p>
           </div>
-          <span class="panel-state active-state">ACTIVE</span>
+        </div>
+
+        <div class="choice-foot locked-foot">
+          <div class="lock-icon" aria-hidden="true"><span></span></div>
+          <strong>LOCKED</strong>
         </div>
       </article>
 
-      <article class="banner-panel d-frame locked" aria-disabled="true">
-        <div class="banner-visual locked-visual" aria-hidden="true">
-          <div class="locked-symbol">?</div>
+      <article class="banner-choice du-panel du-frame du-state--locked" aria-disabled="true">
+        <div class="choice-art art-locked" aria-hidden="true">
+          <span class="silhouette silhouette-c"></span>
+          <span class="silhouette silhouette-d"></span>
         </div>
 
-        <div class="panel-content">
-          <div class="panel-icon pixel-skull" aria-hidden="true">
-            <i></i><b></b>
-          </div>
+        <div class="choice-body">
+          <div class="choice-icon skull-icon horned" aria-hidden="true"><span></span></div>
           <h2>COMING SOON</h2>
-          <ul class="panel-points">
-            <li><span class="bullet-diamond"></span>Future banner slot</li>
-            <li><span class="bullet-diamond"></span>Content unavailable</li>
-            <li><span class="bullet-diamond"></span>More rotations later</li>
-          </ul>
-        </div>
-
-        <div class="panel-bottom">
-          <div class="pixel-lock" aria-hidden="true"><span></span></div>
-          <span class="panel-state">LOCKED</span>
-        </div>
-      </article>
-
-      <article class="banner-panel d-frame locked" aria-disabled="true">
-        <div class="banner-visual locked-visual alternate" aria-hidden="true">
-          <div class="locked-symbol">?</div>
-        </div>
-
-        <div class="panel-content">
-          <div class="panel-icon pixel-skull horned" aria-hidden="true">
-            <i></i><b></b>
+          <div class="choice-points">
+            <p><i></i>Future rotation</p>
+            <p><i></i>Banner unavailable</p>
+            <p><i></i>Content locked</p>
           </div>
-          <h2>COMING SOON</h2>
-          <ul class="panel-points">
-            <li><span class="bullet-diamond"></span>Future banner slot</li>
-            <li><span class="bullet-diamond"></span>Content unavailable</li>
-            <li><span class="bullet-diamond"></span>More rotations later</li>
-          </ul>
         </div>
 
-        <div class="panel-bottom">
-          <div class="pixel-lock" aria-hidden="true"><span></span></div>
-          <span class="panel-state">LOCKED</span>
+        <div class="choice-foot locked-foot">
+          <div class="lock-icon" aria-hidden="true"><span></span></div>
+          <strong>LOCKED</strong>
         </div>
       </article>
     </section>
 
-    <div class="screen-action">
-      <button class="dungeons-action" id="openBanner" type="button">
-        <span>VIEW BANNER</span>
-        <kbd>A</kbd>
+    <div class="confirm-zone">
+      <button class="du-action confirm-button" id="openBanner" type="button">
+        <span>OPEN BANNER</span>
+        <span class="button-key">A</span>
       </button>
-      <p id="actionStatus" aria-live="polite">Rotation 01 selected</p>
+      <p class="selection-status" id="actionStatus" aria-live="polite">Rotation 01 selected</p>
     </div>
   </main>
 
-  <footer class="hud-bottom">
-    <div class="control-hint">
-      <span>Back</span>
-      <kbd class="key-red">B</kbd>
+  <footer class="control-bar">
+    <div class="du-hint-row">
+      <span class="du-hint"><span>Back</span><kbd class="du-key key-b">B</kbd></span>
     </div>
-    <div class="control-hint right-hint">
-      <span>Select</span>
-      <kbd class="key-green">A</kbd>
+    <span class="prototype-label">PIXEL — UI PROTOTYPE</span>
+    <div class="du-hint-row">
+      <span class="du-hint"><span>Select</span><kbd class="du-key key-a">A</kbd></span>
     </div>
   </footer>
 

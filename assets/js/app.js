@@ -1,70 +1,52 @@
-const activePanel = document.querySelector('.banner-panel.selected');
+const activeChoice = document.querySelector('.banner-choice.is-active');
 const openBanner = document.getElementById('openBanner');
 const actionStatus = document.getElementById('actionStatus');
-const closeBox = document.querySelector('.close-box');
 
 function pulseSelection() {
-  if (!activePanel) return;
-
-  activePanel.animate(
+  if (!activeChoice) return;
+  activeChoice.animate(
     [
       { filter: 'brightness(1)' },
-      { filter: 'brightness(1.12)' },
+      { filter: 'brightness(1.1)' },
       { filter: 'brightness(1)' }
     ],
-    { duration: 220, easing: 'ease-out' }
+    { duration: 190, easing: 'ease-out' }
   );
 }
 
-function previewBanner() {
+function openPrototypeBanner() {
   pulseSelection();
-
   if (!openBanner || !actionStatus) return;
+
   const label = openBanner.querySelector('span');
   if (!label) return;
 
-  const original = label.textContent;
+  const previous = label.textContent;
   label.textContent = 'BANNER IN DEVELOPMENT';
-  actionStatus.textContent = 'The gacha screen will be connected after the menu is approved';
+  actionStatus.textContent = 'Menu test complete — gacha screen is not connected yet';
   openBanner.disabled = true;
 
   window.setTimeout(() => {
-    label.textContent = original;
+    label.textContent = previous;
     actionStatus.textContent = 'Rotation 01 selected';
     openBanner.disabled = false;
-  }, 1200);
+  }, 1100);
 }
 
-if (activePanel) {
-  activePanel.addEventListener('click', pulseSelection);
-  activePanel.addEventListener('keydown', (event) => {
-    if (event.key === 'Enter' || event.key === ' ') {
-      event.preventDefault();
-      pulseSelection();
-    }
-  });
-}
-
-if (openBanner) {
-  openBanner.addEventListener('click', previewBanner);
-}
-
-if (closeBox) {
-  closeBox.addEventListener('click', () => {
-    pulseSelection();
-    if (actionStatus) actionStatus.textContent = 'Back action is not connected yet';
-  });
-}
+activeChoice?.addEventListener('click', pulseSelection);
+openBanner?.addEventListener('click', openPrototypeBanner);
 
 document.addEventListener('keydown', (event) => {
   const key = event.key.toLowerCase();
 
   if (event.key === 'Enter' || key === 'a') {
-    previewBanner();
+    event.preventDefault();
+    openPrototypeBanner();
   }
 
   if (event.key === 'Escape' || key === 'b') {
+    event.preventDefault();
     pulseSelection();
-    if (actionStatus) actionStatus.textContent = 'Back action is not connected yet';
+    if (actionStatus) actionStatus.textContent = 'Back is not connected in this prototype';
   }
 });
