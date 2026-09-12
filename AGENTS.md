@@ -23,6 +23,26 @@ Allowed outcomes are only:
 
 A missing official asset is **not** permission to create a lookalike.
 
+## Exact fidelity rule — size, spacing and proportion are part of the asset
+Official-source fidelity includes geometry, not only colors and icons.
+
+When Pixel adopts a specific official Minecraft / Marketplace / Dungeons component, the implementation must preserve the source component's documented or measured desktop geometry:
+- width and height;
+- internal padding;
+- border thickness;
+- icon dimensions;
+- icon-to-label gap;
+- typography size and line-height;
+- neighboring spacing/margins;
+- aspect ratio;
+- hover/pressed inset depth.
+
+Do **not** arbitrarily scale an official component to “fit better”. If responsive behavior is required, preserve the official desktop size at the reference breakpoint and define responsive variants only when an official responsive pattern/source exists or when the change is clearly documented as a Pixel adaptation.
+
+Every new approved component must record a `geometry_source` in `docs/research/OFFICIAL_ASSET_GATE.md`: `OFFICIAL_CODE`, `LIVE_DOM/CSS`, or `MEASURED_OFFICIAL_CAPTURE`.
+
+If exact dimensions are not known yet, the component is not ready for fidelity-critical production use.
+
 ## Official web-shell rule
 The current official Minecraft.net header is a first-class design reference. When Pixel needs web navigation controls, prefer the same official patterns used there before inventing anything:
 - green primary CTA with the official Minecraft button treatment;
@@ -45,6 +65,7 @@ Unless the user later changes this policy explicitly:
 - no Font Awesome, Material Icons or emoji substitutes for Minecraft/Dungeons interface symbols;
 - no invented Marketplace-style or Dungeons-style textures/backgrounds when the intent is to reproduce an official visual;
 - no invented replacements for minecraft.net search/account/arrow/chevron icons when an official source exists;
+- no arbitrary resizing of source-backed controls just to suit the Pixel layout;
 - no extracted game asset copied into the public repo unless usage permission is independently confirmed.
 
 ## Source priority
@@ -58,8 +79,9 @@ Every Minecraft/Dungeons-specific visual must pass this gate before being added 
 2. Identify the exact asset/component/token name when possible.
 3. Record the source in `docs/research/OFFICIAL_SOURCES.md` and/or `docs/research/OFFICIAL_ASSET_GATE.md`.
 4. Record usage status: `APPROVED`, `REFERENCE_ONLY`, `UNKNOWN`, or `BLOCKED`.
-5. Only `APPROVED` assets may be rendered as official visual assets in the site.
-6. `REFERENCE_ONLY`, `UNKNOWN`, and `BLOCKED` assets must remain placeholders/omitted. Do not recreate them.
+5. Record geometry provenance and exact reference dimensions when the component has a fixed/standard geometry.
+6. Only `APPROVED` assets/components may be rendered as official visual assets in the site.
+7. `REFERENCE_ONLY`, `UNKNOWN`, and `BLOCKED` assets must remain placeholders/omitted. Do not recreate them.
 
 ## Typography
 Use only source-backed Minecraft type families.
