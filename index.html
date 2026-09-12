@@ -6,10 +6,38 @@
   <meta name="theme-color" content="#242421">
   <title>Pixel — Dungeons Marketplace</title>
   <link rel="stylesheet" href="assets/css/main.css">
+  <link rel="stylesheet" href="assets/css/official-shell.css">
 </head>
 <body>
   <div class="marketplace-bg" aria-hidden="true"></div>
 
+  <!-- Minecraft.net website-shell layer. No homemade search/account icons. -->
+  <header class="minecraft-web-shell" aria-label="Minecraft website shell reference">
+    <div class="minecraft-web-shell__left">
+      <a class="mc-web-cta" href="https://www.minecraft.net/es-es/store/minecraft-dungeons" aria-label="Comprar ahora">
+        <span>COMPRAR AHORA</span>
+        <img
+          class="mc-web-cta__arrow"
+          src="https://raw.githubusercontent.com/Mojang/web-theme-bootstrap/main/assets/svg/icons/pixel-arrow-right.svg"
+          alt=""
+        >
+      </a>
+    </div>
+
+    <nav class="minecraft-web-shell__right" aria-label="Website controls">
+      <span class="mc-shell-pending" title="Exact official search icon asset still pending gate verification">BUSCAR</span>
+      <span class="mc-shell-pending mc-shell-account" title="Exact official account icon asset still pending gate verification">
+        <span>CUENTA</span>
+        <img
+          class="mc-shell-caret"
+          src="https://raw.githubusercontent.com/Mojang/web-theme-bootstrap/main/assets/svg/icons/pixel-caret.svg"
+          alt=""
+        >
+      </span>
+    </nav>
+  </header>
+
+  <!-- Marketplace / Bedrock Store layer -->
   <header class="store-topbar">
     <div class="store-topbar__brand">
       <strong>PIXEL</strong>
@@ -42,9 +70,13 @@
         <p class="feature-kicker">FEATURED ROTATION</p>
         <h1 id="featured-title">ROTATION 01</h1>
         <p class="feature-copy">The current banner. Reward contents and pull animation will be connected after the Marketplace menu is approved.</p>
-        <button class="store-primary-button store-primary-button--dungeons-primary" id="openBanner" type="button">
+        <button class="store-primary-button mc-dungeons-cta--orange-live" id="openBanner" type="button">
           <span>OPEN BANNER</span>
-          <img class="official-button-arrow" src="https://raw.githubusercontent.com/Mojang/web-theme-bootstrap/main/assets/svg/icons/pixel-arrow-right.svg" alt="">
+          <img
+            class="official-button-arrow"
+            src="https://raw.githubusercontent.com/Mojang/web-theme-bootstrap/main/assets/svg/icons/pixel-arrow-right.svg"
+            alt=""
+          >
         </button>
         <p class="interaction-status" id="actionStatus" aria-live="polite">Ready</p>
       </div>
