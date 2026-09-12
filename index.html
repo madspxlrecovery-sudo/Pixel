@@ -3,11 +3,90 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pixel Web Testing</title>
+  <meta name="theme-color" content="#18211c">
+  <title>Pixel Gacha Test</title>
+  <link rel="stylesheet" href="assets/css/main.css">
 </head>
 <body>
-  <h1>Pixel Web Testing</h1>
-  <p>Sitio en desarrollo</p>
-  <!-- Trigger GitHub Pages rebuild -->
+  <div class="shell">
+    <header class="topbar">
+      <button class="icon-button" type="button" aria-label="Volver">‹</button>
+      <div class="brand-lockup">
+        <span class="brand-kicker">PIXEL NETWORK</span>
+        <strong>MARKETPLACE</strong>
+      </div>
+      <div class="wallet" aria-label="Monedas de prueba">
+        <span class="gem" aria-hidden="true"></span>
+        <span>1,240</span>
+      </div>
+    </header>
+
+    <main class="market-layout">
+      <section class="banner" aria-labelledby="banner-title">
+        <div class="voxel-sky" aria-hidden="true">
+          <span class="block block-a"></span>
+          <span class="block block-b"></span>
+          <span class="block block-c"></span>
+          <span class="block block-d"></span>
+          <span class="beam"></span>
+        </div>
+
+        <div class="banner-copy">
+          <span class="eyebrow">BANNER DESTACADO · PRUEBA</span>
+          <h1 id="banner-title">ROTACIÓN 01</h1>
+          <p>Demo visual del sistema de tiradas.</p>
+          <div class="banner-meta">
+            <span>RECOMPENSAS DE PRUEBA</span>
+            <span class="dot"></span>
+            <span>TARJETAS VACÍAS</span>
+          </div>
+        </div>
+
+        <div class="banner-actions">
+          <button class="pull-button secondary" type="button" data-pull="1">
+            <span class="pull-label">TIRAR x1</span>
+            <span class="pull-cost"><span class="mini-gem"></span>160</span>
+          </button>
+          <button class="pull-button primary" type="button" data-pull="10">
+            <span class="pull-label">TIRAR x10</span>
+            <span class="pull-cost"><span class="mini-gem"></span>1,600</span>
+          </button>
+        </div>
+      </section>
+
+      <aside class="side-panel" aria-label="Información de prueba">
+        <div class="panel-header">
+          <span>VISTA PREVIA</span>
+          <span class="panel-notch"></span>
+        </div>
+        <div class="preview-card">
+          <div class="preview-slot"></div>
+          <div class="preview-lines">
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+        <p class="panel-copy">La recompensa final se mostrará acá más adelante. Por ahora solo estamos probando el lenguaje visual y el reveal.</p>
+        <div class="rarity-key">
+          <span><i class="rarity rarity-rare"></i>RARA</span>
+          <span><i class="rarity rarity-epic"></i>ÉPICA</span>
+          <span><i class="rarity rarity-legendary"></i>LEGENDARIA</span>
+        </div>
+      </aside>
+    </main>
+  </div>
+
+  <section class="reveal" id="reveal" aria-hidden="true">
+    <div class="reveal-vignette"></div>
+    <div class="particle-field" id="particleField" aria-hidden="true"></div>
+    <div class="reveal-topline">
+      <span>APERTURA DE RECOMPENSA</span>
+      <button class="close-reveal" id="closeReveal" type="button">CERRAR ×</button>
+    </div>
+    <div class="cards-stage" id="cardsStage"></div>
+    <div class="reveal-hint">CLICK EN CUALQUIER PARTE PARA CONTINUAR</div>
+  </section>
+
+  <script src="assets/js/app.js"></script>
 </body>
 </html>
