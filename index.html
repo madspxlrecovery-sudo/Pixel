@@ -3,89 +3,189 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#18211c">
-  <title>Pixel Gacha Test</title>
+  <meta name="theme-color" content="#0b0f10">
+  <title>Pixel — Banner Vault</title>
   <link rel="stylesheet" href="assets/css/main.css">
 </head>
 <body>
-  <div class="shell">
-    <header class="topbar">
-      <button class="icon-button" type="button" aria-label="Volver">‹</button>
-      <div class="brand-lockup">
-        <span class="brand-kicker">PIXEL NETWORK</span>
-        <strong>MARKETPLACE</strong>
+  <div class="dungeon-bg" aria-hidden="true">
+    <div class="fog fog-a"></div>
+    <div class="fog fog-b"></div>
+    <div class="torch-glow torch-left"></div>
+    <div class="torch-glow torch-right"></div>
+    <div class="stone-shape stone-a"></div>
+    <div class="stone-shape stone-b"></div>
+    <div class="stone-shape stone-c"></div>
+  </div>
+
+  <div class="screen-frame">
+    <header class="game-header">
+      <button class="dungeon-icon back-button" type="button" aria-label="Volver">
+        <span>‹</span>
+      </button>
+
+      <div class="brand-plaque">
+        <span class="brand-small">PIXEL NETWORK</span>
+        <strong>BANNER VAULT</strong>
       </div>
-      <div class="wallet" aria-label="Monedas de prueba">
-        <span class="gem" aria-hidden="true"></span>
-        <span>1,240</span>
+
+      <div class="header-center">
+        <span class="chapter-mark">I</span>
+        <span class="chapter-text">BANNERS</span>
+      </div>
+
+      <div class="wallet-row" aria-label="Recursos de prueba">
+        <div class="wallet-box">
+          <span class="emerald-icon" aria-hidden="true"></span>
+          <strong>1 240</strong>
+        </div>
+        <div class="profile-stone" aria-hidden="true">
+          <span class="profile-rune">P</span>
+        </div>
       </div>
     </header>
 
-    <main class="market-layout">
-      <section class="banner" aria-labelledby="banner-title">
-        <div class="voxel-sky" aria-hidden="true">
-          <span class="block block-a"></span>
-          <span class="block block-b"></span>
-          <span class="block block-c"></span>
-          <span class="block block-d"></span>
-          <span class="beam"></span>
-        </div>
+    <main class="banner-menu">
+      <aside class="menu-rail" aria-label="Navegación de banners">
+        <div class="rail-cap"></div>
+        <button class="rail-item active" type="button" aria-current="page">
+          <span class="rail-rune">◆</span>
+          <span>BANNERS</span>
+        </button>
+        <div class="rail-divider"></div>
+        <div class="rail-ornament">✦</div>
+        <div class="rail-ornament dim">✦</div>
+        <div class="rail-ornament dim">✦</div>
+      </aside>
 
-        <div class="banner-copy">
-          <span class="eyebrow">BANNER DESTACADO · PRUEBA</span>
-          <h1 id="banner-title">ROTACIÓN 01</h1>
-          <p>Demo visual del sistema de tiradas.</p>
-          <div class="banner-meta">
-            <span>RECOMPENSAS DE PRUEBA</span>
-            <span class="dot"></span>
-            <span>TARJETAS VACÍAS</span>
+      <section class="banner-browser" aria-labelledby="menu-title">
+        <div class="title-row">
+          <div>
+            <span class="section-kicker">SELECCIÓN ACTUAL</span>
+            <h1 id="menu-title">BANNERS</h1>
+          </div>
+          <div class="title-ornament" aria-hidden="true">
+            <span></span><i></i><span></span>
           </div>
         </div>
 
-        <div class="banner-actions">
-          <button class="pull-button secondary" type="button" data-pull="1">
-            <span class="pull-label">TIRAR x1</span>
-            <span class="pull-cost"><span class="mini-gem"></span>160</span>
+        <div class="banner-stage-wrap">
+          <button class="stage-arrow stage-arrow-left" type="button" aria-label="Banner anterior" data-direction="-1">‹</button>
+
+          <article class="banner-stage" data-banner-index="0">
+            <div class="banner-art" aria-hidden="true">
+              <div class="sky-glow"></div>
+              <div class="dungeon-cliff cliff-left"></div>
+              <div class="dungeon-cliff cliff-right"></div>
+              <div class="dungeon-floor"></div>
+              <div class="portal-arch">
+                <div class="portal-inner">
+                  <span class="portal-rune rune-1">◆</span>
+                  <span class="portal-rune rune-2">◆</span>
+                  <span class="portal-rune rune-3">◆</span>
+                </div>
+              </div>
+              <div class="ember ember-1"></div>
+              <div class="ember ember-2"></div>
+              <div class="ember ember-3"></div>
+              <div class="banner-silhouette silhouette-a"></div>
+              <div class="banner-silhouette silhouette-b"></div>
+            </div>
+
+            <div class="stage-vignette"></div>
+            <div class="stage-corner corner-tl"></div>
+            <div class="stage-corner corner-tr"></div>
+            <div class="stage-corner corner-bl"></div>
+            <div class="stage-corner corner-br"></div>
+
+            <div class="banner-label">
+              <span class="banner-overline">ROTACIÓN DE PRUEBA</span>
+              <h2>ROTACIÓN 01</h2>
+              <p>Espacio reservado para el arte del banner.</p>
+            </div>
+
+            <div class="stage-status">
+              <span class="status-gem"></span>
+              <span>DISPONIBLE</span>
+            </div>
+          </article>
+
+          <button class="stage-arrow stage-arrow-right" type="button" aria-label="Banner siguiente" data-direction="1">›</button>
+        </div>
+
+        <div class="banner-slots" role="tablist" aria-label="Lista de banners">
+          <button class="banner-slot selected" type="button" role="tab" aria-selected="true" data-slot="0">
+            <span class="slot-image slot-image-active">
+              <i class="slot-portal"></i>
+            </span>
+            <span class="slot-copy">
+              <b>ROTACIÓN 01</b>
+              <small>BANNER ACTIVO</small>
+            </span>
+            <span class="selection-notch"></span>
           </button>
-          <button class="pull-button primary" type="button" data-pull="10">
-            <span class="pull-label">TIRAR x10</span>
-            <span class="pull-cost"><span class="mini-gem"></span>1,600</span>
+
+          <button class="banner-slot locked" type="button" role="tab" aria-selected="false" data-slot="1" disabled>
+            <span class="slot-image"><i class="locked-mark">?</i></span>
+            <span class="slot-copy">
+              <b>PRÓXIMAMENTE</b>
+              <small>ESPACIO DE BANNER</small>
+            </span>
+          </button>
+
+          <button class="banner-slot locked" type="button" role="tab" aria-selected="false" data-slot="2" disabled>
+            <span class="slot-image"><i class="locked-mark">?</i></span>
+            <span class="slot-copy">
+              <b>PRÓXIMAMENTE</b>
+              <small>ESPACIO DE BANNER</small>
+            </span>
           </button>
         </div>
       </section>
 
-      <aside class="side-panel" aria-label="Información de prueba">
-        <div class="panel-header">
-          <span>VISTA PREVIA</span>
-          <span class="panel-notch"></span>
+      <aside class="banner-info">
+        <div class="info-cap">
+          <span class="cap-rivet"></span>
+          <span>DETALLES</span>
+          <span class="cap-rivet"></span>
         </div>
-        <div class="preview-card">
-          <div class="preview-slot"></div>
-          <div class="preview-lines">
-            <span></span>
-            <span></span>
+
+        <div class="crest-frame">
+          <div class="crest-empty">
+            <span>◆</span>
           </div>
         </div>
-        <p class="panel-copy">La recompensa final se mostrará acá más adelante. Por ahora solo estamos probando el lenguaje visual y el reveal.</p>
-        <div class="rarity-key">
-          <span><i class="rarity rarity-rare"></i>RARA</span>
-          <span><i class="rarity rarity-epic"></i>ÉPICA</span>
-          <span><i class="rarity rarity-legendary"></i>LEGENDARIA</span>
+
+        <div class="info-copy">
+          <span class="info-eyebrow">BANNER ACTUAL</span>
+          <h3>ROTACIÓN 01</h3>
+          <p>Este panel queda preparado para mostrar la información del banner más adelante.</p>
         </div>
+
+        <div class="info-separator"><span></span><i></i><span></span></div>
+
+        <div class="info-stat">
+          <span>ESTADO</span>
+          <b>ACTIVO</b>
+        </div>
+        <div class="info-stat">
+          <span>CONTENIDO</span>
+          <b>PRUEBA</b>
+        </div>
+
+        <button class="dungeon-button" type="button" id="enterBanner">
+          <span>ABRIR BANNER</span>
+          <i class="button-glint"></i>
+        </button>
       </aside>
     </main>
-  </div>
 
-  <section class="reveal" id="reveal" aria-hidden="true">
-    <div class="reveal-vignette"></div>
-    <div class="particle-field" id="particleField" aria-hidden="true"></div>
-    <div class="reveal-topline">
-      <span>APERTURA DE RECOMPENSA</span>
-      <button class="close-reveal" id="closeReveal" type="button">CERRAR ×</button>
-    </div>
-    <div class="cards-stage" id="cardsStage"></div>
-    <div class="reveal-hint">CLICK EN CUALQUIER PARTE PARA CONTINUAR</div>
-  </section>
+    <footer class="game-footer">
+      <div class="footer-hint"><span class="keycap">A</span><span>SELECCIONAR</span></div>
+      <div class="footer-hint"><span class="keycap">Q</span><span class="keycap">E</span><span>CAMBIAR BANNER</span></div>
+      <div class="footer-hint"><span class="keycap">ESC</span><span>VOLVER</span></div>
+    </footer>
+  </div>
 
   <script src="assets/js/app.js"></script>
 </body>
