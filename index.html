@@ -3,93 +3,104 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#1d1e1e">
+  <meta name="theme-color" content="#242421">
   <title>Pixel — Dungeons Marketplace</title>
   <link rel="stylesheet" href="assets/css/main.css">
 </head>
 <body>
-  <header class="marketplace-header">
-    <div class="marketplace-header__inner">
-      <a class="project-brand" href="#main" aria-label="Pixel home">
-        <span class="project-brand__name">PIXEL</span>
-        <span class="project-brand__context">DUNGEONS MARKETPLACE</span>
-      </a>
+  <div class="marketplace-bg" aria-hidden="true"></div>
 
-      <nav class="primary-nav" aria-label="Primary navigation">
-        <a class="primary-nav__item is-active" href="#banners" aria-current="page">BANNERS</a>
-      </nav>
+  <header class="store-topbar">
+    <div class="store-topbar__brand">
+      <strong>PIXEL</strong>
+      <span>DUNGEONS MARKETPLACE</span>
+    </div>
 
-      <div class="currency-text" aria-label="Emerald balance">
-        <span>EMERALDS</span>
-        <strong>3373</strong>
-      </div>
+    <div class="store-topbar__title">BANNERS</div>
+
+    <div class="store-wallet" aria-label="Minecoin balance">
+      <img src="https://www.minecraft.net/content/dam/minecraftnet/franchise/component-library/icons/minecoin.svg" alt="">
+      <span>3373</span>
     </div>
   </header>
 
-  <main id="main" class="page-shell">
-    <header class="page-intro">
-      <p class="eyebrow">MARKETPLACE / DUNGEONS</p>
-      <h1>BANNERS</h1>
-      <p class="page-intro__copy">Choose a banner rotation. Official visual assets are added only after source and usage approval.</p>
-    </header>
+  <main class="store-screen" id="main">
+    <section class="featured-banner" aria-labelledby="featured-title">
+      <div class="featured-banner__art">
+        <img
+          src="https://www.minecraft.net/content/dam/minecraftnet/games/dungeons/key-art/MinecraftDungeons_S1AdventurePass_1280x768.jpg"
+          alt="Official Minecraft Dungeons Cloudy Climb key art"
+        >
+      </div>
 
-    <section id="banners" class="catalog" aria-label="Banner rotations">
-      <div class="catalog-grid" role="listbox" aria-label="Available banner rotations">
-        <button class="banner-card is-selected" type="button" role="option" aria-selected="true" data-banner="rotation-01" data-state="available">
-          <span class="banner-card__media" aria-hidden="true">
-            <span class="asset-placeholder">OFFICIAL ART PENDING</span>
+      <div class="featured-banner__content">
+        <img
+          class="dungeons-logo"
+          src="https://www.minecraft.net/content/dam/minecraftnet/games/dungeons/logos/Dungeons-PMP_Hero-Logo_ParallaxB_432x98.png"
+          alt="Minecraft Dungeons"
+        >
+        <p class="feature-kicker">FEATURED ROTATION</p>
+        <h1 id="featured-title">ROTATION 01</h1>
+        <p class="feature-copy">The current banner. Reward contents and pull animation will be connected after the Marketplace menu is approved.</p>
+        <button class="store-primary-button" id="openBanner" type="button">OPEN BANNER</button>
+        <p class="interaction-status" id="actionStatus" aria-live="polite">Ready</p>
+      </div>
+    </section>
+
+    <section class="offer-section" aria-labelledby="offers-title">
+      <div class="section-heading">
+        <h2 id="offers-title">BANNERS</h2>
+        <span>SELECT A ROTATION</span>
+      </div>
+
+      <div class="offer-grid" role="listbox" aria-label="Banner rotations">
+        <button class="offer-card is-selected" type="button" role="option" aria-selected="true" data-banner="rotation-01">
+          <span class="offer-card__image">
+            <img src="https://www.minecraft.net/content/dam/minecraftnet/games/dungeons/key-art/MinecraftDungeons_S1AdventurePass_1280x768.jpg" alt="Official Minecraft Dungeons Cloudy Climb key art">
           </span>
-          <span class="banner-card__body">
-            <span class="banner-card__state">AVAILABLE</span>
-            <span class="banner-card__title">ROTATION 01</span>
-            <span class="banner-card__meta">CURRENT BANNER</span>
+          <span class="offer-card__meta">
+            <strong>ROTATION 01</strong>
+            <small>AVAILABLE</small>
           </span>
         </button>
 
-        <button class="banner-card is-locked" type="button" role="option" aria-selected="false" data-banner="rotation-02" data-state="locked" disabled>
-          <span class="banner-card__media" aria-hidden="true">
-            <span class="asset-placeholder">OFFICIAL ART PENDING</span>
+        <button class="offer-card is-locked" type="button" role="option" aria-selected="false" data-banner="rotation-02" disabled>
+          <span class="offer-card__image">
+            <img src="https://www.minecraft.net/content/dam/minecraftnet/games/dungeons/key-art/MinecraftDungeons_S2AdventurePass_1280x768.jpg" alt="Official Minecraft Dungeons Luminous Night key art">
           </span>
-          <span class="banner-card__body">
-            <span class="banner-card__state">LOCKED</span>
-            <span class="banner-card__title">COMING SOON</span>
-            <span class="banner-card__meta">ROTATION 02</span>
+          <span class="offer-card__meta">
+            <strong>COMING SOON</strong>
+            <small>ROTATION 02</small>
           </span>
         </button>
 
-        <button class="banner-card is-locked" type="button" role="option" aria-selected="false" data-banner="rotation-03" data-state="locked" disabled>
-          <span class="banner-card__media" aria-hidden="true">
-            <span class="asset-placeholder">OFFICIAL ART PENDING</span>
+        <button class="offer-card is-locked" type="button" role="option" aria-selected="false" data-banner="rotation-03" disabled>
+          <span class="offer-card__image">
+            <img src="https://www.minecraft.net/content/dam/minecraftnet/games/dungeons/key-art/MinecraftDungeons_S3AdventurePass_1280x768.jpg" alt="Official Minecraft Dungeons Fauna Faire key art">
           </span>
-          <span class="banner-card__body">
-            <span class="banner-card__state">LOCKED</span>
-            <span class="banner-card__title">COMING SOON</span>
-            <span class="banner-card__meta">ROTATION 03</span>
+          <span class="offer-card__meta">
+            <strong>COMING SOON</strong>
+            <small>ROTATION 03</small>
+          </span>
+        </button>
+
+        <button class="offer-card is-locked offer-card--square-art" type="button" role="option" aria-selected="false" data-banner="archive" disabled>
+          <span class="offer-card__image">
+            <img src="https://www.minecraft.net/content/dam/minecraftnet/games/dungeons/logos/dungeons-pmp-dlcbundle-boxart-500x500.jpg" alt="Official Minecraft Dungeons Ultimate DLC Bundle key art">
+          </span>
+          <span class="offer-card__meta">
+            <strong>ARCHIVE</strong>
+            <small>LOCKED</small>
           </span>
         </button>
       </div>
-
-      <section class="selection-panel" aria-labelledby="selection-title">
-        <div class="selection-panel__copy">
-          <p class="selection-panel__label">SELECTED BANNER</p>
-          <h2 id="selection-title">ROTATION 01</h2>
-          <p>This is the structural test for the Marketplace extension. Banner artwork, currency icons and Dungeons-specific visual assets remain intentionally absent until approved official resources are available.</p>
-        </div>
-
-        <div class="selection-panel__action">
-          <button class="minecraft-action" id="openBanner" type="button">OPEN BANNER</button>
-          <p class="interaction-status" id="actionStatus" aria-live="polite">Ready</p>
-        </div>
-      </section>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="site-footer__inner">
-      <span>PIXEL</span>
-      <span class="site-footer__disclaimer">NOT AN OFFICIAL MINECRAFT PRODUCT. NOT APPROVED BY OR ASSOCIATED WITH MOJANG OR MICROSOFT.</span>
-      <span class="keyboard-hint">ENTER SELECT · ESC BACK</span>
-    </div>
+  <footer class="store-footer">
+    <span>PIXEL</span>
+    <span>NOT AN OFFICIAL MINECRAFT PRODUCT. NOT APPROVED BY OR ASSOCIATED WITH MOJANG OR MICROSOFT.</span>
+    <span>ENTER SELECT · ESC BACK</span>
   </footer>
 
   <script src="assets/js/app.js"></script>
