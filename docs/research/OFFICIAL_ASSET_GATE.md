@@ -15,6 +15,11 @@ Only `APPROVED` entries may appear as official branded visuals in production.
 | Minecraft Ten V2 font | Mojang `web-theme-bootstrap/assets/fonts` + `LICENSE_OFL.txt` | APPROVED | May be used under OFL terms; current project references official hosted file |
 | Minecraft Seven V2 font | Mojang `web-theme-bootstrap/assets/fonts` + `LICENSE_OFL.txt` | APPROVED | May be used under OFL terms; current project references official hosted file |
 | Mojang published color tokens | Mojang `web-theme-bootstrap/scss/abstract/_colors.scss` and `_theme.scss` | APPROVED | Exact values may be used and must remain marked `--mc-*` |
+| Minecraft.net green primary CTA construction | live minecraft.net + Mojang web-theme button implementation | APPROVED as interaction/style pattern | Reuse the official pattern; exact image/icon assets still require their own gate entry |
+| Minecraft.net CTA arrow icon | live `minecraft.net/es-es/about-dungeons` | UNKNOWN | Locate exact official asset/live URL before rendering; do not redraw |
+| Minecraft.net search magnifier | live `minecraft.net/es-es/about-dungeons` | UNKNOWN | Locate exact official asset/live URL before rendering; do not redraw |
+| Minecraft.net account/profile icon | live `minecraft.net/es-es/about-dungeons` | UNKNOWN | Locate exact official asset/live URL before rendering; do not redraw |
+| Minecraft.net dropdown chevrons | live `minecraft.net/es-es/about-dungeons` | UNKNOWN | Locate exact official asset/live URL before rendering; do not redraw |
 | Mojang Dungeons border image `border-dungeons-25.png` | Mojang `web-theme-bootstrap` | REFERENCE_ONLY | Do not copy or recreate; use only to identify the real component until a permitted usage basis exists |
 | Mojang official SVG/PNG icon files | Mojang `web-theme-bootstrap/assets/svg/icons` and related image dirs | REFERENCE_ONLY | Do not copy or redraw as substitutes until separately approved |
 | Minecraft / Dungeons logos | Official Mojang/Microsoft sources | REFERENCE_ONLY | Do not place in production without explicit permitted usage basis |
@@ -34,9 +39,10 @@ Before implementing any new icon, border, texture, background, badge, currency m
 
 If status is anything else, use text or a neutral placeholder and continue research.
 
-## Marketplace + Dungeons split
+## Three-layer source model
 Pixel’s target is:
-- **Minecraft Marketplace** for the external shell/background/environment;
-- **Minecraft Dungeons** for the specialized menu/interaction layer.
+- **Minecraft.net live web shell** for header/footer, search, account, CTA arrows, dropdown chevrons and other website chrome;
+- **Minecraft Marketplace / Bedrock Store** for storefront/catalog structure and store context;
+- **Minecraft Dungeons** for specialized menu/interaction language and content identity.
 
-Both layers still require the same official-asset gate. A Marketplace-looking imitation is not acceptable merely because Dungeons assets are being avoided, and vice versa.
+All three layers still require the same official-asset gate. Do not create lookalikes to fill gaps.
