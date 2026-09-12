@@ -4,21 +4,50 @@ Primary live reference: https://www.minecraft.net/es-es/about-dungeons
 
 This document defines the official **web-facing** layer of Pixel. It is separate from Bedrock Marketplace UI and separate from Minecraft Dungeons in-game UI.
 
-## Confirmed live components
-The official Minecraft Dungeons page on minecraft.net currently uses:
-- dark global navigation/header bar;
-- green primary CTA (`COMPRAR AHORA` / equivalent locale text);
-- Dungeons orange/gold CTA variants in page content (`OBTENER DUNGEONS`, `NOVEDAD: EDICIÓN ULTIMATE`);
-- directional arrow attached to CTA text;
-- large carousel left/right navigation arrows;
-- search magnifier control;
-- account/profile control;
-- small downward chevrons for expandable navigation/account menus;
-- white primary text on dark surfaces;
-- compact icon sizing and restrained spacing;
-- Minecraft typography and official web button treatment.
+## Current live desktop composition
+The current official Minecraft.net Dungeons page exposes the desktop navigation in this order:
 
-The official Dungeons page currently exposes `Obtener Dungeons` as a primary content CTA and `Novedad: Edición Ultimate` as a second orange/gold CTA in the Ultimate Edition carousel/content section.
+`Minecraft logo → JUEGOS → TIENDA → EXPLORACIÓN → APRENDER → SOPORTE TÉCNICO → COMPRAR AHORA → Buscar → CUENTA`
+
+The live page confirms the navigation labels, search control, account control and `Comprar ahora` action. The official Mojang `web-theme-bootstrap` repository provides the Minecraft logo asset, pixel caret/arrow resources, typography, colors and button implementation evidence used to reconstruct the source-backed shell.
+
+## Measured current desktop reference
+Reference capture supplied from the current official page: `1365×97 px`.
+
+Measured visible header properties:
+- shell height: approximately `80 px`, including a `1 px` dark divider;
+- shell background: `#2A2225`;
+- centered content span: approximately `1240 px`;
+- left/right outer margin at the reference width: approximately `60–63 px`;
+- Minecraft logo display: approximately `220×38 px`;
+- green `COMPRAR AHORA` CTA: `154×36 px`;
+- dropdown caret display: approximately `8×8 px`;
+- menu is a single compact horizontal row.
+
+This `80 px` measurement supersedes the earlier `72 px` estimate, which was based on a differently cropped screenshot.
+
+## Official logo and navigation resources
+Mojang `web-theme-bootstrap` contains:
+- `assets/svg/logos/minecraft.svg`
+- `assets/svg/logos/minecraft-core-brand.svg`
+- `assets/svg/icons/pixel-arrow-right.svg`
+- `assets/svg/icons/pixel-arrow-left.svg`
+- `assets/svg/icons/pixel-arrow-up.svg`
+- `assets/svg/icons/pixel-arrow-down.svg`
+- `assets/svg/icons/pixel-caret.svg`
+
+The current Pixel prototype remotely references the exact `minecraft.svg`, `pixel-arrow-right.svg`, and `pixel-caret.svg` assets instead of redrawing them.
+
+## Search and account pictograms
+The current official live page visibly includes a search magnifier and an account/profile pictogram, but the exact current asset files have not yet been independently identified in the official source set.
+
+Therefore Pixel currently:
+- reserves the measured search-control slot;
+- reserves the profile-icon slot;
+- keeps `CUENTA` and the approved official caret;
+- does **not** draw a fake magnifier or fake profile icon.
+
+This is intentional. A visually incomplete official slot is preferable to a false asset.
 
 ## Official button system evidence
 Mojang `web-theme-bootstrap` defines:
@@ -32,86 +61,58 @@ Mojang `web-theme-bootstrap` defines:
 - Dungeons secondary: `#299b6e`;
 - Dungeons tertiary: `#FFCB56`.
 
-These are source-backed values, not sampled approximations.
+The current desktop header capture also confirms the green CTA outline at the exact Mojang primary green `#3c8527`.
 
-## Official arrow assets
-Mojang `web-theme-bootstrap/assets/svg/icons/` includes exact official pixel navigation assets:
-- `pixel-arrow-right.svg`
-- `pixel-arrow-left.svg`
-- `pixel-arrow-up.svg`
-- `pixel-arrow-down.svg`
-- `pixel-caret.svg`
+## Dungeons page-content CTA reference
+From the official Minecraft Dungeons CTA capture supplied by the user:
+- outer CTA frame: `273×54 px`;
+- orange face: `269×50 px`;
+- top highlight: `6 px`;
+- bottom shadow: `6 px`;
+- measured face colors: `#FFA41F`, highlight `#FFD953`, shadow `#FF791A`.
 
-Do not redraw these arrows. For prototypes that require them, reference the exact official resource. Production reuse still follows the asset gate and Mojang usage terms.
+This remains a separate Dungeons page-content component; it must not be confused with the global Minecraft.net header CTA.
 
 ## Pixel mapping
-Use these components for **website shell tasks** only:
-- top-level navigation;
-- global account/profile area;
-- search;
-- top-level CTA;
-- dropdown menus;
-- small web navigation arrows/chevrons;
-- page-content CTA variants where the live Dungeons page provides a direct precedent.
+Use the Minecraft.net shell for:
+- global navigation;
+- logo placement;
+- top-level menu hierarchy;
+- search/account positioning;
+- `COMPRAR AHORA`-style global CTA;
+- dropdown carets;
+- desktop shell proportions.
 
-Do not use the minecraft.net shell as a replacement for Dungeons in-game controls or Marketplace product-card structure.
+Use Bedrock Marketplace for store/catalog structure underneath this shell, and Dungeons for specialized content/UI language.
 
-## Three-layer source model
-1. `minecraft.net` live shell -> website chrome/micro-UI and official page CTAs.
-2. `Mojang/bedrock-samples` -> Marketplace/Store catalog structure.
-3. Minecraft Dungeons -> content identity and specialized game-facing UI.
+## Composition lock
+When Pixel claims to reproduce the current desktop Minecraft.net shell, do not simplify away the middle navigation. The desktop reference order is locked as:
 
-## Asset rule
-The fact that an icon appears on an official page confirms its visual authority, but does not by itself prove unrestricted redistribution rights.
+`logo / Juegos / Tienda / Exploración / Aprender / Soporte técnico / CTA / Search / Cuenta`
 
-For search/account/arrow/chevron/icon files:
-- locate the exact official file or live official asset URL;
-- record it in `OFFICIAL_ASSET_GATE.md`;
-- prefer remote official references for prototypes rather than redrawing or copying the asset;
-- never redraw it as a substitute.
+A different label set or simplified navigation is a Pixel adaptation and must be explicitly documented as such rather than called 1:1 official fidelity.
 
 ## Geometry rule
-The official shell must not be merely “visually similar”. Size, spacing and proportion are part of the source component.
-
 For every shell component record:
-- source breakpoint or capture size;
+- source breakpoint/capture size;
 - outer width and height;
 - internal padding;
 - icon width/height;
 - icon-to-label gap;
 - type size and line-height;
 - border thickness;
-- neighboring spacing.
+- neighboring spacing and order.
 
-Accepted geometry provenance is `LIVE_DOM/CSS`, `OFFICIAL_CODE`, or `MEASURED_OFFICIAL_CAPTURE`.
+Accepted provenance is `LIVE_DOM/CSS`, `OFFICIAL_CODE`, or `MEASURED_OFFICIAL_CAPTURE`.
 
-If exact dimensions are unknown, do not claim 1:1 fidelity and do not arbitrarily resize the component to make the Pixel layout easier.
-
-## Current measured references
-From the official minecraft.net header capture supplied by the user:
-- desktop shell height reference: `72 px`;
-- green `COMPRAR AHORA` CTA reference: `154 × 36 px` at the supplied desktop capture scale.
-
-From the official Minecraft Dungeons CTA capture supplied by the user:
-- outer CTA frame: `273 × 54 px`;
-- orange face: `269 × 50 px`;
-- top highlight: `6 px`;
-- bottom shadow: `6 px`;
-- measured face colors: `#FFA41F`, highlight `#FFD953`, shadow `#FF791A`.
-
-These measured values are source evidence tied to the supplied official captures. Do not stretch them.
+Do not arbitrarily scale official-source components to make the Pixel layout easier.
 
 ## Current implementation status
-- green header CTA: restored at the measured desktop reference size and using the official Mojang primary green token + exact `pixel-arrow-right.svg`;
-- account dropdown caret: uses exact `pixel-caret.svg`;
-- search magnifier: intentionally not drawn while the exact official asset/live URL and dimensions remain unverified;
-- account/profile pictogram: intentionally not drawn while the exact official asset/live URL and dimensions remain unverified;
-- orange Dungeons CTA: implemented at the measured `273 × 54 px` source size and measured capture colors.
-
-## Current implementation priority
-1. identify exact official search magnifier asset and dimensions;
-2. identify exact official account/profile asset and dimensions;
-3. verify live header spacing/padding from official DOM/CSS evidence;
-4. only then replace the current text-only pending controls.
-
-Until an exact icon asset is approved, keep that control text-only rather than using a homemade icon.
+- full desktop row restored;
+- official Minecraft logo restored by exact Mojang remote SVG;
+- `JUEGOS`, `TIENDA`, `EXPLORACIÓN`, `APRENDER`, `SOPORTE TÉCNICO` restored in source order;
+- official Mojang carets used for dropdown navigation;
+- green header CTA restored at `154×36 px` with official arrow;
+- search and profile pictogram slots reserved but intentionally blank until the exact current assets are identified;
+- shell corrected to approximately `80 px` at the desktop reference breakpoint;
+- orange Dungeons CTA remains implemented at its separately measured `273×54 px` source size.
