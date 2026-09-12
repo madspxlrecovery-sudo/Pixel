@@ -11,8 +11,12 @@
 <body>
   <div class="marketplace-bg" aria-hidden="true"></div>
 
-  <!-- Minecraft.net web-shell layer. Source-backed nav typography/spacing from Mojang theme. -->
-  <header class="minecraft-web-shell" aria-label="Minecraft website navigation">
+  <!--
+    Pixel adaptation of the official Minecraft.net desktop web shell.
+    Official Minecraft controls retain their source-backed geometry and assets.
+    Project-specific brand/expansion/wallet content replaces the institutional nav links.
+  -->
+  <header class="minecraft-web-shell" aria-label="Pixel Network marketplace navigation">
     <div class="minecraft-web-shell__inner">
       <a class="mc-shell-logo" href="https://www.minecraft.net/es-es" aria-label="Minecraft">
         <img
@@ -21,27 +25,20 @@
         >
       </a>
 
-      <nav class="mc-shell-nav" aria-label="Minecraft navigation">
-        <button class="mc-shell-nav__item" type="button">
-          <span>JUEGOS</span>
-          <i class="mc-pixel-caret" aria-hidden="true"></i>
-        </button>
-        <button class="mc-shell-nav__item" type="button">
-          <span>TIENDA</span>
-          <i class="mc-pixel-caret" aria-hidden="true"></i>
-        </button>
-        <button class="mc-shell-nav__item" type="button">
-          <span>EXPLORACIÓN</span>
-          <i class="mc-pixel-caret" aria-hidden="true"></i>
-        </button>
-        <button class="mc-shell-nav__item" type="button">
-          <span>APRENDER</span>
-          <i class="mc-pixel-caret" aria-hidden="true"></i>
-        </button>
-        <a class="mc-shell-nav__item mc-shell-nav__item--link" href="https://help.minecraft.net/" target="_blank" rel="noreferrer">SOPORTE TÉCNICO</a>
-      </nav>
+      <div class="pixel-shell-identity" aria-label="Pixel Network expansion">
+        <strong>PIXEL NETWORK</strong>
+        <span>DUNGEONS MARKETPLACE</span>
+      </div>
 
       <div class="mc-shell-actions">
+        <div class="mc-shell-wallet" aria-label="Minecoin balance">
+          <img
+            src="https://www.minecraft.net/content/dam/minecraftnet/franchise/component-library/icons/minecoin.svg"
+            alt=""
+          >
+          <span>3373</span>
+        </div>
+
         <a class="mc-web-cta" href="https://www.minecraft.net/es-es/store/minecraft-dungeons" aria-label="Comprar ahora">
           <span>COMPRAR AHORA</span>
           <i class="mc-web-cta__arrow-mask" aria-hidden="true"></i>
@@ -49,6 +46,7 @@
 
         <!-- Exact current search pictogram is intentionally not recreated until its live asset is identified. -->
         <button class="mc-shell-search-slot" type="button" aria-label="Buscar" title="Buscar"></button>
+        <i class="mc-pixel-caret mc-shell-search-caret" aria-hidden="true"></i>
 
         <button class="mc-shell-account" type="button" aria-label="Cuenta">
           <span class="mc-shell-account__icon-slot" aria-hidden="true"></span>
