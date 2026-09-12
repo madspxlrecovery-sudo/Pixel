@@ -1,69 +1,119 @@
 {
-  "version": 1,
+  "version": 2,
   "last_verified": "2026-09-12",
-  "policy": "official-source-first",
+  "policy": "official-assets-only-for-branded-visuals",
+  "product_direction": {
+    "base_shell": "official Minecraft Marketplace",
+    "specialized_ui": "official Minecraft Dungeons",
+    "fallback": "neutral placeholder or omission; never a lookalike"
+  },
   "sources": [
     {
       "id": "mojang-web-theme-bootstrap",
       "authority": "tier-a",
       "owner": "Mojang",
       "url": "https://github.com/Mojang/web-theme-bootstrap",
-      "use": ["typography", "official color tokens", "button construction", "Dungeons border reference", "official icon inventory"],
-      "notes": "Repository archived 2026-03-06. Software is MIT; root license separately restricts image-asset reuse. Fonts have separate OFL 1.1 file."
+      "use": [
+        "typography",
+        "official color tokens",
+        "source-code implementation evidence",
+        "Dungeons border identification",
+        "official icon inventory discovery"
+      ],
+      "notes": "Software and font portions have separate licensing considerations. Root license restricts image-asset reuse outside the project. Image assets are REFERENCE_ONLY unless a separate permitted basis is found."
+    },
+    {
+      "id": "minecraft-marketplace",
+      "authority": "tier-a",
+      "owner": "Mojang/Microsoft",
+      "url": "https://www.minecraft.net/marketplace",
+      "use": [
+        "Marketplace shell research",
+        "storefront environment research",
+        "background/layout reference",
+        "navigation reference"
+      ],
+      "notes": "Official page is the primary environment reference for Pixel. Individual imagery/assets require separate usage review before production reuse."
     },
     {
       "id": "minecraft-dungeons-accessibility",
       "authority": "tier-a",
       "owner": "Mojang Studios",
       "url": "https://www.minecraft.net/en-us/accessibility/dungeons",
-      "use": ["keyboard navigation", "controller navigation", "Escape/back behavior", "UI narration", "icon-based communication"]
+      "use": [
+        "keyboard navigation",
+        "controller navigation",
+        "Escape/back behavior",
+        "UI narration",
+        "icon-based communication"
+      ]
     },
     {
       "id": "minecraft-usage-guidelines",
       "authority": "tier-a",
       "owner": "Mojang/Microsoft",
       "url": "https://www.minecraft.net/usage-guidelines",
-      "use": ["brand guardrails", "asset guardrails", "public-site disclaimer", "naming"]
+      "use": [
+        "brand guardrails",
+        "asset guardrails",
+        "public-site disclaimer",
+        "naming"
+      ]
     },
     {
       "id": "xbox-minecraft-dungeons",
       "authority": "tier-a",
       "owner": "Microsoft/Xbox",
       "url": "https://www.xbox.com/games/minecraft-dungeons",
-      "use": ["official gameplay visual reference", "product context"],
+      "use": [
+        "official gameplay visual reference",
+        "product context"
+      ],
       "notes": "Marketing imagery is reference-only unless separately permitted."
     }
   ],
-  "official_tokens": {
-    "minecraft": {
-      "fun_green": "#3c8527",
-      "malachite": "#a0e080",
-      "shark": "#1d1e1e",
-      "soil": "#313131",
-      "tundora": "#404040",
-      "scorpion": "#5a5a5a",
-      "gravel": "#757575",
-      "dusty_gray": "#949494"
-    },
-    "dungeons": {
-      "primary_orange": "#e67834",
-      "secondary_eucalyptus": "#299b6e",
-      "tertiary_golden_tainoi": "#FFCB56"
+  "approved_foundation": {
+    "fonts": [
+      "MinecraftTenV2",
+      "MinecraftSevenV2",
+      "MinecraftTen",
+      "MinecraftSeven",
+      "MinecraftFive"
+    ],
+    "official_tokens": {
+      "minecraft": {
+        "fun_green": "#3c8527",
+        "malachite": "#a0e080",
+        "shark": "#1d1e1e",
+        "soil": "#313131",
+        "tundora": "#404040",
+        "scorpion": "#5a5a5a",
+        "gravel": "#757575",
+        "dusty_gray": "#949494"
+      },
+      "dungeons": {
+        "primary_orange": "#e67834",
+        "secondary_eucalyptus": "#299b6e",
+        "tertiary_golden_tainoi": "#FFCB56"
+      }
     }
   },
-  "fonts": [
-    "MinecraftTenV2",
-    "MinecraftSevenV2",
-    "MinecraftTen",
-    "MinecraftSeven",
-    "MinecraftFive"
+  "asset_gate": {
+    "approved": "may be rendered as official branded visual",
+    "reference_only": "research only; do not copy or recreate",
+    "unknown": "continue official-source research; keep neutral placeholder",
+    "blocked": "must not appear in production"
+  },
+  "blocked_approaches": [
+    "CSS-drawn Minecraft or Dungeons pictograms",
+    "hand-made SVG recreations of official icons",
+    "AI-generated Minecraft or Dungeons UI art",
+    "lookalike Dungeons borders/frames used as substitutes",
+    "lookalike Marketplace backgrounds",
+    "third-party icon packs as branded substitutes",
+    "emoji as branded interface substitute",
+    "extracted game assets in production without permission"
   ],
-  "forbidden_as_primary_authority": [
-    "asset extraction repositories",
-    "fan wikis",
-    "fan fonts",
-    "third-party icon packs",
-    "Pinterest recreations",
-    "unverified UI mockups"
-  ]
+  "third_party_policy": "Third-party/community material may be used only for discovery. It cannot become the production authority for branded visuals.",
+  "required_registry": "docs/research/OFFICIAL_ASSET_GATE.md"
 }
