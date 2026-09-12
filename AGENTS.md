@@ -1,38 +1,79 @@
-# Pixel — Source-First UI Rules
+# Pixel — Official-Source UI Rules
 
 This repository is an unofficial fan/server project. It is not approved by, associated with, or endorsed by Mojang or Microsoft.
 
-## Non-negotiable design rule
-Every UI decision must be traceable to an official Minecraft / Minecraft Dungeons source, or to an actual in-game screenshot supplied for visual comparison. Do not invent a parallel “Minecraft-like” design language when a documented Minecraft/Dungeons pattern exists.
+## Project identity
+Pixel is being designed as an extension of the official Minecraft Marketplace experience, specialized around Minecraft Dungeons content.
+
+The visual hierarchy is therefore:
+1. **Minecraft Marketplace** — base page/environment language, overall shell and background direction.
+2. **Minecraft Dungeons** — in-product menu language, typography, controls, states, panels and game-facing interaction patterns.
+
+Do not replace either layer with a generic “Minecraft-inspired” or “fantasy game” interpretation.
+
+## Non-negotiable rule: official visual assets only
+For any visual element that is recognizably Minecraft/Minecraft Dungeons — icons, logos, currency symbols, frames, borders, textures, backgrounds, badges, controller glyphs, item silhouettes, decorative motifs or game UI artwork — **do not invent, redraw, generate, trace, approximate or reinterpret it**.
+
+Allowed outcomes are only:
+- use an official asset when its source and usage permission are confirmed;
+- reference an official asset remotely when that use is explicitly permitted;
+- use an official implementation/token/source-code pattern when its license permits it;
+- otherwise leave a neutral placeholder or omit the visual until the correct official resource can be used.
+
+A missing official asset is **not** permission to create a lookalike.
+
+## Explicitly forbidden
+Unless the user later changes this policy explicitly:
+- no CSS-drawn Minecraft emeralds, locks, skulls, checks, chests or other branded pictograms;
+- no hand-made SVG recreations of Minecraft/Dungeons icons;
+- no AI-generated Minecraft/Dungeons UI assets, backgrounds, icons or textures;
+- no “inspired by Dungeons” custom border/frame pretending to be the real UI asset;
+- no Font Awesome, Material Icons or emoji substitutes for Minecraft/Dungeons interface symbols;
+- no invented Marketplace-style or Dungeons-style textures/backgrounds when the intent is to reproduce an official visual;
+- no extracted game asset copied into the public repo unless usage permission is independently confirmed.
 
 ## Source priority
-1. **Tier A — Official source code/assets published by Mojang/Microsoft**: `Mojang/web-theme-bootstrap`, minecraft.net, Xbox/Microsoft pages.
-2. **Tier B — Actual Minecraft Dungeons screenshots**: used to measure composition, hierarchy, state treatment, spacing and visual behavior.
-3. **Tier C — Third-party/community material**: may be used only to locate an official source. Never use it as the primary authority for production styling.
+1. **Tier A — Official Mojang/Microsoft sources**: `Mojang/web-theme-bootstrap`, minecraft.net, official Minecraft Marketplace pages, Xbox/Microsoft pages, official media/assets with clear usage terms.
+2. **Tier B — Actual Minecraft / Minecraft Dungeons in-game screenshots**: evidence for layout, hierarchy, spacing, state behavior and identifying the correct official asset; screenshots do not automatically grant redistribution rights for cropped assets.
+3. **Tier C — Third-party/community sources**: discovery only. They may help locate or name an official resource but must not become the production source of truth.
 
-## Required visual invariants
-- Titles/buttons: Minecraft Ten family when appropriate.
-- Body/help copy: Minecraft Seven family when appropriate.
-- Square/pixel geometry; no rounded-card SaaS styling unless a real Dungeons menu proves it.
-- Dark translucent panels over a visible scene/world layer.
-- Thin stepped/cornered frames instead of thick fantasy-stone borders.
-- Strong state system: selected, available, locked, disabled, completed, new.
-- Color is semantic, not decorative.
-- Controller/keyboard prompts are part of the interface grammar.
-- Large type hierarchy and generous negative space.
-- Objects/rewards should not automatically be placed in generic web cards.
+## Asset gate — mandatory before implementation
+Every Minecraft/Dungeons-specific visual must pass this gate before being added to production code:
+1. Identify the exact official source.
+2. Identify the exact asset/component/token name when possible.
+3. Record the source in `docs/research/OFFICIAL_SOURCES.md` and/or `docs/research/OFFICIAL_ASSET_GATE.md`.
+4. Record usage status: `APPROVED`, `REFERENCE_ONLY`, `UNKNOWN`, or `BLOCKED`.
+5. Only `APPROVED` assets may be rendered as official visual assets in the site.
+6. `REFERENCE_ONLY`, `UNKNOWN`, and `BLOCKED` assets must remain placeholders/omitted. Do not recreate them.
 
-## Asset rule
-Do **not** copy restricted Mojang image assets into this repository unless their license explicitly permits it. The official `web-theme-bootstrap` license says image assets in that project may not be used outside that project without permission. Use them as research references and rebuild original Pixel components from the documented visual grammar.
+## Typography
+Use only source-backed Minecraft type families.
+- Minecraft Ten family: titles, buttons, strong labels when appropriate.
+- Minecraft Seven family: body/help text when appropriate.
+- Minecraft Five only when a verified official pattern calls for it.
 
-Fonts in `Mojang/web-theme-bootstrap/assets/fonts` have a separate SIL Open Font License file. This repo references those font files remotely and records the license source in `THIRD_PARTY_NOTICES.md`.
+Font licensing and source are documented in `THIRD_PARTY_NOTICES.md` and `docs/research/ASSET_POLICY.md`.
 
-## Implementation rule
-Before adding or redesigning a component:
-1. Identify the closest Dungeons menu pattern.
-2. Record the official source in `docs/research/OFFICIAL_SOURCES.md` or `source-manifest.json`.
-3. Reproduce the behavior/grammar, not copyrighted art.
-4. Preserve accessibility: keyboard navigation, visible focus, Escape/back behavior and meaningful labels.
+## Colors and implementation tokens
+Exact Mojang values must remain distinguishable from Pixel mappings:
+- `--mc-*` = exact source-backed Mojang values.
+- `--px-*` = project mapping/behavior, never presented as an official Mojang token.
+
+Do not approximate an official color if the exact source-backed value exists.
+
+## UI behavior
+Behavior may be implemented in original code while matching documented official patterns:
+- keyboard/controller navigation;
+- selected, available, locked, disabled, completed and new states;
+- Escape/back behavior;
+- visible focus and meaningful accessible labels.
+
+Behavioral implementation must not be used as an excuse to invent branded visual assets.
+
+## Current legacy warning
+The existing prototype contains earlier experimental CSS interpretations (for example a CSS emerald, CSS locks/checks/skulls, hand-built frames and a synthetic world background). These are **legacy experiments, not approved design-system components** and must be removed/replaced as official permitted resources are identified.
+
+See `docs/research/KNOWN_INVALID_IMPLEMENTATIONS.md` before reusing any existing visual class.
 
 ## Branding/legal guardrail
-Never present Pixel as official Minecraft or Minecraft Dungeons content. Keep the project name dominant and keep the required unofficial-project disclaimer visible in the final public site.
+Never present Pixel as official Minecraft or Minecraft Dungeons content. Keep the project identity clear and retain the required unofficial-project disclaimer in the final public site.
