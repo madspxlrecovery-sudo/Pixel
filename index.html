@@ -7,17 +7,19 @@
   <title>Pixel — Dungeons Marketplace</title>
   <link rel="stylesheet" href="assets/css/main.css">
   <link rel="stylesheet" href="assets/css/official-shell.css">
+  <link rel="stylesheet" href="assets/css/header-v2.css">
 </head>
 <body>
   <div class="marketplace-bg" aria-hidden="true"></div>
 
   <!--
     Pixel adaptation of the official Minecraft.net desktop web shell.
-    Official Minecraft controls retain their source-backed geometry and assets.
-    Project-specific brand/expansion/wallet content replaces the institutional nav links.
+    Mojang source-backed geometry/typography is retained for the navbar.
+    Search/person glyphs currently use documented official Microsoft Fluent
+    fallbacks until the exact live minecraft.net glyph assets are identified.
   -->
   <header class="minecraft-web-shell" aria-label="Pixel Network marketplace navigation">
-    <div class="minecraft-web-shell__inner">
+    <div class="minecraft-web-shell__inner pixel-shell-v2">
       <a class="mc-shell-logo" href="https://www.minecraft.net/es-es" aria-label="Minecraft">
         <img
           src="https://raw.githubusercontent.com/Mojang/web-theme-bootstrap/main/assets/svg/logos/minecraft.svg"
@@ -30,11 +32,27 @@
         <span>DUNGEONS MARKETPLACE</span>
       </div>
 
-      <div class="mc-shell-actions">
+      <nav class="mc-shell-nav pixel-shell-nav" aria-label="Pixel Network navigation">
+        <button class="mc-shell-nav__item" type="button">
+          <span>MARKETPLACE</span>
+          <i class="mc-pixel-caret" aria-hidden="true"></i>
+        </button>
+        <button class="mc-shell-nav__item" type="button">
+          <span>EXPLORACIÓN</span>
+          <i class="mc-pixel-caret" aria-hidden="true"></i>
+        </button>
+        <button class="mc-shell-nav__item" type="button">
+          <span>APRENDER</span>
+          <i class="mc-pixel-caret" aria-hidden="true"></i>
+        </button>
+        <a class="mc-shell-nav__item mc-shell-nav__item--link" href="#about">ABOUT US</a>
+      </nav>
+
+      <div class="mc-shell-actions pixel-shell-actions">
         <div class="mc-shell-wallet" aria-label="Minecoin balance">
           <img
             src="https://www.minecraft.net/content/dam/minecraftnet/franchise/component-library/icons/minecoin.svg"
-            alt=""
+            alt="Minecoin"
           >
           <span>3373</span>
         </div>
@@ -44,12 +62,15 @@
           <i class="mc-web-cta__arrow-mask" aria-hidden="true"></i>
         </a>
 
-        <!-- Exact current search pictogram is intentionally not recreated until its live asset is identified. -->
-        <button class="mc-shell-search-slot" type="button" aria-label="Buscar" title="Buscar"></button>
-        <i class="mc-pixel-caret mc-shell-search-caret" aria-hidden="true"></i>
+        <div class="mc-shell-search-group">
+          <button class="mc-shell-search-slot" type="button" aria-label="Buscar" title="Buscar">
+            <i class="mc-shell-search-icon" aria-hidden="true"></i>
+          </button>
+          <i class="mc-pixel-caret mc-shell-search-caret" aria-hidden="true"></i>
+        </div>
 
         <button class="mc-shell-account" type="button" aria-label="Cuenta">
-          <span class="mc-shell-account__icon-slot" aria-hidden="true"></span>
+          <i class="mc-shell-person-icon" aria-hidden="true"></i>
           <span>CUENTA</span>
           <i class="mc-pixel-caret" aria-hidden="true"></i>
         </button>
@@ -102,7 +123,7 @@
       </div>
     </section>
 
-    <section class="offer-section" aria-labelledby="offers-title">
+    <section class="offer-section" id="marketplace" aria-labelledby="offers-title">
       <div class="section-heading">
         <h2 id="offers-title">BANNERS</h2>
         <span>SELECT A ROTATION</span>
@@ -152,7 +173,7 @@
     </section>
   </main>
 
-  <footer class="store-footer">
+  <footer class="store-footer" id="about">
     <span>PIXEL</span>
     <span>NOT AN OFFICIAL MINECRAFT PRODUCT. NOT APPROVED BY OR ASSOCIATED WITH MOJANG OR MICROSOFT.</span>
     <span>ENTER SELECT · ESC BACK</span>
