@@ -12,7 +12,7 @@ Only `APPROVED` entries may be bundled as official branded production visuals. E
 
 ## Geometry status
 Every fidelity-critical component must also record geometry provenance:
-- `OFFICIAL_CODE` — dimensions/padding/border/typography values come from Mojang source code.
+- `OFFICIAL_CODE` — dimensions/padding/border/typography values come from Mojang/Microsoft source code.
 - `LIVE_DOM/CSS` — dimensions/behavior are taken from the live official page implementation.
 - `MEASURED_OFFICIAL_CAPTURE` — dimensions are measured from an official screenshot/capture supplied as reference.
 - `PIXEL_ADAPTATION` — project-specific content is inserted into an official shell/component while preserving source-backed component geometry and typography where applicable.
@@ -39,22 +39,23 @@ Measured visible shell geometry at the supplied desktop reference scale:
 - Minecraft logo display box: approximately `220×38 px`;
 - green `COMPRAR AHORA` CTA: `154×36 px`;
 - dropdown items use the official Mojang `pixel-caret.svg` geometry;
-- the exact current search and account/profile header pictograms remain `UNKNOWN` until their live assets are identified.
+- the exact current minecraft.net search and account/profile glyph files remain `UNKNOWN` until their live assets are identified.
 
 The previous Pixel implementation that used Minecraft Ten for the web-shell navigation is invalid. Minecraft Ten/Seven remain valid for Dungeons/Marketplace contexts when source-backed, but the minecraft.net global header follows Noto Sans in Mojang's published web theme.
 
 ## Pixel shell adaptation rule
-Pixel does **not** copy the institutional minecraft.net nav labels verbatim. The official desktop shell is used as the structural/visual container, while project-specific information replaces those institutional navigation items.
+Pixel does **not** copy the institutional minecraft.net nav labels verbatim. The official desktop shell is used as the structural/visual container, while project-specific navigation and account/store information are inserted into it.
 
 Current Pixel desktop shell order:
-`Minecraft logo → PIXEL NETWORK → DUNGEONS MARKETPLACE → Minecoin wallet → COMPRAR AHORA → Buscar → CUENTA`
+`Minecraft logo → PIXEL NETWORK / DUNGEONS MARKETPLACE → MARKETPLACE → EXPLORACIÓN → APRENDER → ABOUT US → Minecoin wallet → COMPRAR AHORA → Buscar → CUENTA`
 
 Rules:
 - official shell controls keep source-backed size/typography/behavior;
-- project-only labels (`PIXEL NETWORK`, expansion name) use Noto Sans so they remain native to the web-shell layer;
-- the wallet uses an exact official Minecoin image hosted on `minecraft.net`;
+- project-only labels (`PIXEL NETWORK`, expansion name, `MARKETPLACE`, `ABOUT US`) use Noto Sans and official navbar metrics so they remain native to the web-shell layer;
+- `EXPLORACIÓN` and `APRENDER` deliberately retain official Minecraft.net naming and navbar treatment;
+- the wallet uses the exact official Minecoin image hosted on `minecraft.net`;
 - project-specific placement is marked `PIXEL_ADAPTATION`, not falsely documented as a 1:1 minecraft.net layout;
-- search/account pictograms remain neutral slots until their exact live official assets are identified.
+- until the exact live minecraft.net search/account glyph files are located, Pixel may use the documented Microsoft Fluent 16 Regular search/person glyphs as an **official Microsoft fallback only**. They must never be described as the exact minecraft.net glyphs.
 
 | Resource / system | Official source | Status | Geometry/source reference | Production rule |
 |---|---|---|---|---|
@@ -66,6 +67,7 @@ Rules:
 | Mojang published color tokens | Mojang `web-theme-bootstrap/scss/abstract/_colors.scss` and `_theme.scss` | APPROVED | OFFICIAL_CODE | Exact values may be used and must remain marked `--mc-*` |
 | Current Minecraft.net desktop header composition | live `minecraft.net/es-es/about-dungeons` + official capture supplied by user | APPROVED as layout reference | MEASURED_OFFICIAL_CAPTURE: shell ≈`80 px`; inner ≈`1240 px`; bg `#2A2225`; logo ≈`220×38`; CTA `154×36` | Preserve shell scale, sticky behavior and official control geometry; Pixel-specific content may replace institutional nav only when marked `PIXEL_ADAPTATION` |
 | Pixel Network identity block in shell | Pixel project content inside official shell | APPROVED as project adaptation | PIXEL_ADAPTATION | Use `Noto Sans`; do not present the label as an official minecraft.net item; keep hierarchy compact and within shell geometry |
+| Pixel shell navigation labels | Pixel project content + official minecraft.net navbar grammar | APPROVED as project adaptation | PIXEL_ADAPTATION + OFFICIAL_CODE navbar metrics | Use `MARKETPLACE`, `EXPLORACIÓN`, `APRENDER`, `ABOUT US`; retain official Noto Sans/uppercase/spacing/caret grammar; do not invent a separate nav style |
 | `minecraft.svg` | Mojang `web-theme-bootstrap/assets/svg/logos/minecraft.svg` | REFERENCE_ONLY | OFFICIAL_CODE native `viewBox 0 0 1295.5 221.8`; measured display ≈`220×38 px` | Prototype may reference exact official remote file; preserve aspect ratio; do not redraw or bundle without separate permission basis |
 | Official Minecoin icon | `minecraft.net/content/dam/minecraftnet/franchise/component-library/icons/minecoin.svg` | REFERENCE_ONLY | OFFICIAL_ASSET; displayed at `20×20 px` in Pixel shell adaptation | Prototype may remotely reference exact official file; do not redraw or replace with CSS/emoji |
 | Pixel shell Minecoin wallet | Official Minecoin asset + Pixel balance value | APPROVED as project adaptation | PIXEL_ADAPTATION | Official coin art only; numeric balance may be project data; keep wallet in Noto Sans within the web-shell layer |
@@ -80,8 +82,10 @@ Rules:
 | `pixel-arrow-up.svg` | Mojang `web-theme-bootstrap/assets/svg/icons/pixel-arrow-up.svg` | REFERENCE_ONLY | OFFICIAL_CODE asset geometry | Prototype may reference exact official remote file; do not redraw |
 | `pixel-arrow-down.svg` | Mojang `web-theme-bootstrap/assets/svg/icons/pixel-arrow-down.svg` | REFERENCE_ONLY | OFFICIAL_CODE asset geometry | Prototype may reference exact official remote file; do not redraw |
 | `pixel-caret.svg` | Mojang `web-theme-bootstrap/assets/svg/icons/pixel-caret.svg` | REFERENCE_ONLY | OFFICIAL_CODE asset geometry | Use exact geometry; shell presentation must be light/currentColor, not black raw-image rendering |
-| Minecraft.net search magnifier | live `minecraft.net/es-es/about-dungeons` | UNKNOWN | UNVERIFIED | Keep neutral slot only until exact live asset/component is located; do not redraw |
-| Minecraft.net account/profile header icon | live `minecraft.net/es-es/about-dungeons` | UNKNOWN | UNVERIFIED | Keep neutral slot only until exact live asset/component is located; do not substitute a different Mojang profile image |
+| Microsoft Fluent Search 16 Regular | Microsoft `fluentui-system-icons/assets/Search/SVG/ic_fluent_search_16_regular.svg` | REFERENCE_ONLY | OFFICIAL_CODE native `16×16` | Official Microsoft fallback for Pixel prototype only while exact minecraft.net search glyph remains unresolved; render via currentColor mask; do **not** claim it is the exact live minecraft.net glyph |
+| Microsoft Fluent Person 16 Regular | Microsoft `fluentui-system-icons/assets/Person/SVG/ic_fluent_person_16_regular.svg` | REFERENCE_ONLY | OFFICIAL_CODE native `16×16` | Official Microsoft fallback for Pixel prototype only while exact minecraft.net account glyph remains unresolved; render via currentColor mask; do **not** claim it is the exact live minecraft.net glyph |
+| Minecraft.net exact search magnifier | live `minecraft.net/es-es/about-dungeons` | UNKNOWN | UNVERIFIED | Continue research for the exact live component/asset. Microsoft Fluent fallback may be used meanwhile only under the documented fallback rule |
+| Minecraft.net exact account/profile header icon | live `minecraft.net/es-es/about-dungeons` | UNKNOWN | UNVERIFIED | Continue research for the exact live component/asset. Microsoft Fluent fallback may be used meanwhile only under the documented fallback rule |
 | Mojang Dungeons border image `border-dungeons-25.png` | Mojang `web-theme-bootstrap` | REFERENCE_ONLY | OFFICIAL_CODE | Do not copy or recreate |
 | Other Mojang official SVG/PNG icon files | Mojang `web-theme-bootstrap/assets/svg/icons` and related image dirs | REFERENCE_ONLY | OFFICIAL_CODE when metadata is available | Do not use merely because they are official; they must match the actual component being reproduced |
 | Minecraft / Dungeons logos | Official Mojang/Microsoft sources | REFERENCE_ONLY | OFFICIAL_ASSET native aspect ratio required | Prototype may reference official hosted resources; never distort aspect ratio |
@@ -104,11 +108,12 @@ Before implementing any new icon, border, texture, background, badge, currency m
 9. Record viewport/scroll behavior for sticky/fixed shell components.
 10. Verify actual rendered icon color/state; a black raw SVG does not pass if the official UI shows a white/currentColor symbol.
 11. Mark every non-official placement/content change as `PIXEL_ADAPTATION` rather than silently treating it as official.
-12. Use exact official remote references in the prototype only when explicitly documented here.
-13. Never recreate a missing resource.
-14. Never resize, recolor, reorder or restyle a source-backed component merely to make the Pixel layout easier, unless the live official source does the same transformation.
+12. If using an official fallback from another first-party Microsoft/Mojang system, document it as a fallback and never mislabel it as the exact live asset being researched.
+13. Use exact official remote references in the prototype only when explicitly documented here.
+14. Never recreate a missing resource.
+15. Never resize, recolor, reorder or restyle a source-backed component merely to make the Pixel layout easier, unless the live official source does the same transformation.
 
-If a component's dimensions, typography or icon source remain `UNVERIFIED`, it may be used only as a clearly neutral structural placeholder, not as a claim of 1:1 fidelity.
+If a component's dimensions, typography or icon source remain `UNVERIFIED`, it may be used only as a clearly documented official fallback or a neutral structural placeholder, not as a claim of 1:1 fidelity.
 
 ## Three-layer source model
 Pixel’s target is:
