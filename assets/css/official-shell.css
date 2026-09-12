@@ -1,20 +1,22 @@
 /*
   Official-shell fidelity layer.
 
-  Sources:
+  Source-backed findings used here:
   - live https://www.minecraft.net/es-es/about-dungeons
-  - Mojang/web-theme-bootstrap
-  - official desktop capture supplied by the user (1365×97)
+  - Mojang/web-theme-bootstrap/scss/components/_navbar.scss
+  - Mojang/web-theme-bootstrap/scss/abstract/_variables.scss
+  - official desktop capture supplied by the user
 
-  Desktop shell measured from the official capture:
-  - visible header: ~80 px including bottom divider
-  - inner content span: ~1240 px centered
-  - background: #2A2225
-  - Minecraft logo: ~220×38 px
-  - COMPRAR AHORA CTA: 154×36 px
-
-  Missing current search/profile pictograms are NOT recreated. Their measured slots
-  remain reserved until the exact live official resources pass the asset gate.
+  IMPORTANT:
+  - The navbar font is NOT Minecraft Ten. Mojang's theme sets the base sans family to
+    "Noto Sans", sans-serif and _navbar.scss does not override it.
+  - Official nav links use line-height: 1, uppercase, letter-spacing: 1px,
+    padding: .5rem .75rem, and nav-item margin: 0 2px.
+  - The live header follows the viewport while scrolling. Pixel therefore keeps the shell
+    sticky at top: 0.
+  - Raw Mojang pixel SVGs default to black when linked as <img>. For the shell we use those
+    exact SVG files as masks so the live currentColor treatment remains light/green instead
+    of incorrectly rendering black.
 */
 
 .minecraft-web-shell {
@@ -22,9 +24,12 @@
   height: 80px;
   min-height: 80px;
   display: block;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
   background: #2a2225;
   border-bottom: 1px solid #000;
-  color: var(--mc-white);
+  color: #fff;
 }
 
 .minecraft-web-shell__inner {
@@ -42,7 +47,7 @@
   flex: 0 0 220px;
   display: flex;
   align-items: center;
-  margin-right: 36px;
+  margin-right: 24px;
 }
 
 .mc-shell-logo img {
@@ -56,50 +61,59 @@
   height: 79px;
   display: flex;
   align-items: center;
-  gap: 36px;
+  margin: 0 -2px;
 }
 
 .mc-shell-nav__item {
   appearance: none;
-  height: 36px;
+  height: auto;
+  min-height: 36px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 7px;
-  padding: 0;
+  gap: 6px;
+  margin: 0 2px;
+  padding: .5rem .75rem;
   border: 0;
   background: transparent;
-  color: #f8f5f4;
+  color: currentColor;
   text-decoration: none;
-  font-family: var(--font-du-title);
+  font-family: "Noto Sans", sans-serif;
   font-size: 12px;
+  font-weight: 700;
   line-height: 1;
-  letter-spacing: 0;
+  letter-spacing: 1px;
   text-transform: uppercase;
   cursor: pointer;
 }
 
-.mc-shell-nav__item img {
-  width: 8px;
-  height: 8px;
-  display: block;
-  object-fit: contain;
-}
-
 .mc-shell-nav__item:hover,
 .mc-shell-nav__item:focus-visible {
-  color: var(--mc-white);
+  color: #fff;
+  background: transparent;
+}
+
+/* Exact Mojang pixel-caret.svg used as a currentColor mask instead of black <img>. */
+.mc-pixel-caret {
+  width: 8px;
+  height: 8px;
+  flex: 0 0 8px;
+  display: inline-block;
+  background: currentColor;
+  -webkit-mask: url("https://raw.githubusercontent.com/Mojang/web-theme-bootstrap/main/assets/svg/icons/pixel-caret.svg") center / contain no-repeat;
+  mask: url("https://raw.githubusercontent.com/Mojang/web-theme-bootstrap/main/assets/svg/icons/pixel-caret.svg") center / contain no-repeat;
 }
 
 .mc-shell-actions {
   height: 79px;
-  margin-left: 38px;
+  margin-left: auto;
   display: flex;
   align-items: center;
-  gap: 17px;
+  gap: 14px;
+  font-family: "Noto Sans", sans-serif;
 }
 
-/* Header CTA measured from the official desktop capture. */
+/* Header CTA: measured desktop geometry, official theme green and official arrow mask. */
 .mc-web-cta {
   width: 154px;
   height: 36px;
@@ -113,8 +127,9 @@
   color: #86d562;
   background: transparent;
   text-decoration: none;
-  font-family: var(--font-du-title);
+  font-family: "Noto Sans", sans-serif;
   font-size: 12px;
+  font-weight: 700;
   line-height: 1;
   letter-spacing: 0;
   text-transform: uppercase;
@@ -122,20 +137,23 @@
 
 .mc-web-cta:hover,
 .mc-web-cta:focus-visible {
-  color: var(--mc-white);
+  color: #fff;
   border-color: var(--mc-fun-green);
 }
 
-.mc-web-cta__arrow {
+.mc-web-cta__arrow-mask {
   width: 12px;
   height: 12px;
-  display: block;
-  object-fit: contain;
+  flex: 0 0 12px;
+  display: inline-block;
+  background: currentColor;
+  -webkit-mask: url("https://raw.githubusercontent.com/Mojang/web-theme-bootstrap/main/assets/svg/icons/pixel-arrow-right.svg") center / contain no-repeat;
+  mask: url("https://raw.githubusercontent.com/Mojang/web-theme-bootstrap/main/assets/svg/icons/pixel-arrow-right.svg") center / contain no-repeat;
 }
 
 /*
-  Search uses an empty official-position slot until the exact current search pictogram
-  is located. No CSS magnifier or third-party icon is allowed here.
+  The exact current search/profile header glyph assets are still unresolved.
+  These remain geometry slots; no fake pictograms are drawn.
 */
 .mc-shell-search-slot {
   width: 32px;
@@ -145,7 +163,7 @@
   padding: 0;
   border: 0;
   background: transparent;
-  color: var(--mc-white);
+  color: #fff;
   cursor: pointer;
 }
 
@@ -160,10 +178,12 @@
   padding: 0;
   border: 0;
   background: transparent;
-  color: #f8f5f4;
-  font-family: var(--font-du-title);
+  color: #fff;
+  font-family: "Noto Sans", sans-serif;
   font-size: 12px;
+  font-weight: 700;
   line-height: 1;
+  letter-spacing: 0;
   text-transform: uppercase;
   cursor: pointer;
 }
@@ -173,13 +193,6 @@
   height: 18px;
   flex: 0 0 18px;
   display: block;
-}
-
-.mc-shell-caret {
-  width: 8px;
-  height: 8px;
-  display: block;
-  object-fit: contain;
 }
 
 /*
@@ -235,11 +248,6 @@
   transform: none;
 }
 
-/*
-  The official current desktop shell is the fidelity target above.
-  Below this width we intentionally switch to a compact Pixel adaptation instead of
-  pretending an unverified mobile minecraft.net shell is 1:1 official.
-*/
 @media (max-width: 1280px) {
   .minecraft-web-shell__inner {
     width: calc(100% - 40px);
@@ -248,23 +256,16 @@
   .mc-shell-logo {
     width: 190px;
     flex-basis: 190px;
-    margin-right: 24px;
+    margin-right: 14px;
   }
 
   .mc-shell-logo img {
     width: 190px;
   }
 
-  .mc-shell-nav {
-    gap: 20px;
-  }
-
   .mc-shell-nav__item {
+    padding-inline: .55rem;
     font-size: 11px;
-  }
-
-  .mc-shell-actions {
-    margin-left: auto;
   }
 }
 
