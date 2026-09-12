@@ -1,25 +1,47 @@
-# Minecraft Dungeons UI Research
+# Minecraft Marketplace + Dungeons UI Research
 
 This folder is the canonical research layer for Pixel. Its purpose is to prevent visual drift and stop future work from becoming merely “Minecraft-inspired”.
 
+## Product direction
+Pixel is intended to feel like an extension of the **official Minecraft Marketplace**, specialized around **Minecraft Dungeons** content.
+
+That means:
+- Marketplace is the reference for the external shell, page environment and overall storefront context.
+- Dungeons is the reference for specialized in-product menus, states, typography, controls and interaction language.
+
+Neither layer may be replaced by a custom lookalike when an official resource/pattern exists.
+
 ## What is confirmed from official sources
-- Mojang’s public web theme contains Minecraft Ten, Minecraft Seven, Minecraft Five, Dungeons-specific color tokens, a Dungeons border resource, pixel icon families and the Minecraft Dungeons logo.
-- The official theme defines Dungeons colors as orange `#e67834`, eucalyptus `#299b6e`, and golden-tainoi `#FFCB56`.
+- Mojang’s public web theme contains Minecraft Ten, Minecraft Seven, Minecraft Five, Dungeons-specific color tokens, a Dungeons border resource, pixel icon families and Minecraft/Dungeons web assets.
+- The official theme defines Dungeons colors including orange `#e67834`, eucalyptus `#299b6e`, and golden-tainoi `#FFCB56`.
 - The official theme defines a `.border-dungeons` component built around a dedicated Dungeons border image.
-- The official theme disables rounded geometry globally and uses a block-like 4px edge model for buttons.
+- The official theme disables rounded geometry globally and uses block-like edge treatment for buttons.
 - The official accessibility page confirms full menu navigation by controller/keyboard, Escape-to-back on PC, UI narration and icon-based communication patterns.
-- Mojang’s usage guidelines treat names, logos, fonts, textures and other distinctive characteristics as brand; game graphics/models/sounds/screenshots are assets. Public work must not look official or endorsed.
+- Mojang’s licenses/usage rules mean an official asset is not automatically reusable in Pixel.
 
-## Research conclusion for Pixel
-The target is not a modern marketplace website with Minecraft decoration. It is a web implementation of a **game-screen grammar**: scene behind UI, translucent overlays, large Ten headings, Seven copy, stepped line frames, semantic color, explicit selected/locked states and controller-style prompts.
+## Critical policy change
+Earlier research suggested rebuilding original Pixel artwork from official visual grammar when an official image asset could not be reused.
 
-Read the files in this order:
-1. `OFFICIAL_SOURCES.md`
-2. `TECHNICAL_EVIDENCE.md`
-3. `IN_GAME_PATTERNS.md`
-4. `TYPOGRAPHY.md`
-5. `COLORS_AND_MATERIALS.md`
-6. `UI_GRAMMAR.md`
-7. `CONTROLS_ACCESSIBILITY.md`
-8. `ASSET_POLICY.md`
-9. `source-manifest.json`
+That approach is now **deprecated**.
+
+For recognizable Minecraft/Dungeons visuals (icons, frames, backgrounds, currency marks, logos, textures, badges, pictograms):
+- use an approved official resource;
+- or leave it neutral/empty while research continues.
+
+Do not recreate a lookalike.
+
+## Mandatory files to read before visual implementation
+1. `OFFICIAL_ASSET_GATE.md`
+2. `KNOWN_INVALID_IMPLEMENTATIONS.md`
+3. `ASSET_POLICY.md`
+4. `OFFICIAL_SOURCES.md`
+5. `TECHNICAL_EVIDENCE.md`
+6. `IN_GAME_PATTERNS.md`
+7. `TYPOGRAPHY.md`
+8. `COLORS_AND_MATERIALS.md`
+9. `UI_GRAMMAR.md`
+10. `CONTROLS_ACCESSIBILITY.md`
+11. `source-manifest.json`
+
+## Research rule
+If the correct official asset is not yet approved, the task is not “design something similar”. The task is **continue researching the official source/usage basis**.
