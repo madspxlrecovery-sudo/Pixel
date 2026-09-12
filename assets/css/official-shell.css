@@ -56,7 +56,7 @@
   height: 79px;
   display: flex;
   align-items: center;
-  gap: 30px;
+  gap: 36px;
 }
 
 .mc-shell-nav__item {
@@ -93,7 +93,7 @@
 
 .mc-shell-actions {
   height: 79px;
-  margin-left: auto;
+  margin-left: 38px;
   display: flex;
   align-items: center;
   gap: 17px;
@@ -134,7 +134,7 @@
 }
 
 /*
-  Search uses an empty official-size slot until the exact current search pictogram
+  Search uses an empty official-position slot until the exact current search pictogram
   is located. No CSS magnifier or third-party icon is allowed here.
 */
 .mc-shell-search-slot {
@@ -151,7 +151,7 @@
 
 .mc-shell-account {
   height: 36px;
-  min-width: 91px;
+  min-width: 108px;
   display: inline-flex;
   align-items: center;
   justify-content: flex-end;
@@ -240,7 +240,7 @@
   Below this width we intentionally switch to a compact Pixel adaptation instead of
   pretending an unverified mobile minecraft.net shell is 1:1 official.
 */
-@media (max-width: 1180px) {
+@media (max-width: 1280px) {
   .minecraft-web-shell__inner {
     width: calc(100% - 40px);
   }
@@ -261,6 +261,10 @@
 
   .mc-shell-nav__item {
     font-size: 11px;
+  }
+
+  .mc-shell-actions {
+    margin-left: auto;
   }
 }
 
