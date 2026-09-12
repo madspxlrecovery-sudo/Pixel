@@ -1,59 +1,70 @@
-const stage = document.querySelector('.banner-stage');
-const arrows = document.querySelectorAll('[data-direction]');
-const activeSlot = document.querySelector('.banner-slot.selected');
-const enterBanner = document.getElementById('enterBanner');
-const backButton = document.querySelector('.back-button');
+const activePanel = document.querySelector('.banner-panel.selected');
+const openBanner = document.getElementById('openBanner');
+const actionStatus = document.getElementById('actionStatus');
+const closeBox = document.querySelector('.close-box');
 
 function pulseSelection() {
-  if (!stage) return;
-  stage.animate(
-    [
-      { filter: 'brightness(1)', transform: 'scale(1)' },
-      { filter: 'brightness(1.08)', transform: 'scale(.997)' },
-      { filter: 'brightness(1)', transform: 'scale(1)' }
-    ],
-    { duration: 260, easing: 'ease-out' }
-  );
+  if (!activePanel) return;
 
-  if (activeSlot) {
-    activeSlot.animate(
-      [
-        { filter: 'brightness(1)' },
-        { filter: 'brightness(1.16)' },
-        { filter: 'brightness(1)' }
-      ],
-      { duration: 260, easing: 'ease-out' }
-    );
-  }
+  activePanel.animate(
+    [
+      { filter: 'brightness(1)' },
+      { filter: 'brightness(1.12)' },
+      { filter: 'brightness(1)' }
+    ],
+    { duration: 220, easing: 'ease-out' }
+  );
 }
 
-arrows.forEach((button) => {
-  button.addEventListener('click', pulseSelection);
-});
+function previewBanner() {
+  pulseSelection();
 
-if (enterBanner) {
-  enterBanner.addEventListener('click', () => {
-    const label = enterBanner.querySelector('span');
-    if (!label) return;
+  if (!openBanner || !actionStatus) return;
+  const label = openBanner.querySelector('span');
+  if (!label) return;
 
-    const original = label.textContent;
-    label.textContent = 'BANNER EN PREPARACIÓN';
-    enterBanner.disabled = true;
+  const original = label.textContent;
+  label.textContent = 'BANNER IN DEVELOPMENT';
+  actionStatus.textContent = 'The gacha screen will be connected after the menu is approved';
+  openBanner.disabled = true;
 
-    window.setTimeout(() => {
-      label.textContent = original;
-      enterBanner.disabled = false;
-    }, 900);
+  window.setTimeout(() => {
+    label.textContent = original;
+    actionStatus.textContent = 'Rotation 01 selected';
+    openBanner.disabled = false;
+  }, 1200);
+}
+
+if (activePanel) {
+  activePanel.addEventListener('click', pulseSelection);
+  activePanel.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      pulseSelection();
+    }
   });
 }
 
-if (backButton) {
-  backButton.addEventListener('click', pulseSelection);
+if (openBanner) {
+  openBanner.addEventListener('click', previewBanner);
+}
+
+if (closeBox) {
+  closeBox.addEventListener('click', () => {
+    pulseSelection();
+    if (actionStatus) actionStatus.textContent = 'Back action is not connected yet';
+  });
 }
 
 document.addEventListener('keydown', (event) => {
   const key = event.key.toLowerCase();
-  if (key === 'q' || key === 'e' || event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+
+  if (event.key === 'Enter' || key === 'a') {
+    previewBanner();
+  }
+
+  if (event.key === 'Escape' || key === 'b') {
     pulseSelection();
+    if (actionStatus) actionStatus.textContent = 'Back action is not connected yet';
   }
 });
