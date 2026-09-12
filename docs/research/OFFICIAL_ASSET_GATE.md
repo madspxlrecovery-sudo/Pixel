@@ -15,12 +15,13 @@ Every fidelity-critical component must also record geometry provenance:
 - `OFFICIAL_CODE` — dimensions/padding/border/typography values come from Mojang source code.
 - `LIVE_DOM/CSS` — dimensions/behavior are taken from the live official page implementation.
 - `MEASURED_OFFICIAL_CAPTURE` — dimensions are measured from an official screenshot/capture supplied as reference.
+- `PIXEL_ADAPTATION` — project-specific content is inserted into an official shell/component while preserving source-backed component geometry and typography where applicable.
 - `UNVERIFIED` — exact geometry still unknown; do not claim 1:1 fidelity.
 
 The official component size, font, color, spacing, scroll behavior and state behavior are all part of the component. Matching only the silhouette is not enough.
 
 ## Current Minecraft.net desktop header lock
-Reference: current `https://www.minecraft.net/es-es/about-dungeons`, Mojang `web-theme-bootstrap`, and the official-page desktop capture supplied by the user.
+Reference: current `https://www.minecraft.net/es-es/about-dungeons`, Mojang `web-theme-bootstrap`, and the official-page desktop captures supplied by the user.
 
 Confirmed source-backed facts:
 - Mojang `_variables.scss` sets `$font-family-sans-serif: "Noto Sans", sans-serif`.
@@ -37,11 +38,23 @@ Measured visible shell geometry at the supplied desktop reference scale:
 - centered inner content width: approximately `1240 px`;
 - Minecraft logo display box: approximately `220×38 px`;
 - green `COMPRAR AHORA` CTA: `154×36 px`;
-- navigation order: `Minecraft logo → JUEGOS → TIENDA → EXPLORACIÓN → APRENDER → SOPORTE TÉCNICO → COMPRAR AHORA → Buscar → CUENTA`;
 - dropdown items use the official Mojang `pixel-caret.svg` geometry;
 - the exact current search and account/profile header pictograms remain `UNKNOWN` until their live assets are identified.
 
 The previous Pixel implementation that used Minecraft Ten for the web-shell navigation is invalid. Minecraft Ten/Seven remain valid for Dungeons/Marketplace contexts when source-backed, but the minecraft.net global header follows Noto Sans in Mojang's published web theme.
+
+## Pixel shell adaptation rule
+Pixel does **not** copy the institutional minecraft.net nav labels verbatim. The official desktop shell is used as the structural/visual container, while project-specific information replaces those institutional navigation items.
+
+Current Pixel desktop shell order:
+`Minecraft logo → PIXEL NETWORK → DUNGEONS MARKETPLACE → Minecoin wallet → COMPRAR AHORA → Buscar → CUENTA`
+
+Rules:
+- official shell controls keep source-backed size/typography/behavior;
+- project-only labels (`PIXEL NETWORK`, expansion name) use Noto Sans so they remain native to the web-shell layer;
+- the wallet uses an exact official Minecoin image hosted on `minecraft.net`;
+- project-specific placement is marked `PIXEL_ADAPTATION`, not falsely documented as a 1:1 minecraft.net layout;
+- search/account pictograms remain neutral slots until their exact live official assets are identified.
 
 | Resource / system | Official source | Status | Geometry/source reference | Production rule |
 |---|---|---|---|---|
@@ -51,8 +64,11 @@ The previous Pixel implementation that used Minecraft Ten for the web-shell navi
 | Minecraft.net nav-link metrics | Mojang `scss/components/_navbar.scss` | APPROVED | OFFICIAL_CODE: `.5rem .75rem` padding, `line-height:1`, uppercase, `letter-spacing:1px`; nav-item margin `0 2px` | Preserve source values before making Pixel adaptations |
 | Minecraft.net sticky shell behavior | live minecraft.net current page + user verification | APPROVED as behavior pattern | LIVE_DOM/CSS behavior still to be captured exactly; observed shell follows viewport on scroll | Header must not scroll away with the document on desktop |
 | Mojang published color tokens | Mojang `web-theme-bootstrap/scss/abstract/_colors.scss` and `_theme.scss` | APPROVED | OFFICIAL_CODE | Exact values may be used and must remain marked `--mc-*` |
-| Current Minecraft.net desktop header composition | live `minecraft.net/es-es/about-dungeons` + official capture supplied by user | APPROVED as layout reference | MEASURED_OFFICIAL_CAPTURE: shell ≈`80 px`; inner ≈`1240 px`; bg `#2A2225`; logo ≈`220×38`; CTA `154×36` | Preserve order, scale and desktop composition; do not omit middle navigation merely to simplify Pixel |
+| Current Minecraft.net desktop header composition | live `minecraft.net/es-es/about-dungeons` + official capture supplied by user | APPROVED as layout reference | MEASURED_OFFICIAL_CAPTURE: shell ≈`80 px`; inner ≈`1240 px`; bg `#2A2225`; logo ≈`220×38`; CTA `154×36` | Preserve shell scale, sticky behavior and official control geometry; Pixel-specific content may replace institutional nav only when marked `PIXEL_ADAPTATION` |
+| Pixel Network identity block in shell | Pixel project content inside official shell | APPROVED as project adaptation | PIXEL_ADAPTATION | Use `Noto Sans`; do not present the label as an official minecraft.net item; keep hierarchy compact and within shell geometry |
 | `minecraft.svg` | Mojang `web-theme-bootstrap/assets/svg/logos/minecraft.svg` | REFERENCE_ONLY | OFFICIAL_CODE native `viewBox 0 0 1295.5 221.8`; measured display ≈`220×38 px` | Prototype may reference exact official remote file; preserve aspect ratio; do not redraw or bundle without separate permission basis |
+| Official Minecoin icon | `minecraft.net/content/dam/minecraftnet/franchise/component-library/icons/minecoin.svg` | REFERENCE_ONLY | OFFICIAL_ASSET; displayed at `20×20 px` in Pixel shell adaptation | Prototype may remotely reference exact official file; do not redraw or replace with CSS/emoji |
+| Pixel shell Minecoin wallet | Official Minecoin asset + Pixel balance value | APPROVED as project adaptation | PIXEL_ADAPTATION | Official coin art only; numeric balance may be project data; keep wallet in Noto Sans within the web-shell layer |
 | Minecraft.net green primary CTA construction | live minecraft.net + Mojang `scss/components/_buttons.scss` | APPROVED as interaction/style pattern | OFFICIAL_CODE + MEASURED_OFFICIAL_CAPTURE `154×36 px` | Use exact source-backed construction and measured desktop geometry; do not arbitrarily resize |
 | Dungeons orange CTA — reference capture | Official Minecraft Dungeons page screenshot supplied by user | APPROVED as measured reference pattern | MEASURED_OFFICIAL_CAPTURE: outer dark frame `273×54 px`; orange face `269×50 px`; top highlight `6 px`; bottom shadow `6 px`; face fill `#FFA41F`; highlight `#FFD953`; shadow `#FF791A` | Use exact geometry only for this CTA variant at the same desktop reference scale |
 | Dungeons primary token | Mojang `$dungeons-primary` / `$light-orange` = `#e67834` | APPROVED | OFFICIAL_CODE | Use exact token where the official component calls for it |
@@ -87,9 +103,10 @@ Before implementing any new icon, border, texture, background, badge, currency m
 8. Record neighboring spacing and component order when composition is part of the official pattern.
 9. Record viewport/scroll behavior for sticky/fixed shell components.
 10. Verify actual rendered icon color/state; a black raw SVG does not pass if the official UI shows a white/currentColor symbol.
-11. Use exact official remote references in the prototype only when explicitly documented here.
-12. Never recreate a missing resource.
-13. Never resize, recolor, reorder or restyle a source-backed component merely to make the Pixel layout easier, unless the live official source does the same transformation.
+11. Mark every non-official placement/content change as `PIXEL_ADAPTATION` rather than silently treating it as official.
+12. Use exact official remote references in the prototype only when explicitly documented here.
+13. Never recreate a missing resource.
+14. Never resize, recolor, reorder or restyle a source-backed component merely to make the Pixel layout easier, unless the live official source does the same transformation.
 
 If a component's dimensions, typography or icon source remain `UNVERIFIED`, it may be used only as a clearly neutral structural placeholder, not as a claim of 1:1 fidelity.
 
