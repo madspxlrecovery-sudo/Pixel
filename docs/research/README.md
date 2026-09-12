@@ -6,6 +6,7 @@ This folder is the canonical research layer for Pixel. Its purpose is to prevent
 - Mojang’s public web theme contains Minecraft Ten, Minecraft Seven, Minecraft Five, Dungeons-specific color tokens, a Dungeons border resource, pixel icon families and the Minecraft Dungeons logo.
 - The official theme defines Dungeons colors as orange `#e67834`, eucalyptus `#299b6e`, and golden-tainoi `#FFCB56`.
 - The official theme defines a `.border-dungeons` component built around a dedicated Dungeons border image.
+- The official theme disables rounded geometry globally and uses a block-like 4px edge model for buttons.
 - The official accessibility page confirms full menu navigation by controller/keyboard, Escape-to-back on PC, UI narration and icon-based communication patterns.
 - Mojang’s usage guidelines treat names, logos, fonts, textures and other distinctive characteristics as brand; game graphics/models/sounds/screenshots are assets. Public work must not look official or endorsed.
 
@@ -14,8 +15,11 @@ The target is not a modern marketplace website with Minecraft decoration. It is 
 
 Read the files in this order:
 1. `OFFICIAL_SOURCES.md`
-2. `TYPOGRAPHY.md`
-3. `COLORS_AND_MATERIALS.md`
-4. `UI_GRAMMAR.md`
-5. `CONTROLS_ACCESSIBILITY.md`
-6. `ASSET_POLICY.md`
+2. `TECHNICAL_EVIDENCE.md`
+3. `IN_GAME_PATTERNS.md`
+4. `TYPOGRAPHY.md`
+5. `COLORS_AND_MATERIALS.md`
+6. `UI_GRAMMAR.md`
+7. `CONTROLS_ACCESSIBILITY.md`
+8. `ASSET_POLICY.md`
+9. `source-manifest.json`
