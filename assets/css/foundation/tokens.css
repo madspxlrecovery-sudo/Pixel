@@ -3,13 +3,15 @@
   Mojang/web-theme-bootstrap/scss/abstract/_colors.scss
   Mojang/web-theme-bootstrap/scss/abstract/_theme.scss
 
-  Tokens prefixed --mc-* are source values.
-  Tokens prefixed --px-* are Pixel-derived mappings and are NOT claimed as official Mojang tokens.
+  Tokens prefixed --mc-* are exact source values.
+  Tokens prefixed --px-* are Pixel mappings/interpretations and are NOT claimed as official Mojang tokens.
 */
 
 :root {
   --mc-fun-green: #3c8527;
   --mc-malachite: #a0e080;
+  --mc-mud: #996a41;
+  --mc-dirt: #5a381e;
 
   --mc-shark: #1d1e1e;
   --mc-soil: #313131;
@@ -17,19 +19,37 @@
   --mc-scorpion: #5a5a5a;
   --mc-gravel: #757575;
   --mc-dusty-gray: #949494;
+  --mc-cloud: #d1cfce;
   --mc-white: #ffffff;
+  --mc-black: #000000;
 
-  --mc-dungeons-primary: #e67834;
-  --mc-dungeons-secondary: #299b6e;
-  --mc-dungeons-tertiary: #ffcb56;
+  --mc-red: #ac2015;
+  --mc-yellow: #e6b40b;
+  --mc-golden-tainoi: #ffcb56;
+  --mc-orange: #d4441a;
+  --mc-light-orange: #e67834;
+  --mc-turquoise: #14837f;
+  --mc-eucalyptus: #299b6e;
+  --mc-cyan: #2ab8a6;
+  --mc-light-blue: #5caee0;
+  --mc-blue: #1546c2;
+  --mc-purple: #7824c5;
+  --mc-daisy-bush: #5526ac;
 
+  --mc-dungeons-primary: var(--mc-light-orange);
+  --mc-dungeons-secondary: var(--mc-eucalyptus);
+  --mc-dungeons-tertiary: var(--mc-golden-tainoi);
+
+  /* Pixel mappings derived from Dungeons screenshots + official Mojang tokens. */
   --px-ui-panel: rgba(29, 30, 30, 0.91);
   --px-ui-panel-soft: rgba(49, 49, 49, 0.82);
   --px-ui-line: rgba(255, 255, 255, 0.58);
   --px-ui-line-dim: rgba(255, 255, 255, 0.20);
-  --px-ui-text: #ffffff;
+  --px-ui-text: var(--mc-white);
   --px-ui-text-muted: #cfcfcf;
-  --px-ui-disabled: #5a5a5a;
+  --px-ui-disabled: var(--mc-scorpion);
   --px-ui-action: var(--mc-fun-green);
+  --px-ui-selection: var(--mc-light-blue);
   --px-ui-highlight: var(--mc-dungeons-tertiary);
+  --px-ui-danger: var(--mc-red);
 }
