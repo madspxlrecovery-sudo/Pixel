@@ -1,86 +1,59 @@
-const reveal = document.getElementById('reveal');
-const cardsStage = document.getElementById('cardsStage');
-const particleField = document.getElementById('particleField');
-const closeReveal = document.getElementById('closeReveal');
-const pullButtons = document.querySelectorAll('[data-pull]');
+const stage = document.querySelector('.banner-stage');
+const arrows = document.querySelectorAll('[data-direction]');
+const activeSlot = document.querySelector('.banner-slot.selected');
+const enterBanner = document.getElementById('enterBanner');
+const backButton = document.querySelector('.back-button');
 
-const rarityPool = [
-  { name: 'rare', weight: 70 },
-  { name: 'epic', weight: 25 },
-  { name: 'legendary', weight: 5 }
-];
+function pulseSelection() {
+  if (!stage) return;
+  stage.animate(
+    [
+      { filter: 'brightness(1)', transform: 'scale(1)' },
+      { filter: 'brightness(1.08)', transform: 'scale(.997)' },
+      { filter: 'brightness(1)', transform: 'scale(1)' }
+    ],
+    { duration: 260, easing: 'ease-out' }
+  );
 
-function pickRarity() {
-  const roll = Math.random() * 100;
-  let cursor = 0;
-
-  for (const rarity of rarityPool) {
-    cursor += rarity.weight;
-    if (roll <= cursor) return rarity.name;
-  }
-
-  return 'rare';
-}
-
-function makeParticles(amount = 34) {
-  particleField.innerHTML = '';
-
-  for (let i = 0; i < amount; i += 1) {
-    const particle = document.createElement('span');
-    particle.className = 'particle';
-    particle.style.left = `${45 + Math.random() * 10}%`;
-    particle.style.top = `${45 + Math.random() * 10}%`;
-    particle.style.setProperty('--x', `${(Math.random() - 0.5) * 900}px`);
-    particle.style.setProperty('--y', `${(Math.random() - 0.5) * 620}px`);
-    particle.style.animationDelay = `${Math.random() * 0.25}s`;
-    particleField.appendChild(particle);
+  if (activeSlot) {
+    activeSlot.animate(
+      [
+        { filter: 'brightness(1)' },
+        { filter: 'brightness(1.16)' },
+        { filter: 'brightness(1)' }
+      ],
+      { duration: 260, easing: 'ease-out' }
+    );
   }
 }
 
-function openReveal(count) {
-  cardsStage.innerHTML = '';
-  makeParticles(count === 10 ? 54 : 30);
+arrows.forEach((button) => {
+  button.addEventListener('click', pulseSelection);
+});
 
-  for (let i = 0; i < count; i += 1) {
-    const card = document.createElement('article');
-    card.className = `reward-card ${pickRarity()}`;
-    card.setAttribute('aria-label', `Tarjeta de recompensa vacía ${i + 1}`);
-    cardsStage.appendChild(card);
+if (enterBanner) {
+  enterBanner.addEventListener('click', () => {
+    const label = enterBanner.querySelector('span');
+    if (!label) return;
+
+    const original = label.textContent;
+    label.textContent = 'BANNER EN PREPARACIÓN';
+    enterBanner.disabled = true;
 
     window.setTimeout(() => {
-      card.classList.add('show');
-    }, 180 + (i * 95));
-  }
-
-  reveal.classList.add('active');
-  reveal.setAttribute('aria-hidden', 'false');
-  document.body.style.overflow = 'hidden';
-}
-
-function hideReveal() {
-  reveal.classList.remove('active');
-  reveal.setAttribute('aria-hidden', 'true');
-  document.body.style.overflow = '';
-}
-
-pullButtons.forEach((button) => {
-  button.addEventListener('click', () => {
-    openReveal(Number(button.dataset.pull));
+      label.textContent = original;
+      enterBanner.disabled = false;
+    }, 900);
   });
-});
+}
 
-closeReveal.addEventListener('click', (event) => {
-  event.stopPropagation();
-  hideReveal();
-});
-
-reveal.addEventListener('click', (event) => {
-  if (event.target.closest('.reward-card')) return;
-  hideReveal();
-});
+if (backButton) {
+  backButton.addEventListener('click', pulseSelection);
+}
 
 document.addEventListener('keydown', (event) => {
-  if (event.key === 'Escape' && reveal.classList.contains('active')) {
-    hideReveal();
+  const key = event.key.toLowerCase();
+  if (key === 'q' || key === 'e' || event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+    pulseSelection();
   }
 });
