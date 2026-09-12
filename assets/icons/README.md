@@ -1,14 +1,29 @@
 # Icons
 
-Pixel does not vendor Mojang’s official icon files here.
+Pixel does not create lookalike Minecraft / Minecraft Dungeons icons.
 
-Official research inventory exists in `Mojang/web-theme-bootstrap/assets/svg/icons` and includes pixel arrows, check, close, chest, Dungeons launcher and other Minecraft web icons. The root Mojang repository license restricts reuse of its image assets outside that project, so these are **reference-only** for Pixel.
+## Production rule
+A Minecraft/Dungeons-specific icon may be rendered only when:
+1. the exact official source is identified;
+2. its usage status is recorded as `APPROVED` in `docs/research/OFFICIAL_ASSET_GATE.md`;
+3. the implementation uses that approved official resource.
 
-Production icons belong in a future `assets/icons/pixel/` directory and must be original Pixel artwork that follows the same low-resolution, high-contrast grammar.
+If those conditions are not met, use text or a neutral non-branded placeholder. Do not draw a substitute.
 
-Rules:
-- no Font Awesome
-- no emoji-as-interface
-- no generic Material icons when a Dungeons-style pictogram is appropriate
-- every icon must work at small size and in monochrome
-- important icon-only controls require accessible text/aria labels
+## Explicitly forbidden substitutes
+- CSS-drawn emeralds, skulls, locks, checks, chests or diamonds;
+- hand-made SVG recreations of official icons;
+- AI-generated Minecraft/Dungeons icon lookalikes;
+- Font Awesome / Material / emoji replacements intended to stand in for a Minecraft/Dungeons icon;
+- traced or pixel-by-pixel redrawn official art.
+
+## Official research inventory
+Mojang’s public `web-theme-bootstrap/assets/svg/icons` directory is useful for identifying official icon names and visual systems, but the root repository license restricts reuse of its image assets outside that project unless separate permission applies.
+
+Therefore those files remain `REFERENCE_ONLY` until an explicit approved usage basis is found.
+
+## Current implementation status
+Any pictogram currently drawn by CSS in the prototype is legacy test code and must not be promoted to production. See:
+`docs/research/KNOWN_INVALID_IMPLEMENTATIONS.md`
+
+Accessibility still applies: icon-only controls require readable labels/ARIA text whenever an approved icon is eventually used.
