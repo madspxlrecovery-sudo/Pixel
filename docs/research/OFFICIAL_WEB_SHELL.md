@@ -70,10 +70,48 @@ For search/account/arrow/chevron/icon files:
 - prefer remote official references for prototypes rather than redrawing or copying the asset;
 - never redraw it as a substitute.
 
+## Geometry rule
+The official shell must not be merely “visually similar”. Size, spacing and proportion are part of the source component.
+
+For every shell component record:
+- source breakpoint or capture size;
+- outer width and height;
+- internal padding;
+- icon width/height;
+- icon-to-label gap;
+- type size and line-height;
+- border thickness;
+- neighboring spacing.
+
+Accepted geometry provenance is `LIVE_DOM/CSS`, `OFFICIAL_CODE`, or `MEASURED_OFFICIAL_CAPTURE`.
+
+If exact dimensions are unknown, do not claim 1:1 fidelity and do not arbitrarily resize the component to make the Pixel layout easier.
+
+## Current measured references
+From the official minecraft.net header capture supplied by the user:
+- desktop shell height reference: `72 px`;
+- green `COMPRAR AHORA` CTA reference: `154 × 36 px` at the supplied desktop capture scale.
+
+From the official Minecraft Dungeons CTA capture supplied by the user:
+- outer CTA frame: `273 × 54 px`;
+- orange face: `269 × 50 px`;
+- top highlight: `6 px`;
+- bottom shadow: `6 px`;
+- measured face colors: `#FFA41F`, highlight `#FFD953`, shadow `#FF791A`.
+
+These measured values are source evidence tied to the supplied official captures. Do not stretch them.
+
+## Current implementation status
+- green header CTA: restored at the measured desktop reference size and using the official Mojang primary green token + exact `pixel-arrow-right.svg`;
+- account dropdown caret: uses exact `pixel-caret.svg`;
+- search magnifier: intentionally not drawn while the exact official asset/live URL and dimensions remain unverified;
+- account/profile pictogram: intentionally not drawn while the exact official asset/live URL and dimensions remain unverified;
+- orange Dungeons CTA: implemented at the measured `273 × 54 px` source size and measured capture colors.
+
 ## Current implementation priority
-When refining the current prototype:
-1. use the official orange Dungeons CTA treatment for Dungeons-specific actions;
-2. use exact Mojang pixel-arrow resources for CTA direction/navigation;
-3. preserve green for Minecraft.net global actions where that official pattern applies;
-4. use Dungeons secondary/tertiary button variants only when an official-screen/page precedent justifies them;
-5. continue replacing generic controls with exact official equivalents.
+1. identify exact official search magnifier asset and dimensions;
+2. identify exact official account/profile asset and dimensions;
+3. verify live header spacing/padding from official DOM/CSS evidence;
+4. only then replace the current text-only pending controls.
+
+Until an exact icon asset is approved, keep that control text-only rather than using a homemade icon.
