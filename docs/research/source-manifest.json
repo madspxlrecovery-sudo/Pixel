@@ -1,0 +1,69 @@
+{
+  "version": 1,
+  "last_verified": "2026-09-12",
+  "policy": "official-source-first",
+  "sources": [
+    {
+      "id": "mojang-web-theme-bootstrap",
+      "authority": "tier-a",
+      "owner": "Mojang",
+      "url": "https://github.com/Mojang/web-theme-bootstrap",
+      "use": ["typography", "official color tokens", "button construction", "Dungeons border reference", "official icon inventory"],
+      "notes": "Repository archived 2026-03-06. Software is MIT; root license separately restricts image-asset reuse. Fonts have separate OFL 1.1 file."
+    },
+    {
+      "id": "minecraft-dungeons-accessibility",
+      "authority": "tier-a",
+      "owner": "Mojang Studios",
+      "url": "https://www.minecraft.net/en-us/accessibility/dungeons",
+      "use": ["keyboard navigation", "controller navigation", "Escape/back behavior", "UI narration", "icon-based communication"]
+    },
+    {
+      "id": "minecraft-usage-guidelines",
+      "authority": "tier-a",
+      "owner": "Mojang/Microsoft",
+      "url": "https://www.minecraft.net/usage-guidelines",
+      "use": ["brand guardrails", "asset guardrails", "public-site disclaimer", "naming"]
+    },
+    {
+      "id": "xbox-minecraft-dungeons",
+      "authority": "tier-a",
+      "owner": "Microsoft/Xbox",
+      "url": "https://www.xbox.com/games/minecraft-dungeons",
+      "use": ["official gameplay visual reference", "product context"],
+      "notes": "Marketing imagery is reference-only unless separately permitted."
+    }
+  ],
+  "official_tokens": {
+    "minecraft": {
+      "fun_green": "#3c8527",
+      "malachite": "#a0e080",
+      "shark": "#1d1e1e",
+      "soil": "#313131",
+      "tundora": "#404040",
+      "scorpion": "#5a5a5a",
+      "gravel": "#757575",
+      "dusty_gray": "#949494"
+    },
+    "dungeons": {
+      "primary_orange": "#e67834",
+      "secondary_eucalyptus": "#299b6e",
+      "tertiary_golden_tainoi": "#FFCB56"
+    }
+  },
+  "fonts": [
+    "MinecraftTenV2",
+    "MinecraftSevenV2",
+    "MinecraftTen",
+    "MinecraftSeven",
+    "MinecraftFive"
+  ],
+  "forbidden_as_primary_authority": [
+    "asset extraction repositories",
+    "fan wikis",
+    "fan fonts",
+    "third-party icon packs",
+    "Pinterest recreations",
+    "unverified UI mockups"
+  ]
+}

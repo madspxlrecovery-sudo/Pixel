@@ -1,0 +1,42 @@
+/*
+  Official font source: Mojang/web-theme-bootstrap
+  License source: https://github.com/Mojang/web-theme-bootstrap/blob/main/assets/fonts/LICENSE_OFL.txt
+  Pixel references the official hosted font files; it does not vendor font binaries here.
+*/
+
+@font-face {
+  font-family: "MinecraftTenV2";
+  src: url("https://raw.githubusercontent.com/Mojang/web-theme-bootstrap/main/assets/fonts/Minecraft-Tenv2.woff2") format("woff2"),
+       url("https://raw.githubusercontent.com/Mojang/web-theme-bootstrap/main/assets/fonts/Minecraft-Tenv2.woff") format("woff");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "MinecraftSevenV2";
+  src: url("https://raw.githubusercontent.com/Mojang/web-theme-bootstrap/main/assets/fonts/Minecraft-Seven_v2.woff") format("woff");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+:root {
+  --font-du-title: "MinecraftTenV2", "Arial Black", sans-serif;
+  --font-du-body: "MinecraftSevenV2", Arial, sans-serif;
+}
+
+.du-title,
+.du-action,
+.du-label-strong {
+  font-family: var(--font-du-title);
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.du-copy,
+.du-label,
+.du-help {
+  font-family: var(--font-du-body);
+  font-weight: 400;
+}

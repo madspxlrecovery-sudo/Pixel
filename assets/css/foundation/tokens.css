@@ -1,0 +1,35 @@
+/*
+  Exact official values below come from:
+  Mojang/web-theme-bootstrap/scss/abstract/_colors.scss
+  Mojang/web-theme-bootstrap/scss/abstract/_theme.scss
+
+  Tokens prefixed --mc-* are source values.
+  Tokens prefixed --px-* are Pixel-derived mappings and are NOT claimed as official Mojang tokens.
+*/
+
+:root {
+  --mc-fun-green: #3c8527;
+  --mc-malachite: #a0e080;
+
+  --mc-shark: #1d1e1e;
+  --mc-soil: #313131;
+  --mc-tundora: #404040;
+  --mc-scorpion: #5a5a5a;
+  --mc-gravel: #757575;
+  --mc-dusty-gray: #949494;
+  --mc-white: #ffffff;
+
+  --mc-dungeons-primary: #e67834;
+  --mc-dungeons-secondary: #299b6e;
+  --mc-dungeons-tertiary: #ffcb56;
+
+  --px-ui-panel: rgba(29, 30, 30, 0.91);
+  --px-ui-panel-soft: rgba(49, 49, 49, 0.82);
+  --px-ui-line: rgba(255, 255, 255, 0.58);
+  --px-ui-line-dim: rgba(255, 255, 255, 0.20);
+  --px-ui-text: #ffffff;
+  --px-ui-text-muted: #cfcfcf;
+  --px-ui-disabled: #5a5a5a;
+  --px-ui-action: var(--mc-fun-green);
+  --px-ui-highlight: var(--mc-dungeons-tertiary);
+}
