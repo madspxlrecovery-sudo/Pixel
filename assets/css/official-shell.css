@@ -1,0 +1,161 @@
+/*
+  Official-shell fidelity layer.
+
+  Geometry rules:
+  - Do not scale source-backed controls arbitrarily.
+  - Minecraft.net desktop shell is treated as its own website layer.
+  - Dungeons orange CTA below is measured from the official reference capture supplied by the user.
+
+  Exact Dungeons orange CTA capture measurement:
+  outer frame: 273 × 54 px
+  orange face: 269 × 50 px
+  top highlight: 6 px
+  bottom shadow: 6 px
+  face: #FFA41F
+  highlight: #FFD953
+  shadow: #FF791A
+*/
+
+.minecraft-web-shell {
+  height: 72px;
+  min-height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  background: var(--mc-shark);
+  border-bottom: 4px solid #0d3154;
+  color: var(--mc-white);
+}
+
+.minecraft-web-shell__left,
+.minecraft-web-shell__right {
+  display: flex;
+  align-items: center;
+}
+
+.minecraft-web-shell__right {
+  gap: 26px;
+}
+
+/*
+  Header CTA geometry measured from the official header capture supplied by the user.
+  This stays fixed on the desktop reference breakpoint rather than stretching with layout.
+*/
+.mc-web-cta {
+  width: 154px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 0;
+  border: 2px solid var(--mc-fun-green);
+  color: #65c64a;
+  background: transparent;
+  text-decoration: none;
+  font-family: var(--font-du-title);
+  font-size: 12px;
+  line-height: 1;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.mc-web-cta__arrow {
+  width: 12px;
+  height: 12px;
+  display: block;
+  object-fit: contain;
+}
+
+.mc-shell-pending {
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--mc-white);
+  font-family: var(--font-du-title);
+  font-size: 12px;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.mc-shell-account {
+  gap: 7px;
+}
+
+.mc-shell-caret {
+  width: 8px;
+  height: 8px;
+  display: block;
+  object-fit: contain;
+}
+
+/*
+  Official Dungeons orange CTA variant measured from supplied official capture.
+  Do not replace these values with generic Dungeons theme tokens: this live-rendered CTA
+  is visibly different from Mojang's generic $dungeons-primary token.
+*/
+.store-primary-button.mc-dungeons-cta--orange-live {
+  width: 273px;
+  min-width: 273px;
+  max-width: 273px;
+  height: 54px;
+  min-height: 54px;
+  max-height: 54px;
+  padding: 0 18px;
+  gap: 14px;
+  border: 2px solid #262423;
+  color: #262423;
+  background: #ffa41f;
+  box-shadow:
+    inset 0 6px #ffd953,
+    inset 0 -6px #ff791a;
+  font-size: 18px;
+  line-height: 1;
+}
+
+.store-primary-button.mc-dungeons-cta--orange-live::before,
+.store-primary-button.mc-dungeons-cta--orange-live::after {
+  content: none;
+}
+
+.store-primary-button.mc-dungeons-cta--orange-live .official-button-arrow {
+  width: 16px;
+  height: 16px;
+}
+
+.store-primary-button.mc-dungeons-cta--orange-live:hover,
+.store-primary-button.mc-dungeons-cta--orange-live:focus-visible,
+.store-primary-button.mc-dungeons-cta--orange-live:active {
+  color: #262423;
+  background: #ffa41f;
+  box-shadow:
+    inset 0 6px #ffd953,
+    inset 0 -6px #ff791a;
+}
+
+.store-primary-button.mc-dungeons-cta--orange-live:active {
+  transform: none;
+}
+
+@media (max-width: 780px) {
+  .minecraft-web-shell {
+    height: auto;
+    min-height: 64px;
+    gap: 14px;
+    flex-wrap: wrap;
+    padding: 14px 16px;
+  }
+
+  .minecraft-web-shell__right {
+    gap: 16px;
+  }
+}
+
+@media (max-width: 520px) {
+  .minecraft-web-shell__right {
+    width: 100%;
+    justify-content: flex-end;
+  }
+}
