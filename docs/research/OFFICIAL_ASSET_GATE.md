@@ -12,17 +12,25 @@ Only `APPROVED` entries may be bundled as official branded production visuals. E
 
 ## Geometry status
 Every fidelity-critical component must also record geometry provenance:
-- `OFFICIAL_CODE` — dimensions/padding/border values come from Mojang source code.
-- `LIVE_DOM/CSS` — dimensions are taken from the live official page implementation.
+- `OFFICIAL_CODE` — dimensions/padding/border/typography values come from Mojang source code.
+- `LIVE_DOM/CSS` — dimensions/behavior are taken from the live official page implementation.
 - `MEASURED_OFFICIAL_CAPTURE` — dimensions are measured from an official screenshot/capture supplied as reference.
 - `UNVERIFIED` — exact geometry still unknown; do not claim 1:1 fidelity.
 
-The official component size is part of the component. Color fidelity without geometry fidelity does not pass this gate.
+The official component size, font, color, spacing, scroll behavior and state behavior are all part of the component. Matching only the silhouette is not enough.
 
 ## Current Minecraft.net desktop header lock
-Reference: current `https://www.minecraft.net/es-es/about-dungeons` plus the official-page desktop capture supplied by the user at `1365×97 px`.
+Reference: current `https://www.minecraft.net/es-es/about-dungeons`, Mojang `web-theme-bootstrap`, and the official-page desktop capture supplied by the user.
 
-Measured visible shell geometry at that reference scale:
+Confirmed source-backed facts:
+- Mojang `_variables.scss` sets `$font-family-sans-serif: "Noto Sans", sans-serif`.
+- Mojang `_navbar.scss` does not override that family for `.nav-link`.
+- `.nav-link` uses `padding: 0.5rem 0.75rem`, `line-height: 1`, uppercase, `letter-spacing: 1px`, flex alignment.
+- `.nav-item` uses `margin: 0 2px`.
+- the live minecraft.net header remains visible at the top while scrolling; Pixel must preserve that sticky/fixed viewport behavior rather than scrolling away with page content.
+- raw Mojang pixel SVG files render black if naïvely loaded as `<img>` because their rect/path fill is implicit black. In the live shell, navigation symbols must follow the light/currentColor appearance; Pixel therefore uses the exact Mojang SVG geometry as a CSS mask/currentColor source rather than recoloring/redrawing the artwork.
+
+Measured visible shell geometry at the supplied desktop reference scale:
 - header height: approximately `80 px`, including the bottom divider;
 - header background: `#2A2225`;
 - bottom divider: approximately `1 px` black;
@@ -30,37 +38,40 @@ Measured visible shell geometry at that reference scale:
 - Minecraft logo display box: approximately `220×38 px`;
 - green `COMPRAR AHORA` CTA: `154×36 px`;
 - navigation order: `Minecraft logo → JUEGOS → TIENDA → EXPLORACIÓN → APRENDER → SOPORTE TÉCNICO → COMPRAR AHORA → Buscar → CUENTA`;
-- dropdown items use official Mojang pixel-carets;
-- the exact current search and account/profile pictograms remain `UNKNOWN` until their live assets are identified.
+- dropdown items use the official Mojang `pixel-caret.svg` geometry;
+- the exact current search and account/profile header pictograms remain `UNKNOWN` until their live assets are identified.
 
-This lock supersedes the older `72 px` shell estimate, which came from a differently cropped reference.
+The previous Pixel implementation that used Minecraft Ten for the web-shell navigation is invalid. Minecraft Ten/Seven remain valid for Dungeons/Marketplace contexts when source-backed, but the minecraft.net global header follows Noto Sans in Mojang's published web theme.
 
-| Resource / system | Official source | Status | Geometry source / reference | Production rule |
+| Resource / system | Official source | Status | Geometry/source reference | Production rule |
 |---|---|---|---|---|
-| Minecraft Ten V2 font | Mojang `web-theme-bootstrap/assets/fonts` + `LICENSE_OFL.txt` | APPROVED | OFFICIAL_CODE | May be used under OFL terms; current project references official hosted file |
-| Minecraft Seven V2 font | Mojang `web-theme-bootstrap/assets/fonts` + `LICENSE_OFL.txt` | APPROVED | OFFICIAL_CODE | May be used under OFL terms; current project references official hosted file |
+| Minecraft Ten V2 font | Mojang `web-theme-bootstrap/assets/fonts` + `LICENSE_OFL.txt` | APPROVED | OFFICIAL_CODE | Use only where the official source/pattern calls for it; do not automatically apply it to minecraft.net shell navigation |
+| Minecraft Seven V2 font | Mojang `web-theme-bootstrap/assets/fonts` + `LICENSE_OFL.txt` | APPROVED | OFFICIAL_CODE | Use where the official source/pattern calls for it |
+| Minecraft.net shell text family | Mojang `scss/abstract/_variables.scss` | APPROVED | OFFICIAL_CODE: `"Noto Sans", sans-serif` | Required for global navbar labels/actions unless newer live code proves a different family |
+| Minecraft.net nav-link metrics | Mojang `scss/components/_navbar.scss` | APPROVED | OFFICIAL_CODE: `.5rem .75rem` padding, `line-height:1`, uppercase, `letter-spacing:1px`; nav-item margin `0 2px` | Preserve source values before making Pixel adaptations |
+| Minecraft.net sticky shell behavior | live minecraft.net current page + user verification | APPROVED as behavior pattern | LIVE_DOM/CSS behavior still to be captured exactly; observed shell follows viewport on scroll | Header must not scroll away with the document on desktop |
 | Mojang published color tokens | Mojang `web-theme-bootstrap/scss/abstract/_colors.scss` and `_theme.scss` | APPROVED | OFFICIAL_CODE | Exact values may be used and must remain marked `--mc-*` |
-| Current Minecraft.net desktop header composition | live `minecraft.net/es-es/about-dungeons` + official capture supplied by user | APPROVED as layout reference | MEASURED_OFFICIAL_CAPTURE: `1365×97` source capture; shell ≈`80 px`; inner ≈`1240 px`; bg `#2A2225`; logo ≈`220×38`; CTA `154×36` | Preserve order, scale and spacing at the desktop reference breakpoint; do not omit middle navigation merely to simplify Pixel |
-| `minecraft.svg` | Mojang `web-theme-bootstrap/assets/svg/logos/minecraft.svg` | REFERENCE_ONLY | OFFICIAL_CODE native `viewBox 0 0 1295.5 221.8`; measured display ≈`220×38 px` in current header reference | Prototype may reference exact official remote file; preserve aspect ratio; do not redraw or bundle without separate permission basis |
-| Minecraft.net green primary CTA construction | live minecraft.net + Mojang `scss/components/_buttons.scss` | APPROVED as interaction/style pattern | OFFICIAL_CODE + MEASURED_OFFICIAL_CAPTURE `154×36 px` current desktop header | Use exact source-backed colors/construction and measured desktop geometry; do not arbitrarily resize |
-| Dungeons orange CTA — reference capture | Official Minecraft Dungeons page screenshot supplied by user | APPROVED as measured reference pattern | MEASURED_OFFICIAL_CAPTURE: outer dark frame `273×54 px`; orange face `269×50 px`; top highlight `6 px`; bottom shadow `6 px`; face fill `#FFA41F`; highlight `#FFD953`; shadow `#FF791A` | Use this exact geometry only when reproducing this CTA variant at the same desktop reference scale; do not stretch it to fit text |
-| Dungeons primary token | Mojang `$dungeons-primary` / `$light-orange` = `#e67834` | APPROVED | OFFICIAL_CODE | Use exact token where the official component calls for it; do not confuse it with the orange CTA capture above |
+| Current Minecraft.net desktop header composition | live `minecraft.net/es-es/about-dungeons` + official capture supplied by user | APPROVED as layout reference | MEASURED_OFFICIAL_CAPTURE: shell ≈`80 px`; inner ≈`1240 px`; bg `#2A2225`; logo ≈`220×38`; CTA `154×36` | Preserve order, scale and desktop composition; do not omit middle navigation merely to simplify Pixel |
+| `minecraft.svg` | Mojang `web-theme-bootstrap/assets/svg/logos/minecraft.svg` | REFERENCE_ONLY | OFFICIAL_CODE native `viewBox 0 0 1295.5 221.8`; measured display ≈`220×38 px` | Prototype may reference exact official remote file; preserve aspect ratio; do not redraw or bundle without separate permission basis |
+| Minecraft.net green primary CTA construction | live minecraft.net + Mojang `scss/components/_buttons.scss` | APPROVED as interaction/style pattern | OFFICIAL_CODE + MEASURED_OFFICIAL_CAPTURE `154×36 px` | Use exact source-backed construction and measured desktop geometry; do not arbitrarily resize |
+| Dungeons orange CTA — reference capture | Official Minecraft Dungeons page screenshot supplied by user | APPROVED as measured reference pattern | MEASURED_OFFICIAL_CAPTURE: outer dark frame `273×54 px`; orange face `269×50 px`; top highlight `6 px`; bottom shadow `6 px`; face fill `#FFA41F`; highlight `#FFD953`; shadow `#FF791A` | Use exact geometry only for this CTA variant at the same desktop reference scale |
+| Dungeons primary token | Mojang `$dungeons-primary` / `$light-orange` = `#e67834` | APPROVED | OFFICIAL_CODE | Use exact token where the official component calls for it |
 | Dungeons secondary CTA color | Mojang `$dungeons-secondary` / `$eucalyptus` = `#299b6e` | APPROVED | OFFICIAL_CODE | Use exact value only |
 | Dungeons tertiary CTA color | Mojang `$dungeons-tertiary` / `$golden-tainoi` = `#FFCB56` | APPROVED | OFFICIAL_CODE | Use exact value only |
 | Minecraft button hover | Mojang `$primary-hover` / `$soil` = `#313131` | APPROVED | OFFICIAL_CODE | Use exact source-backed hover behavior when following web-theme button pattern |
-| `pixel-arrow-right.svg` | Mojang `web-theme-bootstrap/assets/svg/icons/pixel-arrow-right.svg` | REFERENCE_ONLY | OFFICIAL_CODE asset dimensions | Prototype may reference exact official remote file; do not redraw or bundle without separate permission basis |
-| `pixel-arrow-left.svg` | Mojang `web-theme-bootstrap/assets/svg/icons/pixel-arrow-left.svg` | REFERENCE_ONLY | OFFICIAL_CODE asset dimensions | Prototype may reference exact official remote file; do not redraw or bundle without separate permission basis |
-| `pixel-arrow-up.svg` | Mojang `web-theme-bootstrap/assets/svg/icons/pixel-arrow-up.svg` | REFERENCE_ONLY | OFFICIAL_CODE asset dimensions | Prototype may reference exact official remote file; do not redraw or bundle without separate permission basis |
-| `pixel-arrow-down.svg` | Mojang `web-theme-bootstrap/assets/svg/icons/pixel-arrow-down.svg` | REFERENCE_ONLY | OFFICIAL_CODE asset dimensions | Prototype may reference exact official remote file; do not redraw or bundle without separate permission basis |
-| `pixel-caret.svg` | Mojang `web-theme-bootstrap/assets/svg/icons/pixel-caret.svg` | REFERENCE_ONLY | OFFICIAL_CODE asset dimensions; displayed at ≈`8×8 px` in current prototype | Prototype may reference exact official remote file; do not redraw or bundle without separate permission basis |
-| Minecraft.net search magnifier | live `minecraft.net/es-es/about-dungeons` | UNKNOWN | UNVERIFIED | Keep a neutral geometry slot only. Locate exact live asset/URL and dimensions before rendering; do not redraw |
-| Minecraft.net account/profile icon | live `minecraft.net/es-es/about-dungeons` | UNKNOWN | UNVERIFIED | Keep a neutral geometry slot only. Locate exact live asset/URL and dimensions before rendering; do not redraw |
-| Mojang Dungeons border image `border-dungeons-25.png` | Mojang `web-theme-bootstrap` | REFERENCE_ONLY | OFFICIAL_CODE | Do not copy or recreate; use only to identify the real component until a permitted usage basis exists |
-| Other Mojang official SVG/PNG icon files | Mojang `web-theme-bootstrap/assets/svg/icons` and related image dirs | REFERENCE_ONLY | OFFICIAL_CODE when metadata is available | Do not copy or redraw as substitutes until separately documented |
-| Minecraft / Dungeons logos | Official Mojang/Microsoft sources | REFERENCE_ONLY | OFFICIAL_ASSET native aspect ratio required | Prototype may reference official hosted resources; never distort aspect ratio; bundling requires separate permitted usage basis |
-| Minecraft Marketplace background/artwork | Official Marketplace / minecraft.net / Mojang `bedrock-samples` | REFERENCE_ONLY | OFFICIAL_ASSET / OFFICIAL_CODE | Prototype may reference exact official remote resources; preserve source aspect/tiling behavior; do not create lookalikes |
+| `pixel-arrow-right.svg` | Mojang `web-theme-bootstrap/assets/svg/icons/pixel-arrow-right.svg` | REFERENCE_ONLY | OFFICIAL_CODE asset geometry | Prototype may reference exact remote geometry; when used in the shell, preserve live currentColor/light appearance via mask/currentColor instead of black raw `<img>` rendering |
+| `pixel-arrow-left.svg` | Mojang `web-theme-bootstrap/assets/svg/icons/pixel-arrow-left.svg` | REFERENCE_ONLY | OFFICIAL_CODE asset geometry | Prototype may reference exact official remote file; do not redraw |
+| `pixel-arrow-up.svg` | Mojang `web-theme-bootstrap/assets/svg/icons/pixel-arrow-up.svg` | REFERENCE_ONLY | OFFICIAL_CODE asset geometry | Prototype may reference exact official remote file; do not redraw |
+| `pixel-arrow-down.svg` | Mojang `web-theme-bootstrap/assets/svg/icons/pixel-arrow-down.svg` | REFERENCE_ONLY | OFFICIAL_CODE asset geometry | Prototype may reference exact official remote file; do not redraw |
+| `pixel-caret.svg` | Mojang `web-theme-bootstrap/assets/svg/icons/pixel-caret.svg` | REFERENCE_ONLY | OFFICIAL_CODE asset geometry | Use exact geometry; shell presentation must be light/currentColor, not black raw-image rendering |
+| Minecraft.net search magnifier | live `minecraft.net/es-es/about-dungeons` | UNKNOWN | UNVERIFIED | Keep neutral slot only until exact live asset/component is located; do not redraw |
+| Minecraft.net account/profile header icon | live `minecraft.net/es-es/about-dungeons` | UNKNOWN | UNVERIFIED | Keep neutral slot only until exact live asset/component is located; do not substitute a different Mojang profile image |
+| Mojang Dungeons border image `border-dungeons-25.png` | Mojang `web-theme-bootstrap` | REFERENCE_ONLY | OFFICIAL_CODE | Do not copy or recreate |
+| Other Mojang official SVG/PNG icon files | Mojang `web-theme-bootstrap/assets/svg/icons` and related image dirs | REFERENCE_ONLY | OFFICIAL_CODE when metadata is available | Do not use merely because they are official; they must match the actual component being reproduced |
+| Minecraft / Dungeons logos | Official Mojang/Microsoft sources | REFERENCE_ONLY | OFFICIAL_ASSET native aspect ratio required | Prototype may reference official hosted resources; never distort aspect ratio |
+| Minecraft Marketplace background/artwork | Official Marketplace / minecraft.net / Mojang `bedrock-samples` | REFERENCE_ONLY | OFFICIAL_ASSET / OFFICIAL_CODE | Preserve source aspect/tiling behavior; do not create lookalikes |
 | Minecraft Dungeons in-game UI screenshots | Official game/screenshots | REFERENCE_ONLY | MEASURED_OFFICIAL_CAPTURE allowed for layout research | Use for layout/state/geometry research; do not crop/extract UI art into production as an asset |
-| Extracted Dungeons game assets from community repos | Third-party extraction of genuine game data | BLOCKED for production | n/a | Research/discovery only unless a separate official usage permission is established |
+| Extracted Dungeons game assets from community repos | Third-party extraction of genuine game data | BLOCKED for production | n/a | Research/discovery only unless separate official usage permission is established |
 | CSS-drawn Minecraft/Dungeons pictograms | Pixel legacy prototype | BLOCKED | n/a | Remove/replace; never treat as official |
 | AI-generated Minecraft/Dungeons UI art/icons/textures | Generated content | BLOCKED | n/a | Not permitted under current project fidelity rule |
 
@@ -71,13 +82,16 @@ Before implementing any new icon, border, texture, background, badge, currency m
 3. Record the usage/license basis.
 4. Set the status.
 5. Record `geometry_source`.
-6. Record exact width/height/padding/border/icon dimensions when the source component has a fixed desktop geometry.
-7. Record neighboring spacing and component order when composition is part of the official pattern.
-8. Use exact official remote references in the prototype only when explicitly documented here.
-9. Never recreate a missing resource.
-10. Never resize or reorder a source-backed component merely to make the Pixel layout easier.
+6. Record exact width/height/padding/border/icon dimensions when the source component has fixed geometry.
+7. Record font family, font weight, line-height and letter-spacing.
+8. Record neighboring spacing and component order when composition is part of the official pattern.
+9. Record viewport/scroll behavior for sticky/fixed shell components.
+10. Verify actual rendered icon color/state; a black raw SVG does not pass if the official UI shows a white/currentColor symbol.
+11. Use exact official remote references in the prototype only when explicitly documented here.
+12. Never recreate a missing resource.
+13. Never resize, recolor, reorder or restyle a source-backed component merely to make the Pixel layout easier, unless the live official source does the same transformation.
 
-If a component's dimensions are still `UNVERIFIED`, it may be used only as a clearly neutral structural placeholder, not as a claim of 1:1 fidelity.
+If a component's dimensions, typography or icon source remain `UNVERIFIED`, it may be used only as a clearly neutral structural placeholder, not as a claim of 1:1 fidelity.
 
 ## Three-layer source model
 Pixel’s target is:
