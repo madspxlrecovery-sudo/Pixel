@@ -11,7 +11,7 @@
 <body>
   <div class="marketplace-bg" aria-hidden="true"></div>
 
-  <!-- Minecraft.net web-shell layer: composition follows the current official desktop header. -->
+  <!-- Minecraft.net web-shell layer. Source-backed nav typography/spacing from Mojang theme. -->
   <header class="minecraft-web-shell" aria-label="Minecraft website navigation">
     <div class="minecraft-web-shell__inner">
       <a class="mc-shell-logo" href="https://www.minecraft.net/es-es" aria-label="Minecraft">
@@ -24,19 +24,19 @@
       <nav class="mc-shell-nav" aria-label="Minecraft navigation">
         <button class="mc-shell-nav__item" type="button">
           <span>JUEGOS</span>
-          <img src="https://raw.githubusercontent.com/Mojang/web-theme-bootstrap/main/assets/svg/icons/pixel-caret.svg" alt="">
+          <i class="mc-pixel-caret" aria-hidden="true"></i>
         </button>
         <button class="mc-shell-nav__item" type="button">
           <span>TIENDA</span>
-          <img src="https://raw.githubusercontent.com/Mojang/web-theme-bootstrap/main/assets/svg/icons/pixel-caret.svg" alt="">
+          <i class="mc-pixel-caret" aria-hidden="true"></i>
         </button>
         <button class="mc-shell-nav__item" type="button">
           <span>EXPLORACIÓN</span>
-          <img src="https://raw.githubusercontent.com/Mojang/web-theme-bootstrap/main/assets/svg/icons/pixel-caret.svg" alt="">
+          <i class="mc-pixel-caret" aria-hidden="true"></i>
         </button>
         <button class="mc-shell-nav__item" type="button">
           <span>APRENDER</span>
-          <img src="https://raw.githubusercontent.com/Mojang/web-theme-bootstrap/main/assets/svg/icons/pixel-caret.svg" alt="">
+          <i class="mc-pixel-caret" aria-hidden="true"></i>
         </button>
         <a class="mc-shell-nav__item mc-shell-nav__item--link" href="https://help.minecraft.net/" target="_blank" rel="noreferrer">SOPORTE TÉCNICO</a>
       </nav>
@@ -44,24 +44,16 @@
       <div class="mc-shell-actions">
         <a class="mc-web-cta" href="https://www.minecraft.net/es-es/store/minecraft-dungeons" aria-label="Comprar ahora">
           <span>COMPRAR AHORA</span>
-          <img
-            class="mc-web-cta__arrow"
-            src="https://raw.githubusercontent.com/Mojang/web-theme-bootstrap/main/assets/svg/icons/pixel-arrow-right.svg"
-            alt=""
-          >
+          <i class="mc-web-cta__arrow-mask" aria-hidden="true"></i>
         </a>
 
-        <!-- Exact current search pictogram is intentionally not recreated. Slot preserves measured shell geometry. -->
+        <!-- Exact current search pictogram is intentionally not recreated until its live asset is identified. -->
         <button class="mc-shell-search-slot" type="button" aria-label="Buscar" title="Buscar"></button>
 
         <button class="mc-shell-account" type="button" aria-label="Cuenta">
           <span class="mc-shell-account__icon-slot" aria-hidden="true"></span>
           <span>CUENTA</span>
-          <img
-            class="mc-shell-caret"
-            src="https://raw.githubusercontent.com/Mojang/web-theme-bootstrap/main/assets/svg/icons/pixel-caret.svg"
-            alt=""
-          >
+          <i class="mc-pixel-caret" aria-hidden="true"></i>
         </button>
       </div>
     </div>
