@@ -12,16 +12,32 @@ The visual hierarchy is therefore:
 
 Do not replace any of these layers with a generic “Minecraft-inspired” or “fantasy game” interpretation.
 
-## Non-negotiable rule: official visual assets only
-For any visual element that is recognizably Minecraft/Minecraft Dungeons — icons, logos, currency symbols, frames, borders, textures, backgrounds, badges, controller glyphs, item silhouettes, decorative motifs or game UI artwork — **do not invent, redraw, generate, trace, approximate or reinterpret it**.
+## Non-negotiable rule: exact official visual resources only
+For any visual element that is recognizably Minecraft/Minecraft Dungeons — icons, logos, currency symbols, frames, borders, textures, backgrounds, badges, controller glyphs, item silhouettes, decorative motifs or game UI artwork — **do not invent, redraw, generate, trace, approximate, reinterpret, or substitute it**.
+
+When reproducing a specific component from a specific official Minecraft/Mojang page or game UI, **“official somewhere else” is not enough**. The exact resource or exact implementation used by that component must be identified.
 
 Allowed outcomes are only:
-- use an official asset when its source and usage permission are confirmed;
-- reference an official asset remotely when that use is explicitly permitted;
-- use an official implementation/token/source-code pattern when its license permits it;
-- otherwise leave a neutral placeholder or omit the visual until the correct official resource can be used.
+- use the exact official asset used by the target component when its source and usage basis are confirmed;
+- reference that exact official asset remotely when that use is explicitly documented for the prototype;
+- use the exact official implementation/token/source-code pattern when its source permits it;
+- otherwise leave a neutral geometry placeholder or omit the visual until the exact resource is identified.
 
-A missing official asset is **not** permission to create a lookalike.
+A missing official asset is **not** permission to create a lookalike or to use a substitute from another Microsoft/Mojang product.
+
+### No-substitution rule
+This rule overrides all older prototype fallback behavior.
+
+For fidelity-locked components:
+- no Microsoft Fluent icon may stand in for a minecraft.net icon unless the live minecraft.net implementation itself is proven to use that exact Fluent asset;
+- no generic Mojang icon may stand in for a different live minecraft.net glyph merely because both are official;
+- no CSS shape, emoji, Font Awesome, Material icon, generated SVG, traced SVG, or hand-built approximation may fill a missing branded resource;
+- no “close enough” font may stand in for an official published font when the exact font files are available;
+- no component may be called “exact”, “official”, or “1:1” while any fidelity-critical asset inside it remains unidentified.
+
+The September 2026 Search/Account fallback incident is the canonical example: Microsoft Fluent Search/Person were official Microsoft assets, but they were **not proven to be the exact live minecraft.net header glyphs**, so they were removed. Until those exact live glyphs are identified, Pixel keeps only their neutral layout slots.
+
+See `docs/research/EXACT_RESOURCE_POLICY.md` for the permanent incident record and enforcement checklist.
 
 ## Exact fidelity rule — size, spacing and proportion are part of the asset
 Official-source fidelity includes geometry, not only colors and icons.
@@ -32,10 +48,12 @@ When Pixel adopts a specific official Minecraft / Marketplace / Dungeons compone
 - border thickness;
 - icon dimensions;
 - icon-to-label gap;
-- typography size and line-height;
+- typography family, weight, size and line-height;
 - neighboring spacing/margins;
 - aspect ratio;
-- hover/pressed inset depth.
+- hover/pressed inset depth;
+- component order and alignment;
+- sticky/fixed/scroll behavior.
 
 Do **not** arbitrarily scale an official component to “fit better”. If responsive behavior is required, preserve the official desktop size at the reference breakpoint and define responsive variants only when an official responsive pattern/source exists or when the change is clearly documented as a Pixel adaptation.
 
@@ -44,17 +62,18 @@ Every new approved component must record a `geometry_source` in `docs/research/O
 If exact dimensions are not known yet, the component is not ready for fidelity-critical production use.
 
 ## Official web-shell rule
-The current official Minecraft.net header is a first-class design reference. When Pixel needs web navigation controls, prefer the same official patterns used there before inventing anything:
+The current official Minecraft.net header is a first-class design reference. When Pixel needs web navigation controls, use the exact resources and patterns from that shell before anything else:
+- exact Noto Sans webfonts published by Mojang for the shell;
 - green primary CTA with the official Minecraft button treatment;
-- small directional/diagonal arrow treatment attached to CTA text;
-- search magnifier control;
-- account/profile control;
-- dropdown chevrons;
-- dark global header bar and spacing hierarchy.
+- exact directional arrow asset attached to CTA text;
+- exact search control asset once positively identified;
+- exact account/profile control asset once positively identified;
+- exact dropdown caret asset;
+- dark global header bar, measured spacing, and sticky behavior.
 
 These controls belong to the **Minecraft.net web shell**, not to the Dungeons in-game UI. Do not mix their roles accidentally.
 
-Exact production assets must still pass `docs/research/OFFICIAL_ASSET_GATE.md`. If the exact live/official asset cannot be approved for use, keep the control text-only or neutral rather than redrawing the icon.
+The only intentional adaptation in the global header is Pixel-owned content placed inside official layout slots, such as the project wordmark and wallet data. That does **not** authorize changing the official shell’s unrelated typography, iconography, spacing, or behavior.
 
 ## Explicitly forbidden
 Unless the user later changes this policy explicitly:
@@ -65,29 +84,36 @@ Unless the user later changes this policy explicitly:
 - no Font Awesome, Material Icons or emoji substitutes for Minecraft/Dungeons interface symbols;
 - no invented Marketplace-style or Dungeons-style textures/backgrounds when the intent is to reproduce an official visual;
 - no invented replacements for minecraft.net search/account/arrow/chevron icons when an official source exists;
+- no cross-product “official fallback” used as a visual substitute for an unidentified target asset;
 - no arbitrary resizing of source-backed controls just to suit the Pixel layout;
 - no extracted game asset copied into the public repo unless usage permission is independently confirmed.
 
 ## Source priority
-1. **Tier A — Official Mojang/Microsoft sources**: minecraft.net live pages, `Mojang/web-theme-bootstrap`, `Mojang/bedrock-samples`, official Minecraft Marketplace pages, Xbox/Microsoft pages, official media/assets with clear usage terms.
-2. **Tier B — Actual Minecraft / Minecraft Dungeons in-game screenshots**: evidence for layout, hierarchy, spacing, state behavior and identifying the correct official asset; screenshots do not automatically grant redistribution rights for cropped assets.
-3. **Tier C — Third-party/community sources**: discovery only. They may help locate or name an official resource but must not become the production source of truth.
+1. **Tier A — Exact target official source**: the live minecraft.net page/component being reproduced, exact Mojang/Microsoft source repository for that component, exact official Marketplace/Bedrock/Dungeons resource.
+2. **Tier B — Other official Mojang/Microsoft sources**: research/discovery only unless they are proven to be the same resource used by the target component.
+3. **Tier C — Actual Minecraft / Minecraft Dungeons screenshots**: evidence for layout, hierarchy, spacing, state behavior and identifying the correct official asset; screenshots do not automatically grant redistribution rights for cropped assets.
+4. **Tier D — Third-party/community sources**: discovery only. They may help locate or name an official resource but must never become the production source of truth.
 
 ## Asset gate — mandatory before implementation
 Every Minecraft/Dungeons-specific visual must pass this gate before being added to production code:
-1. Identify the exact official source.
-2. Identify the exact asset/component/token name when possible.
-3. Record the source in `docs/research/OFFICIAL_SOURCES.md` and/or `docs/research/OFFICIAL_ASSET_GATE.md`.
-4. Record usage status: `APPROVED`, `REFERENCE_ONLY`, `UNKNOWN`, or `BLOCKED`.
-5. Record geometry provenance and exact reference dimensions when the component has a fixed/standard geometry.
-6. Only `APPROVED` assets/components may be rendered as official visual assets in the site.
-7. `REFERENCE_ONLY`, `UNKNOWN`, and `BLOCKED` assets must remain placeholders/omitted. Do not recreate them.
+1. Identify the exact official target source.
+2. Identify the exact asset/component/token name or live implementation when possible.
+3. Prove that it is the resource used by the target component, not merely a similar first-party asset.
+4. Record the source in `docs/research/OFFICIAL_SOURCES.md`, `docs/research/OFFICIAL_ASSET_GATE.md`, and when relevant `docs/research/EXACT_RESOURCE_POLICY.md`.
+5. Record usage status: `APPROVED`, `REFERENCE_ONLY`, `UNKNOWN`, or `BLOCKED`.
+6. Record geometry provenance and exact reference dimensions when the component has a fixed/standard geometry.
+7. Only `APPROVED` assets/components may be rendered as exact official visual assets in the site.
+8. `REFERENCE_ONLY`, `UNKNOWN`, and `BLOCKED` target assets must remain neutral/omitted. Do not recreate or substitute them.
+9. Before marking a task complete, check the page for accidental legacy substitutes or approximations.
 
 ## Typography
-Use only source-backed Minecraft type families.
-- Minecraft Ten family: titles, buttons, strong labels when appropriate.
-- Minecraft Seven family: body/help text when appropriate.
-- Minecraft Five only when a verified official pattern calls for it.
+Typography follows the same exact-resource rule.
+
+- **Minecraft.net shell:** use the exact Mojang-published Noto Sans Regular/Bold files loaded by `assets/css/foundation/typography.css`.
+- **Minecraft Dungeons:** Minecraft Ten / Seven only where the official Dungeons pattern supports them.
+- **Pixel-owned wordmark:** Minecraft Five Bold may be used as a licensed project typeface; this is a Pixel adaptation, not an official Minecraft logo.
+
+Never rely on a system-installed font when Mojang publishes the exact webfont needed for the target component.
 
 Font licensing and source are documented in `THIRD_PARTY_NOTICES.md` and `docs/research/ASSET_POLICY.md`.
 
@@ -107,10 +133,21 @@ Behavior may be implemented in original code while matching documented official 
 
 Behavioral implementation must not be used as an excuse to invent branded visual assets.
 
-## Current legacy warning
-The existing prototype contains earlier experimental CSS interpretations (for example a CSS emerald, CSS locks/checks/skulls, hand-built frames and a synthetic world background). These are **legacy experiments, not approved design-system components** and must be removed/replaced as official permitted resources are identified.
+## Current unresolved exact assets
+The current minecraft.net desktop header visibly contains a search magnifier and account/profile pictogram. Their exact live asset files have **not yet been positively identified** in the public Mojang sources inspected so far.
 
-See `docs/research/KNOWN_INVALID_IMPLEMENTATIONS.md` before reusing any existing visual class.
+Therefore:
+- their geometry slots may remain in the header;
+- their labels/carets may use exact identified shell resources;
+- their pictograms must remain visually neutral/omitted;
+- do not restore the removed Fluent Search/Person fallbacks unless new evidence proves those exact assets are used by minecraft.net.
+
+## Current legacy warning
+The prototype history contains earlier experimental CSS interpretations and substitutes. These are **legacy experiments, not approved design-system components** and must not be reused.
+
+Examples include CSS emeralds, locks/checks/skulls, hand-built frames, synthetic world backgrounds, and the removed Microsoft Fluent Search/Person header fallback.
+
+See `docs/research/KNOWN_INVALID_IMPLEMENTATIONS.md` and `docs/research/EXACT_RESOURCE_POLICY.md` before reusing any existing visual class.
 
 ## Baseline
 The branch `baseline/first-valid-prototype` is the frozen rollback point for the first visually valid Marketplace + Dungeons prototype. Do not rewrite or repurpose that branch.
