@@ -14,11 +14,9 @@
 
   <!--
     Pixel adaptation of the current Minecraft.net Marketplace desktop shell.
-    Slot mapping is measured against the official desktop reference:
-    brand slot -> Pixel Network / expansion name
-    nav slots 1-4 -> Pixel navigation
-    original support slot -> Minecoin balance
-    right action rail -> buy / search / account
+    Pixel Network replaces the original Minecraft brand slot.
+    The original fifth navigation slot remains reserved so the official CTA/search/account
+    positions do not drift. Pixel's Minecoin wallet is appended visually after Account.
   -->
   <header class="minecraft-web-shell" aria-label="Pixel Network marketplace navigation">
     <div class="minecraft-web-shell__inner pixel-shell-v2">
@@ -45,13 +43,7 @@
           <i class="mc-pixel-caret" aria-hidden="true"></i>
         </a>
 
-        <div class="mc-shell-wallet mc-shell-wallet--nav" aria-label="Minecoin balance">
-          <img
-            src="https://www.minecraft.net/content/dam/minecraftnet/franchise/component-library/icons/minecoin.svg"
-            alt="Minecoin"
-          >
-          <span>3373</span>
-        </div>
+        <span class="mc-shell-nav__reserved-slot" aria-hidden="true"></span>
       </nav>
 
       <div class="mc-shell-actions pixel-shell-actions">
@@ -72,6 +64,14 @@
           <span>CUENTA</span>
           <i class="mc-pixel-caret" aria-hidden="true"></i>
         </button>
+
+        <div class="mc-shell-wallet mc-shell-wallet--after-account" aria-label="Minecoin balance">
+          <img
+            src="https://www.minecraft.net/content/dam/minecraftnet/franchise/component-library/icons/minecoin.svg"
+            alt="Minecoin"
+          >
+          <span>3373</span>
+        </div>
       </div>
     </div>
   </header>
