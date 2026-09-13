@@ -21,7 +21,12 @@
       search rail ≈x1123–1167 (44 px)
       account rail ≈x1191–1285 (94 px)
 
-  Pixel maps project content into those slots rather than adding new columns.
+  Pixel-specific mapping:
+  - PIXEL NETWORK replaces the original Minecraft brand slot.
+  - The fifth institutional navigation slot stays reserved so CTA/search/account keep
+    the same measured desktop positions.
+  - Minecoins are appended visually after Account in the original outer-right breathing
+    room instead of stealing a navigation slot or moving the action rail.
 */
 
 /* --------------------------------------------------------------------------
@@ -32,16 +37,14 @@
   width: min(1240px, calc(100% - 120px));
   height: 79px;
   margin: 0 auto;
+  position: relative;
   display: flex;
   align-items: center;
   white-space: nowrap;
+  overflow: visible;
 }
 
-/*
-  Replaces the single 220px Minecraft-logo slot.
-  Pixel identity and expansion name live inside ONE slot so the rest of the
-  official navbar does not get pushed out of position.
-*/
+/* Replaces the single 220px Minecraft-logo slot. */
 .pixel-shell-brand-slot {
   width: 220px;
   height: 38px;
@@ -84,8 +87,8 @@
 
 /*
   At the 1365px reference width this block spans approximately x306–953.
-  Four Pixel nav entries occupy the first four institutional nav slots; the
-  wallet occupies the fifth slot (where SOPORTE TÉCNICO sits on minecraft.net).
+  The first four slots are Pixel navigation. The fifth original slot is deliberately
+  preserved as empty geometry to keep the right action rail in its official position.
 */
 .pixel-shell-nav {
   height: 79px;
@@ -115,30 +118,14 @@
   white-space: nowrap;
 }
 
-/* Wallet maps into the fifth original navigation slot, not the action rail. */
-.mc-shell-wallet--nav {
+/* Keeps the original fifth nav slot without showing fake content. */
+.mc-shell-nav__reserved-slot {
   width: 80px;
   height: 36px;
   flex: 0 0 80px;
   margin: 0 2px;
-  padding: 0 8px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 7px;
-  color: #fff;
-  font-family: "Noto Sans", sans-serif;
-  font-size: 12px;
-  font-weight: 700;
-  line-height: 1;
-}
-
-.mc-shell-wallet--nav img {
-  width: 20px;
-  height: 20px;
-  flex: 0 0 20px;
   display: block;
-  object-fit: contain;
+  pointer-events: none;
 }
 
 /* --------------------------------------------------------------------------
@@ -150,6 +137,7 @@
   height: 79px;
   flex: 0 0 349px;
   margin-left: 0;
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -195,8 +183,7 @@
 
 /*
   Official Microsoft Fluent System Icons — Search 16 Regular.
-  Temporary official-source fallback; NOT claimed as the exact minecraft.net
-  glyph until the live asset is positively identified.
+  Temporary official-source fallback; NOT claimed as the exact minecraft.net glyph.
 */
 .mc-shell-search-icon {
   width: 16px;
@@ -246,6 +233,38 @@
   mask: url("https://raw.githubusercontent.com/microsoft/fluentui-system-icons/main/assets/Person/SVG/ic_fluent_person_16_regular.svg") center / contain no-repeat;
 }
 
+/*
+  Pixel wallet follows Account without moving the official action rail.
+  At the 1365px reference, the official inner container ends around x≈1302 and the page
+  still has ≈63px of right breathing room. The 64px wallet uses that outer room.
+*/
+.mc-shell-wallet--after-account {
+  width: 64px;
+  height: 36px;
+  position: absolute;
+  top: 50%;
+  right: -60px;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 6px;
+  padding: 0;
+  color: #fff;
+  font-family: "Noto Sans", sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.mc-shell-wallet--after-account img {
+  width: 20px;
+  height: 20px;
+  flex: 0 0 20px;
+  display: block;
+  object-fit: contain;
+}
+
 /* --------------------------------------------------------------------------
    Responsive adaptation — desktop lock above; controlled collapse below
    -------------------------------------------------------------------------- */
@@ -270,15 +289,26 @@
     font-size: 11px;
   }
 
-  .mc-shell-wallet--nav {
-    width: 68px;
-    flex-basis: 68px;
-    padding-inline: 4px;
+  .mc-shell-nav__reserved-slot {
+    width: 60px;
+    flex-basis: 60px;
+  }
+
+  .mc-shell-wallet--after-account {
+    right: -2px;
+    transform: translate(100%, -50%);
+  }
+}
+
+@media (max-width: 1180px) {
+  .mc-shell-wallet--after-account {
+    display: none;
   }
 }
 
 @media (max-width: 1120px) {
-  .pixel-shell-nav .mc-shell-nav__item:nth-child(4) {
+  .pixel-shell-nav .mc-shell-nav__item:nth-child(4),
+  .mc-shell-nav__reserved-slot {
     display: none;
   }
 }
