@@ -1,6 +1,6 @@
 # Official Source Registry
 
-Last research pass: 2026-09-12.
+Last research pass: 2026-09-13.
 
 ## A. Minecraft.net — official Dungeons page and global web shell
 https://www.minecraft.net/es-es/about-dungeons
@@ -23,6 +23,20 @@ Pixel use:
 - search/account/arrow/chevron visuals must come from an official approved asset/source, not a redraw.
 
 See `OFFICIAL_WEB_SHELL.md`.
+
+### Verified live global-header glyph implementation — 2026-09-13
+
+Component stylesheet:
+`https://www.minecraft.net/webui/mc-components.min.css`
+
+Verified exact resources and rules:
+- `--mc-environment-search_icon_svg-18x18` / `_hover` through `.MC_globalHeaderA_searchGlyph::before`;
+- `--mc-environment-accountIcon_svg-16x16` / `_hover` through `.MC_globalHeaderA_accountGlyph::before`;
+- Search geometry `18×18px`;
+- Account geometry `16×16px`, with `3px` right margin;
+- default glyph color `#FFFFFF` and hover/expanded color `#86D562`.
+
+Status: `APPROVED` for the corresponding Pixel shell controls. These are the exact SVG data URIs embedded by the live target component, not recreated or cross-product substitute icons.
 
 ## B. Mojang — web-theme-bootstrap
 https://github.com/Mojang/web-theme-bootstrap

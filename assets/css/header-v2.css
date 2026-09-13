@@ -10,11 +10,9 @@
   - Mojang pixel-arrow-right.svg
   - official Minecoin SVG hosted on minecraft.net
 
-  STRICT RULE:
-  Search/account pictograms are intentionally NOT approximated here. The previous
-  Microsoft Fluent fallbacks were removed because they are not the exact live
-  minecraft.net glyphs. Their 16px geometry slots remain neutral until the exact
-  live assets are positively identified and gated.
+  Search/account pictograms use the exact SVG data-URI variables embedded by the
+  current live Minecraft.net component stylesheet. The previous Microsoft Fluent
+  fallbacks remain forbidden because they were not the target component resources.
 */
 
 /* --------------------------------------------------------------------------
@@ -175,16 +173,17 @@
   cursor: pointer;
 }
 
-/*
-  Neutral geometry only. No substitute glyph is permitted.
-  The exact live minecraft.net search asset is still awaiting identification.
-*/
 .mc-shell-search-icon {
-  width: 16px;
-  height: 16px;
-  flex: 0 0 16px;
+  width: 18px;
+  height: 18px;
+  flex: 0 0 18px;
   display: block;
-  background: transparent;
+  background: var(--mc-environment-search-icon-svg-18x18) no-repeat center / 18px 18px;
+}
+
+.mc-shell-search-slot:hover .mc-shell-search-icon,
+.mc-shell-search-slot:focus-visible .mc-shell-search-icon {
+  background-image: var(--mc-environment-search-icon-svg-hover-18x18);
 }
 
 .mc-shell-search-caret {
@@ -239,16 +238,22 @@
   text-transform: uppercase;
 }
 
-/*
-  Neutral geometry only. No substitute glyph is permitted.
-  The exact live minecraft.net account/profile asset is still awaiting identification.
-*/
 .mc-shell-person-icon {
   width: 16px;
   height: 16px;
   flex: 0 0 16px;
   display: block;
-  background: transparent;
+  background: var(--mc-environment-account-icon-svg-16x16) no-repeat center / 16px 16px;
+}
+
+.pixel-shell-actions .mc-shell-account:hover,
+.pixel-shell-actions .mc-shell-account:focus-visible {
+  color: #86d562;
+}
+
+.pixel-shell-actions .mc-shell-account:hover .mc-shell-person-icon,
+.pixel-shell-actions .mc-shell-account:focus-visible .mc-shell-person-icon {
+  background-image: var(--mc-environment-account-icon-svg-hover-16x16);
 }
 
 .mc-shell-wallet--after-account {

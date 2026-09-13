@@ -39,15 +39,12 @@ Mojang `web-theme-bootstrap` contains:
 The current Pixel prototype remotely references the exact `minecraft.svg`, `pixel-arrow-right.svg`, and `pixel-caret.svg` assets instead of redrawing them.
 
 ## Search and account pictograms
-The current official live page visibly includes a search magnifier and an account/profile pictogram, but the exact current asset files have not yet been independently identified in the official source set.
+The exact current resources were verified on 2026-09-13 in the live Minecraft.net component stylesheet `https://www.minecraft.net/webui/mc-components.min.css`:
 
-Therefore Pixel currently:
-- reserves the measured search-control slot;
-- reserves the profile-icon slot;
-- keeps `CUENTA` and the approved official caret;
-- does **not** draw a fake magnifier or fake profile icon.
+- Search: `--mc-environment-search_icon_svg-18x18` and `_hover`, applied by `.MC_globalHeaderA_searchGlyph::before` at `18×18px`.
+- Account: `--mc-environment-accountIcon_svg-16x16` and `_hover`, applied by `.MC_globalHeaderA_accountGlyph::before` at `16×16px`, with `3px` right margin before the label.
 
-This is intentional. A visually incomplete official slot is preferable to a false asset.
+These variables contain the original SVG data URIs used by the target component. Pixel uses those exact data URIs and the official white-to-`#86D562` interaction states. The previous Fluent substitutes remain blocked.
 
 ## Official button system evidence
 Mojang `web-theme-bootstrap` defines:
@@ -113,6 +110,6 @@ Do not arbitrarily scale official-source components to make the Pixel layout eas
 - `JUEGOS`, `TIENDA`, `EXPLORACIÓN`, `APRENDER`, `SOPORTE TÉCNICO` restored in source order;
 - official Mojang carets used for dropdown navigation;
 - green header CTA restored at `154×36 px` with official arrow;
-- search and profile pictogram slots reserved but intentionally blank until the exact current assets are identified;
+- exact live Search and Account embedded SVG resources restored with their source dimensions and hover states;
 - shell corrected to approximately `80 px` at the desktop reference breakpoint;
 - orange Dungeons CTA remains implemented at its separately measured `273×54 px` source size.

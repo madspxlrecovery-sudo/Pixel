@@ -133,14 +133,15 @@ Behavior may be implemented in original code while matching documented official 
 
 Behavioral implementation must not be used as an excuse to invent branded visual assets.
 
-## Current unresolved exact assets
-The current minecraft.net desktop header visibly contains a search magnifier and account/profile pictogram. Their exact live asset files have **not yet been positively identified** in the public Mojang sources inspected so far.
+## Current exact shell glyphs
+The current minecraft.net desktop header search and account pictograms were positively identified on 2026-09-13 in the live official component stylesheet:
 
-Therefore:
-- their geometry slots may remain in the header;
-- their labels/carets may use exact identified shell resources;
-- their pictograms must remain visually neutral/omitted;
-- do not restore the removed Fluent Search/Person fallbacks unless new evidence proves those exact assets are used by minecraft.net.
+- stylesheet: `https://www.minecraft.net/webui/mc-components.min.css`;
+- search: `--mc-environment-search_icon_svg-18x18` and its `_hover` variant;
+- account: `--mc-environment-accountIcon_svg-16x16` and its `_hover` variant;
+- implementation: exact SVG data URIs applied by the live `.MC_globalHeaderA_searchGlyph::before` and `.MC_globalHeaderA_accountGlyph::before` rules.
+
+Pixel may use those exact data URIs at their live `18×18px` and `16×16px` geometry. Do not redraw them or restore the removed Fluent Search/Person fallbacks.
 
 ## Current legacy warning
 The prototype history contains earlier experimental CSS interpretations and substitutes. These are **legacy experiments, not approved design-system components** and must not be reused.

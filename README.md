@@ -34,10 +34,11 @@ Importante: parte del CSS visual actual pertenece al prototipo anterior y está 
 Aprobado como base:
 - familias tipográficas oficiales documentadas;
 - tokens de color exactos publicados por Mojang;
+- glyphs exactos de Buscar y Cuenta del header actual de Minecraft.net;
 - estructura HTML, accesibilidad, navegación y lógica de estados.
 
 Pendiente de aprobación oficial de assets:
-- iconos;
+- otros iconos específicos fuera de Buscar/Cuenta;
 - marcos/bordes gráficos;
 - fondos Marketplace;
 - currency artwork;

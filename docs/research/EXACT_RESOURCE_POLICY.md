@@ -110,19 +110,22 @@ If item 2 or 3 is unknown for a recognisable official pictogram, **do not render
 
 ---
 
-# Current unresolved shell resources
+# September 2026 exact-glyph resolution
 
-As of this correction:
+On 2026-09-13 the two current header glyphs were positively identified in the live official Minecraft.net component stylesheet at `https://www.minecraft.net/webui/mc-components.min.css`.
 
-- exact current minecraft.net Search header pictogram: `UNKNOWN`;
-- exact current minecraft.net Account/Profile header pictogram: `UNKNOWN`.
+- Search uses the exact embedded SVG data URI from `--mc-environment-search_icon_svg-18x18` and its `_hover` variant.
+- Account uses the exact embedded SVG data URI from `--mc-environment-accountIcon_svg-16x16` and its `_hover` variant.
+- The live component applies them through `.MC_globalHeaderA_searchGlyph::before` at `18×18px` and `.MC_globalHeaderA_accountGlyph::before` at `16×16px`.
 
-They remain deliberately omitted until positively identified.
+Their Asset Gate status is now `APPROVED`. This resolution does not rehabilitate the removed Fluent fallbacks: those remain `BLOCKED` because they are different resources.
 
 Exact resources already identified and allowed in the prototype include:
 - Mojang Noto Sans Regular/Bold webfonts;
 - Mojang `pixel-caret.svg`;
 - Mojang `pixel-arrow-right.svg`;
+- the live Minecraft.net Search `18×18px` embedded SVG, including its hover state;
+- the live Minecraft.net Account `16×16px` embedded SVG, including its hover state;
 - official Minecoin SVG hosted on minecraft.net;
 - official Dungeons/Marketplace artwork already individually documented in the project.
 

@@ -88,10 +88,10 @@ Only the Pixel wordmark/copy and wallet placement are project adaptations. The s
 | Green `COMPRAR AHORA` CTA | live minecraft.net + Mojang button code | APPROVED as shell component pattern | OFFICIAL_CODE + MEASURED_OFFICIAL_CAPTURE | Desktop reference approximately `154×36px`; preserve source treatment |
 | `PIXEL` wordmark | Pixel-owned branding using licensed Minecraft Five Bold | APPROVED project adaptation | PIXEL_ADAPTATION | May differ from Minecraft logo; must stay inside official brand slot |
 | `DUNGEONS MARKETPLACE` brand caption | Pixel-owned text | APPROVED project adaptation | PIXEL_ADAPTATION | Current project accent uses source-backed Dungeons orange token |
-| Search control geometry slot | live minecraft.net header | APPROVED geometry only | MEASURED_OFFICIAL_CAPTURE | Keep slot, but do not render a pictogram until exact target resource is identified |
-| Current minecraft.net search magnifier pictogram | live minecraft.net header | UNKNOWN | UNVERIFIED | **OMIT/NEUTRAL ONLY** until exact asset/implementation is positively identified |
-| Account control geometry slot | live minecraft.net header | APPROVED geometry only | MEASURED_OFFICIAL_CAPTURE | Keep slot/label/caret, but do not render a pictogram until exact target resource is identified |
-| Current minecraft.net account/profile pictogram | live minecraft.net header | UNKNOWN | UNVERIFIED | **OMIT/NEUTRAL ONLY** until exact asset/implementation is positively identified |
+| Search control geometry | live `.MC_globalHeaderA_searchGlyph` | APPROVED | LIVE_DOM/CSS | Render the exact live `18×18px` pseudo-element geometry |
+| Current minecraft.net search magnifier pictogram | live `mc-components.min.css` variable `--mc-environment-search_icon_svg-18x18` + `_hover` | APPROVED | LIVE_DOM/CSS | Exact embedded SVG data URI only; preserve white/default and `#86D562` hover assets |
+| Account control geometry | live `.MC_globalHeaderA_accountGlyph` | APPROVED | LIVE_DOM/CSS | Render the exact live `16×16px` pseudo-element geometry with `3px` label gap |
+| Current minecraft.net account/profile pictogram | live `mc-components.min.css` variable `--mc-environment-accountIcon_svg-16x16` + `_hover` | APPROVED | LIVE_DOM/CSS | Exact embedded SVG data URI only; preserve white/default and `#86D562` hover assets |
 | Microsoft Fluent Search 16 Regular | Microsoft Fluent System Icons | BLOCKED for minecraft.net shell | n/a | Removed September 2026: official Microsoft ≠ exact minecraft.net target asset |
 | Microsoft Fluent Person 16 Regular | Microsoft Fluent System Icons | BLOCKED for minecraft.net shell | n/a | Removed September 2026: official Microsoft ≠ exact minecraft.net target asset |
 | CSS-drawn Minecraft/Dungeons pictograms | legacy Pixel prototype | BLOCKED | n/a | Never use as official-looking visuals |

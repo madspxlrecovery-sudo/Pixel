@@ -8,6 +8,17 @@
 */
 
 :root {
+  /*
+    Exact current Minecraft.net global-header glyph resources.
+    Source: https://www.minecraft.net/webui/mc-components.min.css
+    Live variables verified on 2026-09-13 at the Marketplace desktop header.
+    These data URIs are copied from the target component; they are not redraws.
+  */
+  --mc-environment-search-icon-svg-18x18: url('data:image/svg+xml;utf8,<svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" title="Search icon"><path fill-rule="evenodd" clip-rule="evenodd" d="M5 1H10V3H5V1ZM3 5V3H5V5H3ZM3 10H1V5H3V10ZM5 12H3V10H5V12ZM10 12V14H5V12H10ZM12 10H10V12H12V14H14V16H16V18H18V16H16V14H14V12H12V10ZM12 5H14V10H12V5ZM12 5V3H10V5H12Z" fill="%23FFFFFF"/></svg>');
+  --mc-environment-search-icon-svg-hover-18x18: url('data:image/svg+xml;utf8,<svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" title="Search icon"><path fill-rule="evenodd" clip-rule="evenodd" d="M5 1H10V3H5V1ZM3 5V3H5V5H3ZM3 10H1V5H3V10ZM5 12H3V10H5V12ZM10 12V14H5V12H10ZM12 10H10V12H12V14H14V16H16V18H18V16H16V14H14V12H12V10ZM12 5H14V10H12V5ZM12 5V3H10V5H12Z" fill="%2386D562"/></svg>');
+  --mc-environment-account-icon-svg-16x16: url('data:image/svg+xml;utf8,<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 0H4V2H2V10H4V12H2V14H0V16H2V14H4V12H6V10H4V2H12V10H10V12H12V14H14V16H16V14H14V12H12V10H14V2H12V0Z" fill="%23FFFFFF"/></svg>');
+  --mc-environment-account-icon-svg-hover-16x16: url('data:image/svg+xml;utf8,<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 0H4V2H2V10H4V12H2V14H0V16H2V14H4V12H6V10H4V2H12V10H10V12H12V14H14V16H16V14H14V12H12V10H14V2H12V0Z" fill="%2386D562"/></svg>');
+
   --mc-fun-green: #3c8527;
   --mc-malachite: #a0e080;
   --mc-mud: #996a41;

@@ -1,6 +1,6 @@
 {
-  "version": 2,
-  "last_verified": "2026-09-12",
+  "version": 3,
+  "last_verified": "2026-09-13",
   "policy": "official-assets-only-for-branded-visuals",
   "product_direction": {
     "base_shell": "official Minecraft Marketplace",
@@ -8,6 +8,25 @@
     "fallback": "neutral placeholder or omission; never a lookalike"
   },
   "sources": [
+    {
+      "id": "minecraft-global-header-components",
+      "authority": "tier-a",
+      "owner": "Mojang/Microsoft",
+      "url": "https://www.minecraft.net/webui/mc-components.min.css",
+      "use": [
+        "exact current search glyph",
+        "exact current account glyph",
+        "header control geometry",
+        "header glyph hover states"
+      ],
+      "verified_resources": {
+        "search": "--mc-environment-search_icon_svg-18x18",
+        "search_hover": "--mc-environment-search_icon_svg_hover-18x18",
+        "account": "--mc-environment-accountIcon_svg-16x16",
+        "account_hover": "--mc-environment-accountIcon_svg_hover-16x16"
+      },
+      "notes": "Exact SVG data URIs and pseudo-element geometry inspected in the live target component on 2026-09-13. APPROVED only for the corresponding Pixel shell controls."
+    },
     {
       "id": "mojang-web-theme-bootstrap",
       "authority": "tier-a",
@@ -73,6 +92,10 @@
     }
   ],
   "approved_foundation": {
+    "header_glyphs": [
+      "Minecraft.net Search 18x18 default/hover",
+      "Minecraft.net Account 16x16 default/hover"
+    ],
     "fonts": [
       "MinecraftTenV2",
       "MinecraftSevenV2",
