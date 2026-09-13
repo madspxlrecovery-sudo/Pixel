@@ -1,27 +1,21 @@
 /*
-  Pixel shell — Marketplace desktop geometry v3
+  Pixel shell — Marketplace desktop geometry v4
 
   Primary visual reference:
   https://www.minecraft.net/es-es/marketplace/category/texture-packs
 
-  Important correction from the previous pass:
-  the desktop shell is not a permanently capped 1240px container. At wide desktop
-  widths the live composition keeps roughly 60px outer gutters, so the brand stays
-  near the left edge while the action rail stays near the right edge.
-
   Source-backed rules retained from Mojang web-theme-bootstrap:
-  - Noto Sans
+  - Noto Sans for the global web-shell navigation/actions
   - .nav-link padding .5rem .75rem
   - line-height: 1
   - uppercase
   - letter-spacing: 1px
   - .nav-item margin: 0 2px
 
-  Pixel mapping:
-  - PIXEL NETWORK replaces the original Minecraft brand/logo slot.
-  - Project navigation occupies the centered navigation cluster.
-  - COMPRAR AHORA / search / account keep the compact official right-rail rhythm.
-  - Minecoins sit after Account in the available outer-right breathing room.
+  Pixel-specific adaptations:
+  - PIXEL is a project-owned wordmark using Mojang's OFL-licensed Minecraft Five Bold.
+  - the wordmark occupies the original Minecraft brand slot; it is not presented as a Mojang logo.
+  - the Minecoin wallet sits immediately before Account in the right action cluster.
 */
 
 /* --------------------------------------------------------------------------
@@ -35,26 +29,25 @@
   margin: 0 60px;
   position: relative;
   display: grid;
-  grid-template-columns: 220px minmax(0, 1fr) 340px;
+  grid-template-columns: 220px minmax(0, 1fr) 404px;
   align-items: center;
   white-space: nowrap;
   overflow: visible;
 }
 
-/* Pixel Network occupies exactly the original desktop brand slot. */
+/* Pixel wordmark replaces the original Minecraft-logo slot. */
 .pixel-shell-brand-slot {
   width: 220px;
-  height: 38px;
+  height: 46px;
   min-width: 220px;
   margin: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  gap: 3px;
+  gap: 1px;
   color: #fff;
   text-decoration: none;
-  font-family: "Noto Sans", sans-serif;
   line-height: 1;
 }
 
@@ -64,29 +57,31 @@
   text-decoration: none;
 }
 
-.pixel-shell-brand-slot strong {
+.pixel-wordmark {
   display: block;
-  font-size: 15px;
+  font-family: var(--font-pixel-wordmark, "MinecraftFiveBold", "Arial Black", sans-serif);
+  font-size: 28px;
   font-weight: 700;
-  line-height: 1;
-  letter-spacing: 1px;
+  line-height: .82;
+  letter-spacing: .8px;
   text-transform: uppercase;
+  white-space: nowrap;
 }
 
-.pixel-shell-brand-slot span {
+.pixel-wordmark-caption {
   display: block;
-  color: rgba(255, 255, 255, .72);
-  font-size: 10px;
+  margin-left: 2px;
+  color: rgba(255, 255, 255, .76);
+  font-family: "Noto Sans", sans-serif;
+  font-size: 8px;
   font-weight: 700;
   line-height: 1;
-  letter-spacing: 1px;
+  letter-spacing: .9px;
   text-transform: uppercase;
+  white-space: nowrap;
 }
 
-/*
-  The official wide-desktop navbar behaves as a compact cluster between brand
-  and actions. It must not stretch each item across all available space.
-*/
+/* Compact navigation cluster between brand and right rail. */
 .pixel-shell-nav {
   width: auto;
   min-width: 0;
@@ -117,25 +112,24 @@
   white-space: nowrap;
 }
 
-/* The previous fake fifth-width spacer distorted wide desktop centering. */
 .mc-shell-nav__reserved-slot {
   display: none;
 }
 
 /* --------------------------------------------------------------------------
-   Compact right rail — Buy / Search / Account
+   Right rail — Buy / Search / Wallet / Account
    -------------------------------------------------------------------------- */
 
 .pixel-shell-actions {
-  width: 340px;
+  width: 404px;
   height: 79px;
-  min-width: 340px;
+  min-width: 404px;
   margin: 0;
   justify-self: end;
   position: relative;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: flex-end;
   gap: 0;
   font-family: "Noto Sans", sans-serif;
 }
@@ -191,13 +185,39 @@
   color: #fff;
 }
 
+/* Official Minecoin artwork, placed directly before Account. */
+.mc-shell-wallet--before-account {
+  width: 64px;
+  height: 36px;
+  flex: 0 0 64px;
+  margin-left: 16px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 6px;
+  color: #fff;
+  font-family: "Noto Sans", sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.mc-shell-wallet--before-account img {
+  width: 20px;
+  height: 20px;
+  flex: 0 0 20px;
+  display: block;
+  object-fit: contain;
+}
+
 .pixel-shell-actions .mc-shell-account {
   width: 94px;
   min-width: 94px;
   max-width: 94px;
   height: 36px;
   flex: 0 0 94px;
-  margin-left: 24px;
+  margin-left: 16px;
   padding: 0;
   display: inline-flex;
   align-items: center;
@@ -223,36 +243,9 @@
   mask: url("https://raw.githubusercontent.com/microsoft/fluentui-system-icons/main/assets/Person/SVG/ic_fluent_person_16_regular.svg") center / contain no-repeat;
 }
 
-/*
-  At ~1907px wide the original account group still leaves roughly one small
-  right-side gutter. Pixel uses that gutter for its Minecoin balance instead
-  of shifting the official Buy/Search/Account rhythm to the left.
-*/
+/* Remove obsolete wallet placement from earlier iterations. */
 .mc-shell-wallet--after-account {
-  width: 64px;
-  height: 36px;
-  position: absolute;
-  top: 50%;
-  right: -60px;
-  transform: translateY(-50%);
-  display: inline-flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 6px;
-  padding: 0;
-  color: #fff;
-  font-family: "Noto Sans", sans-serif;
-  font-size: 12px;
-  font-weight: 700;
-  line-height: 1;
-}
-
-.mc-shell-wallet--after-account img {
-  width: 20px;
-  height: 20px;
-  flex: 0 0 20px;
-  display: block;
-  object-fit: contain;
+  display: none !important;
 }
 
 /* --------------------------------------------------------------------------
@@ -263,7 +256,7 @@
   .minecraft-web-shell__inner.pixel-shell-v2 {
     width: calc(100% - 40px);
     margin: 0 20px;
-    grid-template-columns: 190px minmax(0, 1fr) 340px;
+    grid-template-columns: 190px minmax(0, 1fr) 392px;
   }
 
   .pixel-shell-brand-slot {
@@ -271,8 +264,12 @@
     min-width: 190px;
   }
 
-  .pixel-shell-brand-slot strong {
-    font-size: 13px;
+  .pixel-wordmark {
+    font-size: 24px;
+  }
+
+  .pixel-wordmark-caption {
+    font-size: 7px;
   }
 
   .pixel-shell-nav {
@@ -284,15 +281,14 @@
     font-size: 11px;
   }
 
-  .mc-shell-wallet--after-account {
-    right: -18px;
-    transform: translate(100%, -50%);
+  .pixel-shell-actions {
+    width: 392px;
+    min-width: 392px;
   }
-}
 
-@media (max-width: 1180px) {
-  .mc-shell-wallet--after-account {
-    display: none;
+  .mc-shell-wallet--before-account,
+  .pixel-shell-actions .mc-shell-account {
+    margin-left: 12px;
   }
 }
 
@@ -316,13 +312,24 @@
   }
 }
 
+@media (max-width: 820px) {
+  .mc-shell-wallet--before-account {
+    display: none;
+  }
+
+  .pixel-shell-actions {
+    width: 316px;
+    min-width: 316px;
+  }
+}
+
 @media (max-width: 760px) {
   .pixel-shell-brand-slot {
     width: 170px;
     min-width: 170px;
   }
 
-  .pixel-shell-brand-slot span,
+  .pixel-wordmark-caption,
   .mc-shell-search-group {
     display: none;
   }
@@ -338,6 +345,10 @@
     width: 145px;
     min-width: 145px;
     margin-right: 10px;
+  }
+
+  .pixel-wordmark {
+    font-size: 21px;
   }
 
   .pixel-shell-actions {
