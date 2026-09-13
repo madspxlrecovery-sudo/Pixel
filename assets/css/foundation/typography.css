@@ -1,8 +1,27 @@
 /*
-  Official font source: Mojang/web-theme-bootstrap
+  Official font sources: Mojang/web-theme-bootstrap
   License source: https://github.com/Mojang/web-theme-bootstrap/blob/main/assets/fonts/LICENSE_OFL.txt
   Pixel references the official hosted font files; it does not vendor font binaries here.
 */
+
+/* Exact minecraft.net web-shell family published by Mojang. */
+@font-face {
+  font-family: "Noto Sans MC";
+  src: url("https://raw.githubusercontent.com/Mojang/web-theme-bootstrap/main/assets/fonts/NotoSans-Regular.woff2") format("woff2"),
+       url("https://raw.githubusercontent.com/Mojang/web-theme-bootstrap/main/assets/fonts/NotoSans-Regular.woff") format("woff");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Noto Sans MC";
+  src: url("https://raw.githubusercontent.com/Mojang/web-theme-bootstrap/main/assets/fonts/NotoSans-Bold.woff2") format("woff2"),
+       url("https://raw.githubusercontent.com/Mojang/web-theme-bootstrap/main/assets/fonts/NotoSans-Bold.woff") format("woff");
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
 
 @font-face {
   font-family: "MinecraftTenV2";
@@ -30,6 +49,7 @@
 }
 
 :root {
+  --font-mc-web: "Noto Sans MC", "Noto Sans", sans-serif;
   --font-du-title: "MinecraftTenV2", "Arial Black", sans-serif;
   --font-du-body: "MinecraftSevenV2", Arial, sans-serif;
   --font-pixel-wordmark: "MinecraftFiveBold", "Arial Black", sans-serif;
