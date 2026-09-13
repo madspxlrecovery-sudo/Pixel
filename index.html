@@ -1,33 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#242421">
+  <meta name="description" content="Pixel Dungeons Marketplace — prototipo estructural de tienda digital.">
   <title>Pixel — Dungeons Marketplace</title>
-  <link rel="stylesheet" href="assets/css/main.css?v=20260913-1">
-  <link rel="stylesheet" href="assets/css/official-shell.css?v=20260913-1">
-  <link rel="stylesheet" href="assets/css/header-v2.css?v=20260913-1">
+  <link rel="stylesheet" href="assets/css/main.css?v=20260913-4">
+  <link rel="stylesheet" href="assets/css/official-shell.css?v=20260913-4">
+  <link rel="stylesheet" href="assets/css/header-v2.css?v=20260913-4">
+  <link rel="stylesheet" href="assets/css/marketplace-templates.css?v=20260913-4">
 </head>
 <body>
+  <a class="skip-link" href="#main">Saltar al contenido</a>
   <div class="marketplace-bg" aria-hidden="true"></div>
 
   <!--
     Pixel adaptation of the current Minecraft.net Marketplace desktop shell.
     The Pixel project wordmark replaces the original Minecraft brand slot.
-    Minecraft.net shell typography/spacing remains source-backed for navigation/actions.
-    Minecoins sit immediately before Account in the right action cluster.
     Search/account pictograms use the exact SVG data URIs embedded by the live minecraft.net shell.
+    The category dropdown is a Pixel-owned marketplace adaptation and is intentionally neutral.
   -->
-  <header class="minecraft-web-shell" aria-label="Pixel Network marketplace navigation">
+  <header class="minecraft-web-shell" aria-label="Navegación de Pixel Network">
     <div class="minecraft-web-shell__inner pixel-shell-v2">
-      <a class="pixel-shell-brand-slot" href="#main" aria-label="Pixel Network — Dungeons Marketplace">
+      <a class="pixel-shell-brand-slot" href="#marketplace/inicio" aria-label="Pixel Network — Dungeons Marketplace">
         <span class="pixel-wordmark">PIXEL</span>
         <span class="pixel-wordmark-caption">DUNGEONS MARKETPLACE</span>
       </a>
 
-      <nav class="mc-shell-nav pixel-shell-nav" aria-label="Pixel Network navigation">
-        <button class="mc-shell-nav__item" type="button">
+      <nav class="mc-shell-nav pixel-shell-nav" aria-label="Navegación principal de Pixel Network">
+        <button class="mc-shell-nav__item" id="marketplaceMenuToggle" type="button" aria-expanded="false" aria-controls="marketplaceMenu" aria-haspopup="menu">
           <span>MARKETPLACE</span>
           <i class="mc-pixel-caret" aria-hidden="true"></i>
         </button>
@@ -50,22 +52,16 @@
           <span>COMPRAR AHORA</span>
           <i class="mc-web-cta__arrow-mask" aria-hidden="true"></i>
         </a>
-
         <div class="mc-shell-search-group">
           <button class="mc-shell-search-slot" type="button" aria-label="Buscar" title="Buscar">
             <i class="mc-shell-search-icon" aria-hidden="true"></i>
           </button>
           <i class="mc-pixel-caret mc-shell-search-caret" aria-hidden="true"></i>
         </div>
-
-        <div class="mc-shell-wallet mc-shell-wallet--before-account" aria-label="Minecoin balance">
-          <img
-            src="https://www.minecraft.net/content/dam/minecraftnet/franchise/component-library/icons/minecoin.svg"
-            alt="Minecoin"
-          >
+        <div class="mc-shell-wallet mc-shell-wallet--before-account" aria-label="Saldo de Minecoins">
+          <img src="https://www.minecraft.net/content/dam/minecraftnet/franchise/component-library/icons/minecoin.svg" alt="">
           <span>3373</span>
         </div>
-
         <button class="mc-shell-account" type="button" aria-label="Cuenta">
           <i class="mc-shell-person-icon" aria-hidden="true"></i>
           <span>CUENTA</span>
@@ -73,109 +69,153 @@
         </button>
       </div>
     </div>
+
+    <div class="marketplace-menu" id="marketplaceMenu" role="menu" aria-label="Categorías del Marketplace" hidden>
+      <div class="marketplace-menu__intro">
+        <span class="template-label">MARKETPLACE</span>
+        <strong>Elegí qué querés explorar</strong>
+        <p>Cada categoría usa el template más adecuado para su forma de compra.</p>
+      </div>
+      <div class="marketplace-menu__grid">
+        <button class="marketplace-menu__item is-current" type="button" role="menuitem" data-category="inicio"><strong>INICIO</strong><span>Destacados, novedades y más vendidos</span></button>
+        <button class="marketplace-menu__item" type="button" role="menuitem" data-category="gachas"><strong>GACHAS</strong><span>Cajas, banners y tiradas</span></button>
+        <button class="marketplace-menu__item" type="button" role="menuitem" data-category="consumibles"><strong>CONSUMIBLES</strong><span>Packs para usar durante el juego</span></button>
+        <button class="marketplace-menu__item" type="button" role="menuitem" data-category="cosmeticos"><strong>COSMÉTICOS</strong><span>Sets visuales completos</span></button>
+        <button class="marketplace-menu__item" type="button" role="menuitem" data-category="pets"><strong>PETS</strong><span>Compañeros y sets de pets</span></button>
+        <button class="marketplace-menu__item" type="button" role="menuitem" data-category="moneda"><strong>MONEDA PREMIUM</strong><span>Packs de saldo del juego</span></button>
+        <button class="marketplace-menu__item marketplace-menu__item--wide" type="button" role="menuitem" data-category="bundles"><strong>BUNDLES Y OFERTAS</strong><span>Combinaciones de varias categorías con valor visible</span></button>
+      </div>
+    </div>
   </header>
 
-  <!-- Marketplace / Bedrock Store layer -->
-  <header class="store-topbar">
-    <div class="store-topbar__brand">
-      <strong>PIXEL</strong>
-      <span>DUNGEONS MARKETPLACE</span>
+  <div class="store-context-bar">
+    <div class="store-context-bar__path" aria-label="Ubicación actual"><span>MARKETPLACE</span><span aria-hidden="true">/</span><strong id="currentCategoryLabel">INICIO</strong></div>
+    <button class="store-context-bar__categories" id="marketplaceMenuMobileToggle" type="button" aria-expanded="false" aria-controls="marketplaceMenu">CATEGORÍAS</button>
+    <div class="store-context-bar__mode">TEMPLATE COMERCIAL</div>
+    <div class="store-context-bar__actions">
+      <span class="store-context-bar__balance">SALDO <strong>3373</strong></span>
+      <button class="store-context-bar__cart" id="cartButton" type="button" aria-label="Carrito, 0 productos">CARRITO <strong id="cartCount">0</strong></button>
     </div>
+  </div>
 
-    <div class="store-topbar__title">BANNERS</div>
+  <main class="marketplace-template" id="main" tabindex="-1">
+    <div class="template-notice" role="note"><strong>MODO TEMPLATE</strong><span>La jerarquía, los botones y los slots están definidos. Arte, marcos, nombres, precios y contenido son provisionales.</span></div>
 
-    <div class="store-wallet" aria-label="Minecoin balance">
-      <img src="https://www.minecraft.net/content/dam/minecraftnet/franchise/component-library/icons/minecoin.svg" alt="">
-      <span>3373</span>
-    </div>
-  </header>
-
-  <main class="store-screen" id="main">
-    <section class="featured-banner" aria-labelledby="featured-title">
-      <div class="featured-banner__art">
-        <img
-          src="https://www.minecraft.net/content/dam/minecraftnet/games/dungeons/key-art/MinecraftDungeons_S1AdventurePass_1280x768.jpg"
-          alt="Official Minecraft Dungeons Cloudy Climb key art"
-        >
+    <section class="marketplace-view is-active" data-view="inicio" aria-labelledby="homeTitle">
+      <div class="marketplace-hero">
+        <div class="template-media template-media--hero" aria-label="Slot para arte principal"><span>MEDIA PRINCIPAL</span><small>16:9 · ASSET PENDIENTE</small></div>
+        <div class="marketplace-hero__content">
+          <span class="template-label">OFERTA DESTACADA</span>
+          <h1 id="homeTitle">Título de la campaña principal</h1>
+          <p>Una propuesta clara de valor en dos líneas: qué incluye, para quién sirve y por qué conviene comprarla ahora.</p>
+          <ul class="value-list"><li>Contenido principal incluido</li><li>Beneficio o ahorro verificable</li><li>Disponibilidad y condiciones visibles</li></ul>
+          <div class="purchase-row">
+            <div class="price-block"><span>PRECIO</span><strong>000</strong></div>
+            <button class="marketplace-primary-action" type="button" data-product-template data-product-name="Oferta destacada">VER OFERTA</button>
+            <button class="marketplace-secondary-action" type="button" data-category-link="bundles">VER BUNDLES</button>
+          </div>
+        </div>
       </div>
 
-      <div class="featured-banner__content">
-        <img
-          class="dungeons-logo"
-          src="https://www.minecraft.net/content/dam/minecraftnet/games/dungeons/logos/Dungeons-PMP_Hero-Logo_ParallaxB_432x98.png"
-          alt="Minecraft Dungeons"
-        >
-        <p class="feature-kicker">FEATURED ROTATION</p>
-        <h1 id="featured-title">ROTATION 01</h1>
-        <p class="feature-copy">The current banner. Reward contents and pull animation will be connected after the Marketplace menu is approved.</p>
-        <button class="store-primary-button mc-dungeons-cta--orange-live" id="openBanner" type="button">
-          <span>OPEN BANNER</span>
-          <img
-            class="official-button-arrow"
-            src="https://raw.githubusercontent.com/Mojang/web-theme-bootstrap/main/assets/svg/icons/pixel-arrow-right.svg"
-            alt=""
-          >
-        </button>
-        <p class="interaction-status" id="actionStatus" aria-live="polite">Ready</p>
-      </div>
+      <section class="category-gateway" aria-labelledby="categoryTitle">
+        <div class="marketplace-section-heading">
+          <div><span class="template-label">COMPRAR POR CATEGORÍA</span><h2 id="categoryTitle">Encontrá rápido lo que buscás</h2></div>
+          <p>Las categorías separan decisiones de compra distintas y evitan una grilla imposible de filtrar.</p>
+        </div>
+        <div class="category-gateway__grid">
+          <button class="category-card category-card--large" type="button" data-category-link="gachas"><span class="category-card__media">SLOT GACHA</span><span class="category-card__copy"><strong>GACHAS</strong><small>Cajas, banners y tiradas</small></span></button>
+          <button class="category-card" type="button" data-category-link="consumibles"><span class="category-card__media">SLOT PACK</span><span class="category-card__copy"><strong>CONSUMIBLES</strong><small>Uso y cantidad visibles</small></span></button>
+          <button class="category-card" type="button" data-category-link="cosmeticos"><span class="category-card__media">SLOT SET</span><span class="category-card__copy"><strong>COSMÉTICOS</strong><small>Sets y piezas incluidas</small></span></button>
+          <button class="category-card" type="button" data-category-link="pets"><span class="category-card__media">SLOT PET</span><span class="category-card__copy"><strong>PETS</strong><small>Compañeros y variantes</small></span></button>
+          <button class="category-card" type="button" data-category-link="moneda"><span class="category-card__media">SLOT MONEDA</span><span class="category-card__copy"><strong>MONEDA PREMIUM</strong><small>Cantidades y bonus</small></span></button>
+          <button class="category-card" type="button" data-category-link="bundles"><span class="category-card__media">SLOT BUNDLE</span><span class="category-card__copy"><strong>BUNDLES</strong><small>Valor combinado</small></span></button>
+        </div>
+      </section>
+
+      <section class="product-shelf" aria-labelledby="bestSellersTitle">
+        <div class="marketplace-section-heading marketplace-section-heading--compact">
+          <div><span class="template-label">PRUEBA SOCIAL</span><h2 id="bestSellersTitle">Más vendidos</h2></div>
+          <button class="marketplace-text-action" type="button" data-category-link="bundles">VER TODOS</button>
+        </div>
+        <div class="product-grid product-grid--featured">
+          <article class="product-card"><button class="product-card__open" type="button" data-product-template data-product-name="Bundle más vendido"><span class="template-media product-card__media"><span>MEDIA 4:3</span></span><span class="product-card__body"><small>BUNDLE · ETIQUETA OPCIONAL</small><strong>Nombre del producto</strong><span>Resumen de contenido y beneficio principal.</span><span class="product-card__price">000 <em>MONEDA</em></span></span></button></article>
+          <article class="product-card"><button class="product-card__open" type="button" data-product-template data-product-name="Set cosmético destacado"><span class="template-media product-card__media"><span>MEDIA 4:3</span></span><span class="product-card__body"><small>COSMÉTICOS · SET</small><strong>Nombre del producto</strong><span>Cantidad de piezas y compatibilidad.</span><span class="product-card__price">000 <em>MONEDA</em></span></span></button></article>
+          <article class="product-card"><button class="product-card__open" type="button" data-product-template data-product-name="Pack de pets destacado"><span class="template-media product-card__media"><span>MEDIA 4:3</span></span><span class="product-card__body"><small>PETS · PACK</small><strong>Nombre del producto</strong><span>Compañeros, variantes y condiciones.</span><span class="product-card__price">000 <em>MONEDA</em></span></span></button></article>
+          <article class="product-card"><button class="product-card__open" type="button" data-product-template data-product-name="Pack consumible destacado"><span class="template-media product-card__media"><span>MEDIA 4:3</span></span><span class="product-card__body"><small>CONSUMIBLES · PACK</small><strong>Nombre del producto</strong><span>Cantidad, duración y uso esperado.</span><span class="product-card__price">000 <em>MONEDA</em></span></span></button></article>
+        </div>
+      </section>
     </section>
 
-    <section class="offer-section" id="marketplace" aria-labelledby="offers-title">
-      <div class="section-heading">
-        <h2 id="offers-title">BANNERS</h2>
-        <span>SELECT A ROTATION</span>
+    <section class="marketplace-view" data-view="gachas" aria-labelledby="gachaTitle" hidden>
+      <div class="category-intro">
+        <div><span class="template-label">TEMPLATE ESPECIALIZADO</span><h1 id="gachaTitle">Gachas y cajas</h1><p>La animación crea expectativa; la información de costo, probabilidades y progreso permanece visible antes de comprar.</p></div>
+        <button class="marketplace-secondary-action" type="button" id="oddsJump">VER PROBABILIDADES</button>
       </div>
-
-      <div class="offer-grid" role="listbox" aria-label="Banner rotations">
-        <button class="offer-card is-selected" type="button" role="option" aria-selected="true" data-banner="rotation-01">
-          <span class="offer-card__image">
-            <img src="https://www.minecraft.net/content/dam/minecraftnet/games/dungeons/key-art/MinecraftDungeons_S1AdventurePass_1280x768.jpg" alt="Official Minecraft Dungeons Cloudy Climb key art">
-          </span>
-          <span class="offer-card__meta">
-            <strong>ROTATION 01</strong>
-            <small>AVAILABLE</small>
-          </span>
-        </button>
-
-        <button class="offer-card is-locked" type="button" role="option" aria-selected="false" data-banner="rotation-02" disabled>
-          <span class="offer-card__image">
-            <img src="https://www.minecraft.net/content/dam/minecraftnet/games/dungeons/key-art/MinecraftDungeons_S2AdventurePass_1280x768.jpg" alt="Official Minecraft Dungeons Luminous Night key art">
-          </span>
-          <span class="offer-card__meta">
-            <strong>COMING SOON</strong>
-            <small>ROTATION 02</small>
-          </span>
-        </button>
-
-        <button class="offer-card is-locked" type="button" role="option" aria-selected="false" data-banner="rotation-03" disabled>
-          <span class="offer-card__image">
-            <img src="https://www.minecraft.net/content/dam/minecraftnet/games/dungeons/key-art/MinecraftDungeons_S3AdventurePass_1280x768.jpg" alt="Official Minecraft Dungeons Fauna Faire key art">
-          </span>
-          <span class="offer-card__meta">
-            <strong>COMING SOON</strong>
-            <small>ROTATION 03</small>
-          </span>
-        </button>
-
-        <button class="offer-card is-locked offer-card--square-art" type="button" role="option" aria-selected="false" data-banner="archive" disabled>
-          <span class="offer-card__image">
-            <img src="https://www.minecraft.net/content/dam/minecraftnet/games/dungeons/logos/dungeons-pmp-dlcbundle-boxart-500x500.jpg" alt="Official Minecraft Dungeons Ultimate DLC Bundle key art">
-          </span>
-          <span class="offer-card__meta">
-            <strong>ARCHIVE</strong>
-            <small>LOCKED</small>
-          </span>
-        </button>
+      <div class="gacha-layout">
+        <section class="gacha-stage" aria-labelledby="activeBannerTitle">
+          <div class="gacha-stage__header"><span>BANNER ACTIVO</span><span>ROTACIÓN · TIEMPO VISIBLE</span></div>
+          <div class="template-media gacha-stage__media"><span>ESCENARIO DE ANIMACIÓN</span><small>ENTRADA → RULETA → REVELADO → RESULTADO</small></div>
+          <div class="gacha-stage__track" aria-label="Slots de premios destacados"><span>ITEM</span><span>ITEM</span><span>ITEM</span><span>ITEM</span><span>ITEM</span></div>
+        </section>
+        <aside class="gacha-purchase" aria-labelledby="activeBannerTitle">
+          <span class="template-label">BANNER SELECCIONADO</span><h2 id="activeBannerTitle">Nombre del gacha</h2><p>Resumen del pool, premio principal y regla de duplicados.</p>
+          <div class="gacha-progress"><div><span>GARANTÍA / PITY</span><strong>00 / 00</strong></div><div class="gacha-progress__bar" aria-hidden="true"><span></span></div></div>
+          <div class="gacha-purchase__actions"><button class="marketplace-secondary-action" type="button" data-template-action="Tirada individual">1 TIRADA · 000</button><button class="marketplace-primary-action" type="button" data-template-action="Pack de diez tiradas">10 TIRADAS · 000</button></div>
+          <p class="purchase-disclosure">El costo total, las probabilidades y las condiciones deben verse antes de confirmar.</p>
+        </aside>
       </div>
+      <section class="odds-panel" id="oddsPanel" aria-labelledby="oddsTitle">
+        <div><span class="template-label">TRANSPARENCIA OBLIGATORIA</span><h2 id="oddsTitle">Probabilidades y reglas</h2><p>Template para odds por nivel, garantía, duplicados, límite y disponibilidad regional.</p></div>
+        <dl class="odds-table"><div><dt>RAREZA / GRUPO A</dt><dd>00.00%</dd></div><div><dt>RAREZA / GRUPO B</dt><dd>00.00%</dd></div><div><dt>RAREZA / GRUPO C</dt><dd>00.00%</dd></div><div><dt>GARANTÍA</dt><dd>REGLA VISIBLE</dd></div></dl>
+      </section>
+      <section class="product-shelf" aria-labelledby="bannersTitle">
+        <div class="marketplace-section-heading marketplace-section-heading--compact"><div><span class="template-label">SELECCIÓN</span><h2 id="bannersTitle">Banners disponibles</h2></div></div>
+        <div class="banner-grid"><button class="banner-card is-selected" type="button"><span class="template-media">MEDIA 16:9</span><strong>BANNER PRINCIPAL</strong><small>ACTIVO</small></button><button class="banner-card" type="button"><span class="template-media">MEDIA 16:9</span><strong>BANNER SECUNDARIO</strong><small>DISPONIBLE</small></button><button class="banner-card" type="button"><span class="template-media">MEDIA 16:9</span><strong>PRÓXIMA ROTACIÓN</strong><small>FECHA</small></button></div>
+      </section>
     </section>
+
+    <section class="marketplace-view" data-view="catalogo" aria-labelledby="catalogTitle" hidden>
+      <div class="category-intro"><div><span class="template-label" id="catalogKicker">TEMPLATE DE CATÁLOGO</span><h1 id="catalogTitle">Categoría</h1><p id="catalogDescription">Descripción de la categoría y su valor principal.</p></div></div>
+      <div class="catalog-toolbar" aria-label="Herramientas del catálogo">
+        <label class="catalog-search"><span>BUSCAR EN ESTA CATEGORÍA</span><input id="catalogSearch" type="search" placeholder="Buscar productos" autocomplete="off"></label>
+        <div class="catalog-filter-group" id="catalogFilters" aria-label="Filtros recomendados"></div>
+        <label class="catalog-sort"><span>ORDENAR</span><select id="catalogSort"><option value="featured">Destacados</option><option value="popular">Más vendidos</option><option value="new">Más nuevos</option><option value="price-low">Precio menor</option><option value="price-high">Precio mayor</option></select></label>
+      </div>
+      <div class="catalog-layout"><aside class="catalog-summary"><strong id="catalogCount">8 PRODUCTOS</strong><p>Los filtros cambian según la categoría; no se usa una solución única para productos distintos.</p><button class="marketplace-text-action" type="button" id="clearFilters">LIMPIAR FILTROS</button></aside><div class="product-grid" id="catalogGrid" aria-live="polite"></div></div>
+    </section>
+
+    <section class="marketplace-view" data-view="moneda" aria-labelledby="currencyTitle" hidden>
+      <div class="category-intro category-intro--currency"><div><span class="template-label">COMPRA DE SALDO</span><h1 id="currencyTitle">Moneda premium</h1><p>Una matriz simple para comparar cantidades, bonus y precio real sin mezclarla con productos del catálogo.</p></div><div class="current-balance"><span>SALDO ACTUAL</span><strong>3373</strong></div></div>
+      <div class="currency-grid">
+        <article class="currency-card"><div class="currency-card__visual"><span>ICONO PENDIENTE</span><strong>000</strong></div><div class="currency-card__body"><span>PACK INICIAL</span><strong>PRECIO REAL</strong><small>Sin bonus</small><button type="button" data-template-action="Pack inicial de moneda">COMPRAR</button></div></article>
+        <article class="currency-card"><div class="currency-card__visual"><span>ICONO PENDIENTE</span><strong>0 000</strong></div><div class="currency-card__body"><span>PACK MEDIO</span><strong>PRECIO REAL</strong><small>+00 bonus</small><button type="button" data-template-action="Pack medio de moneda">COMPRAR</button></div></article>
+        <article class="currency-card currency-card--recommended"><div class="currency-card__tag">MEJOR RELACIÓN</div><div class="currency-card__visual"><span>ICONO PENDIENTE</span><strong>0 000</strong></div><div class="currency-card__body"><span>PACK RECOMENDADO</span><strong>PRECIO REAL</strong><small>+000 bonus · ahorro verificable</small><button type="button" data-template-action="Pack recomendado de moneda">COMPRAR</button></div></article>
+        <article class="currency-card"><div class="currency-card__visual"><span>ICONO PENDIENTE</span><strong>00 000</strong></div><div class="currency-card__body"><span>PACK GRANDE</span><strong>PRECIO REAL</strong><small>+000 bonus</small><button type="button" data-template-action="Pack grande de moneda">COMPRAR</button></div></article>
+      </div>
+      <section class="purchase-assurance" aria-label="Información antes de comprar"><div><strong>VALOR CLARO</strong><span>Cantidad base, bonus y precio separados.</span></div><div><strong>COMPRA SEGURA</strong><span>Proveedor de pago y moneda local visibles.</span></div><div><strong>SOPORTE</strong><span>Recibo, historial y ayuda accesibles.</span></div></section>
+    </section>
+
+    <p class="marketplace-status" id="marketplaceStatus" aria-live="polite"></p>
   </main>
 
-  <footer class="store-footer" id="about">
-    <span>PIXEL</span>
-    <span>NOT AN OFFICIAL MINECRAFT PRODUCT. NOT APPROVED BY OR ASSOCIATED WITH MOJANG OR MICROSOFT.</span>
-    <span>ENTER SELECT · ESC BACK</span>
-  </footer>
+  <dialog class="product-dialog" id="productDialog" aria-labelledby="productDialogTitle">
+    <div class="product-dialog__layout">
+      <div class="template-media product-dialog__media"><span>GALERÍA / PREVIEW</span><small>ASSET PENDIENTE</small></div>
+      <div class="product-dialog__content">
+        <button class="product-dialog__close" id="productDialogClose" type="button" aria-label="Cerrar">CERRAR</button>
+        <span class="template-label">DETALLE DE PRODUCTO</span><h2 id="productDialogTitle">Nombre del producto</h2><p>Resumen comercial breve. El detalle confirma exactamente qué recibe el comprador antes de pagar.</p>
+        <dl class="product-specs"><div><dt>INCLUYE</dt><dd>Lista de contenidos</dd></div><div><dt>COMPATIBILIDAD</dt><dd>Requisitos o slots</dd></div><div><dt>ENTREGA</dt><dd>Inmediata / condición</dd></div></dl>
+        <div class="product-dialog__purchase"><div class="price-block"><span>PRECIO</span><strong>000</strong></div><button class="marketplace-primary-action" id="addToCartButton" type="button">AGREGAR AL CARRITO</button></div>
+      </div>
+    </div>
+  </dialog>
 
-  <script src="assets/js/app.js"></script>
+  <footer class="store-footer" id="about"><span>PIXEL</span><span>NOT AN OFFICIAL MINECRAFT PRODUCT. NOT APPROVED BY OR ASSOCIATED WITH MOJANG OR MICROSOFT.</span><span>TEMPLATE V1 · MARKETPLACE IA</span></footer>
+
+  <template id="catalogCardTemplate">
+    <article class="product-card"><button class="product-card__open" type="button" data-product-template><span class="template-media product-card__media"><span>MEDIA 4:3</span></span><span class="product-card__body"><small class="product-card__eyebrow"></small><strong class="product-card__title"></strong><span class="product-card__description"></span><span class="product-card__price">000 <em>MONEDA</em></span></span></button></article>
+  </template>
+
+  <script type="module" src="assets/js/marketplace.js?v=20260913-4"></script>
 </body>
 </html>

@@ -22,6 +22,7 @@ Las reglas obligatorias para futuras iteraciones están en [`AGENTS.md`](./AGENT
 - [`docs/research/README.md`](./docs/research/README.md) — orden de lectura de la investigación.
 - [`docs/research/OFFICIAL_SOURCES.md`](./docs/research/OFFICIAL_SOURCES.md)
 - [`docs/research/source-manifest.json`](./docs/research/source-manifest.json)
+- [`docs/design-system/MARKETPLACE_TEMPLATES.md`](./docs/design-system/MARKETPLACE_TEMPLATES.md) — arquitectura comercial, categorías y contratos de templates.
 
 ## Foundation CSS
 - [`assets/css/foundation/typography.css`](./assets/css/foundation/typography.css)
@@ -35,6 +36,7 @@ Aprobado como base:
 - familias tipográficas oficiales documentadas;
 - tokens de color exactos publicados por Mojang;
 - glyphs exactos de Buscar y Cuenta del header actual de Minecraft.net;
+- arquitectura de categorías y templates neutrales para Inicio, Gachas, catálogo, Moneda premium y detalle de producto;
 - estructura HTML, accesibilidad, navegación y lógica de estados.
 
 Pendiente de aprobación oficial de assets:

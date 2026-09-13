@@ -343,8 +343,7 @@
     min-width: 170px;
   }
 
-  .pixel-wordmark-caption,
-  .mc-shell-search-group {
+  .pixel-wordmark-caption {
     display: none;
   }
 }

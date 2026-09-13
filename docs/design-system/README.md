@@ -11,6 +11,9 @@ This design system is not a library of Minecraft/Dungeons lookalikes. It is a co
 - `assets/css/foundation/tokens.css`
 - `assets/css/foundation/dungeons-core.css`
 
+## Marketplace templates
+- `MARKETPLACE_TEMPLATES.md` — category architecture, commercial templates, conversion rationale and measurement plan.
+
 Important: the existence of an old CSS primitive does not mean it is approved for final visual use. Read `COMPONENTS.md` and `../research/KNOWN_INVALID_IMPLEMENTATIONS.md` before reusing anything.
 
 ## Component philosophy
