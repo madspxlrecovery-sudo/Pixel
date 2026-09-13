@@ -13,24 +13,19 @@
   <div class="marketplace-bg" aria-hidden="true"></div>
 
   <!--
-    Pixel adaptation of the official Minecraft.net desktop web shell.
-    Mojang source-backed geometry/typography is retained for the navbar.
-    Search/person glyphs currently use documented official Microsoft Fluent
-    fallbacks until the exact live minecraft.net glyph assets are identified.
+    Pixel adaptation of the current Minecraft.net Marketplace desktop shell.
+    Slot mapping is measured against the official desktop reference:
+    brand slot -> Pixel Network / expansion name
+    nav slots 1-4 -> Pixel navigation
+    original support slot -> Minecoin balance
+    right action rail -> buy / search / account
   -->
   <header class="minecraft-web-shell" aria-label="Pixel Network marketplace navigation">
     <div class="minecraft-web-shell__inner pixel-shell-v2">
-      <a class="mc-shell-logo" href="https://www.minecraft.net/es-es" aria-label="Minecraft">
-        <img
-          src="https://raw.githubusercontent.com/Mojang/web-theme-bootstrap/main/assets/svg/logos/minecraft.svg"
-          alt="Minecraft"
-        >
-      </a>
-
-      <div class="pixel-shell-identity" aria-label="Pixel Network expansion">
+      <a class="pixel-shell-brand-slot" href="#main" aria-label="Pixel Network — Dungeons Marketplace">
         <strong>PIXEL NETWORK</strong>
         <span>DUNGEONS MARKETPLACE</span>
-      </div>
+      </a>
 
       <nav class="mc-shell-nav pixel-shell-nav" aria-label="Pixel Network navigation">
         <button class="mc-shell-nav__item" type="button">
@@ -45,18 +40,21 @@
           <span>APRENDER</span>
           <i class="mc-pixel-caret" aria-hidden="true"></i>
         </button>
-        <a class="mc-shell-nav__item mc-shell-nav__item--link" href="#about">ABOUT US</a>
-      </nav>
+        <a class="mc-shell-nav__item mc-shell-nav__item--link" href="#about">
+          <span>ABOUT US</span>
+          <i class="mc-pixel-caret" aria-hidden="true"></i>
+        </a>
 
-      <div class="mc-shell-actions pixel-shell-actions">
-        <div class="mc-shell-wallet" aria-label="Minecoin balance">
+        <div class="mc-shell-wallet mc-shell-wallet--nav" aria-label="Minecoin balance">
           <img
             src="https://www.minecraft.net/content/dam/minecraftnet/franchise/component-library/icons/minecoin.svg"
             alt="Minecoin"
           >
           <span>3373</span>
         </div>
+      </nav>
 
+      <div class="mc-shell-actions pixel-shell-actions">
         <a class="mc-web-cta" href="https://www.minecraft.net/es-es/store/minecraft-dungeons" aria-label="Comprar ahora">
           <span>COMPRAR AHORA</span>
           <i class="mc-web-cta__arrow-mask" aria-hidden="true"></i>
