@@ -36,7 +36,8 @@ Aprobado como base:
 - familias tipográficas oficiales documentadas;
 - tokens de color exactos publicados por Mojang;
 - glyphs exactos de Buscar y Cuenta del header actual de Minecraft.net;
-- arquitectura de categorías y templates neutrales para Inicio, Gachas, catálogo, Moneda premium y detalle de producto;
+- arquitectura de doce categorías y templates neutrales para Inicio, Ruletas, Gachas, Crates, Battlepass, catálogos, Moneda premium, Pixel+ y Bundles;
+- detalle de sets con compra del conjunto completo o de piezas individuales;
 - estructura HTML, accesibilidad, navegación y lógica de estados.
 
 Pendiente de aprobación oficial de assets:

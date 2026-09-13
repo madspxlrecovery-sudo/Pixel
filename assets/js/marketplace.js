@@ -3,9 +3,21 @@ const categoryConfig = {
     label: 'INICIO',
     view: 'inicio',
   },
+  ruletas: {
+    label: 'RULETAS',
+    view: 'ruletas',
+  },
   gachas: {
     label: 'GACHAS',
     view: 'gachas',
+  },
+  crates: {
+    label: 'CRATES',
+    view: 'crates',
+  },
+  battlepass: {
+    label: 'BATTLEPASS',
+    view: 'battlepass',
   },
   consumibles: {
     label: 'CONSUMIBLES',
@@ -32,6 +44,7 @@ const categoryConfig = {
     description: 'La ficha muestra el conjunto completo, las piezas incluidas, la compatibilidad y una galería antes de comprar.',
     filters: ['SLOT', 'COLECCIÓN', 'COMPATIBILIDAD'],
     productType: 'COSMÉTICO',
+    supportsIndividual: true,
     products: [
       ['Set cosmético 01', 'Cantidad de piezas y slots incluidos.'],
       ['Set cosmético 02', 'Vista del conjunto y sus variantes.'],
@@ -50,6 +63,7 @@ const categoryConfig = {
     description: 'Compañeros agrupados por pack, variante y comportamiento. El preview debe explicar qué cambia y qué permanece igual.',
     filters: ['TIPO', 'VARIANTE', 'PACK'],
     productType: 'PET',
+    supportsIndividual: true,
     products: [
       ['Pack de pets 01', 'Compañeros incluidos y variantes.'],
       ['Pack de pets 02', 'Preview, comportamiento y compatibilidad.'],
@@ -61,9 +75,32 @@ const categoryConfig = {
       ['Pack de pets 08', 'Resumen para comparar en la grilla.'],
     ],
   },
+  talismanes: {
+    label: 'TALISMANES',
+    view: 'catalogo',
+    title: 'Sets de talismanes',
+    description: 'Colecciones comparables por tipo, efecto y compatibilidad. Cada set también permite abrir el detalle de sus talismanes individuales.',
+    filters: ['TIPO', 'EFECTO', 'COMPATIBILIDAD'],
+    productType: 'TALISMÁN',
+    supportsIndividual: true,
+    products: [
+      ['Set de talismanes 01', 'Efectos, piezas y compatibilidad visibles.'],
+      ['Set de talismanes 02', 'Comparación entre conjunto y piezas individuales.'],
+      ['Set de talismanes 03', 'Alcance exacto de cada beneficio.'],
+      ['Set de talismanes 04', 'Contenido completo y valor por pieza.'],
+      ['Set de talismanes 05', 'Colección, variantes y condiciones de uso.'],
+      ['Set de talismanes 06', 'Compatibilidad y límites claramente indicados.'],
+      ['Set de talismanes 07', 'Disponibilidad sin escasez artificial.'],
+      ['Set de talismanes 08', 'Resumen para comparar antes de comprar.'],
+    ],
+  },
   moneda: {
     label: 'MONEDA PREMIUM',
     view: 'moneda',
+  },
+  pixelplus: {
+    label: 'PIXEL+',
+    view: 'pixelplus',
   },
   bundles: {
     label: 'BUNDLES Y OFERTAS',
@@ -109,12 +146,18 @@ const productDialog = document.getElementById('productDialog');
 const productDialogTitle = document.getElementById('productDialogTitle');
 const productDialogClose = document.getElementById('productDialogClose');
 const addToCartButton = document.getElementById('addToCartButton');
+const setBreakdown = document.getElementById('setBreakdown');
 const cartButton = document.getElementById('cartButton');
 const cartCount = document.getElementById('cartCount');
+const crateQuantity = document.getElementById('crateQuantity');
+const crateQuantitySummary = document.getElementById('crateQuantitySummary');
+const crateOpeningsSummary = document.getElementById('crateOpeningsSummary');
+const selectedCrateName = document.getElementById('selectedCrateName');
 
 let activeCategory = 'inicio';
 let activeCatalog = null;
 let selectedProduct = 'Producto';
+let selectedProductSupportsIndividual = false;
 let cartItems = 0;
 let activeFilters = new Set();
 
@@ -165,7 +208,8 @@ function renderCatalog() {
     const description = fragment.querySelector('.product-card__description');
 
     openButton.dataset.productName = product.title;
-    eyebrow.textContent = `${activeCatalog.productType} · PACK`;
+    openButton.dataset.supportsIndividual = String(Boolean(activeCatalog.supportsIndividual));
+    eyebrow.textContent = `${activeCatalog.productType} · ${activeCatalog.supportsIndividual ? 'SET' : 'PACK'}`;
     title.textContent = product.title;
     description.textContent = product.description;
     catalogGrid.append(fragment);
@@ -230,6 +274,7 @@ function setCategory(category, { updateHistory = true, focusMain = true } = {}) 
   });
 
   setMenuOpen(false);
+  status.textContent = '';
   document.title = `${config.label} — Pixel Marketplace`;
 
   if (updateHistory) history.pushState({ category: activeCategory }, '', `#marketplace/${activeCategory}`);
@@ -292,8 +337,20 @@ document.addEventListener('click', (event) => {
   const productButton = target.closest('[data-product-template]');
   if (productButton && productDialog) {
     selectedProduct = productButton.dataset.productName || 'Producto';
+    selectedProductSupportsIndividual = productButton.dataset.supportsIndividual === 'true';
     productDialogTitle.textContent = selectedProduct;
+    setBreakdown.hidden = !selectedProductSupportsIndividual;
+    addToCartButton.textContent = selectedProductSupportsIndividual ? 'AGREGAR SET AL CARRITO' : 'AGREGAR AL CARRITO';
     productDialog.showModal();
+  }
+
+  const setPieceButton = target.closest('[data-set-piece]');
+  if (setPieceButton && productDialog) {
+    cartItems += 1;
+    cartCount.textContent = String(cartItems);
+    cartButton.setAttribute('aria-label', `Carrito, ${cartItems} ${cartItems === 1 ? 'producto' : 'productos'}`);
+    productDialog.close();
+    status.textContent = `${setPieceButton.dataset.setPiece} de ${selectedProduct} agregada al carrito de demostración.`;
   }
 
   const templateAction = target.closest('[data-template-action]');
@@ -324,6 +381,27 @@ document.getElementById('oddsJump')?.addEventListener('click', () => {
   document.getElementById('oddsPanel')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 });
 
+document.querySelectorAll('.roulette-tiers button').forEach((button) => {
+  button.addEventListener('click', () => {
+    document.querySelectorAll('.roulette-tiers button').forEach((tier) => tier.setAttribute('aria-pressed', String(tier === button)));
+    status.textContent = `Nivel de ruleta seleccionado: ${button.textContent}.`;
+  });
+});
+
+document.querySelectorAll('[data-crate-name]').forEach((button) => {
+  button.addEventListener('click', () => {
+    document.querySelectorAll('[data-crate-name]').forEach((card) => card.classList.toggle('is-selected', card === button));
+    selectedCrateName.textContent = button.dataset.crateName;
+  });
+});
+
+crateQuantity?.addEventListener('input', () => {
+  const quantity = Math.min(100, Math.max(1, Number.parseInt(crateQuantity.value, 10) || 1));
+  crateQuantity.value = String(quantity);
+  crateQuantitySummary.textContent = String(quantity);
+  crateOpeningsSummary.textContent = String(quantity);
+});
+
 productDialogClose?.addEventListener('click', () => productDialog.close());
 productDialog?.addEventListener('click', (event) => {
   if (event.target === productDialog) productDialog.close();
@@ -334,7 +412,7 @@ addToCartButton?.addEventListener('click', () => {
   cartCount.textContent = String(cartItems);
   cartButton.setAttribute('aria-label', `Carrito, ${cartItems} ${cartItems === 1 ? 'producto' : 'productos'}`);
   productDialog.close();
-  status.textContent = `${selectedProduct} agregado al carrito de demostración.`;
+  status.textContent = `${selectedProductSupportsIndividual ? `Set ${selectedProduct}` : selectedProduct} agregado al carrito de demostración.`;
 });
 
 cartButton?.addEventListener('click', () => {
