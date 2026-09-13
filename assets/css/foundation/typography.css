@@ -21,9 +21,18 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: "MinecraftFiveBold";
+  src: url("https://raw.githubusercontent.com/Mojang/web-theme-bootstrap/main/assets/fonts/MinecraftFive-Bold.woff") format("woff");
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+
 :root {
   --font-du-title: "MinecraftTenV2", "Arial Black", sans-serif;
   --font-du-body: "MinecraftSevenV2", Arial, sans-serif;
+  --font-pixel-wordmark: "MinecraftFiveBold", "Arial Black", sans-serif;
 }
 
 .du-title,
