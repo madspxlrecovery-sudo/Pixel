@@ -1,71 +1,207 @@
 /*
-  Pixel shell v2
+  Pixel shell — measured Marketplace slot mapping
 
-  This file only adapts the official-source shell established in official-shell.css.
-  It does not replace the Mojang navbar metrics there.
+  Desktop reference:
+  https://www.minecraft.net/es-es/marketplace/category/texture-packs
 
-  Official source roles:
-  - Mojang web-theme-bootstrap: navbar metrics, Minecraft logo, pixel carets, CTA arrow.
-  - minecraft.net: Minecoin artwork and live shell reference.
-  - Microsoft Fluent System Icons: temporary official-source fallback for search/person
-    glyphs while the exact current minecraft.net glyph assets remain unresolved.
+  Source-backed rules:
+  - Mojang web-theme-bootstrap _navbar.scss:
+      .nav-link padding .5rem .75rem
+      line-height 1
+      uppercase
+      letter-spacing 1px
+      .nav-item margin 0 2px
+  - Mojang _variables.scss: "Noto Sans", sans-serif
+  - official desktop capture at 1365 px wide:
+      centered shell ≈1240 px
+      left edge ≈62 px
+      original brand/logo slot ≈220 px
+      nav begins ≈306 px
+      green CTA ≈x953–1107 (154 px)
+      search rail ≈x1123–1167 (44 px)
+      account rail ≈x1191–1285 (94 px)
 
-  IMPORTANT: the Fluent search/person glyphs are official Microsoft assets, but are NOT
-  claimed to be the exact current minecraft.net header glyphs. See OFFICIAL_ASSET_GATE.md.
+  Pixel maps project content into those slots rather than adding new columns.
 */
 
-.pixel-shell-v2 .pixel-shell-identity {
-  flex: 0 0 128px;
-  width: 128px;
-  padding-left: 14px;
-  margin-right: 4px;
+/* --------------------------------------------------------------------------
+   Desktop slot skeleton
+   -------------------------------------------------------------------------- */
+
+.minecraft-web-shell__inner.pixel-shell-v2 {
+  width: min(1240px, calc(100% - 120px));
+  height: 79px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
 }
 
-.pixel-shell-v2 .pixel-shell-identity strong {
-  font-size: 11px;
-  letter-spacing: .8px;
+/*
+  Replaces the single 220px Minecraft-logo slot.
+  Pixel identity and expansion name live inside ONE slot so the rest of the
+  official navbar does not get pushed out of position.
+*/
+.pixel-shell-brand-slot {
+  width: 220px;
+  height: 38px;
+  flex: 0 0 220px;
+  margin-right: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 3px;
+  color: #fff;
+  text-decoration: none;
+  font-family: "Noto Sans", sans-serif;
+  line-height: 1;
 }
 
-.pixel-shell-v2 .pixel-shell-identity span {
-  font-size: 8px;
-  letter-spacing: .65px;
+.pixel-shell-brand-slot:hover,
+.pixel-shell-brand-slot:focus-visible {
+  color: #fff;
+  text-decoration: none;
 }
 
+.pixel-shell-brand-slot strong {
+  display: block;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.pixel-shell-brand-slot span {
+  display: block;
+  color: rgba(255, 255, 255, .72);
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/*
+  At the 1365px reference width this block spans approximately x306–953.
+  Four Pixel nav entries occupy the first four institutional nav slots; the
+  wallet occupies the fifth slot (where SOPORTE TÉCNICO sits on minecraft.net).
+*/
 .pixel-shell-nav {
+  height: 79px;
+  min-width: 0;
   flex: 1 1 auto;
-  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0;
+  overflow: visible;
 }
 
 .pixel-shell-nav .mc-shell-nav__item {
   flex: 0 0 auto;
+  min-height: 36px;
+  margin: 0 2px;
+  padding: .5rem .75rem;
+  font-family: "Noto Sans", sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
-.pixel-shell-actions {
-  flex: 0 0 auto;
-  gap: 12px;
+.pixel-shell-nav .mc-shell-nav__item--link {
+  white-space: nowrap;
 }
 
-.mc-shell-search-group {
+/* Wallet maps into the fifth original navigation slot, not the action rail. */
+.mc-shell-wallet--nav {
+  width: 80px;
   height: 36px;
+  flex: 0 0 80px;
+  margin: 0 2px;
+  padding: 0 8px;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
+  gap: 7px;
+  color: #fff;
+  font-family: "Noto Sans", sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.mc-shell-wallet--nav img {
+  width: 20px;
+  height: 20px;
+  flex: 0 0 20px;
+  display: block;
+  object-fit: contain;
+}
+
+/* --------------------------------------------------------------------------
+   Right rail — measured against the official desktop screenshot
+   -------------------------------------------------------------------------- */
+
+.pixel-shell-actions {
+  width: 349px;
+  height: 79px;
+  flex: 0 0 349px;
+  margin-left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0;
+  font-family: "Noto Sans", sans-serif;
+}
+
+.pixel-shell-actions .mc-web-cta {
+  width: 154px;
+  min-width: 154px;
+  max-width: 154px;
+  height: 36px;
+  flex: 0 0 154px;
+}
+
+/* Official-current-icon fallback rail: x≈1123–1167 at the 1365 reference. */
+.mc-shell-search-group {
+  width: 44px;
+  height: 36px;
+  flex: 0 0 44px;
+  margin-left: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
   gap: 5px;
   color: #fff;
 }
 
 .mc-shell-search-slot {
+  width: 24px;
+  height: 36px;
+  flex: 0 0 24px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  appearance: none;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: currentColor;
+  cursor: pointer;
 }
 
 /*
   Official Microsoft Fluent System Icons — Search 16 Regular.
-  Remote source is used as a mask so the shell can render it white/currentColor.
+  Temporary official-source fallback; NOT claimed as the exact minecraft.net
+  glyph until the live asset is positively identified.
 */
 .mc-shell-search-icon {
   width: 16px;
   height: 16px;
+  flex: 0 0 16px;
   display: block;
   background: currentColor;
   -webkit-mask: url("https://raw.githubusercontent.com/microsoft/fluentui-system-icons/main/assets/Search/SVG/ic_fluent_search_16_regular.svg") center / contain no-repeat;
@@ -74,9 +210,32 @@
 
 .mc-shell-search-caret {
   margin-left: 0;
+  color: #fff;
 }
 
-/* Official Microsoft Fluent System Icons — Person 16 Regular. */
+/* Account rail begins ≈24px after search and occupies ≈94px. */
+.pixel-shell-actions .mc-shell-account {
+  width: 94px;
+  min-width: 94px;
+  max-width: 94px;
+  height: 36px;
+  flex: 0 0 94px;
+  margin-left: 24px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 6px;
+  color: #fff;
+  font-family: "Noto Sans", sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+/* Official Microsoft Fluent System Icons — Person 16 Regular fallback. */
 .mc-shell-person-icon {
   width: 16px;
   height: 16px;
@@ -87,30 +246,23 @@
   mask: url("https://raw.githubusercontent.com/microsoft/fluentui-system-icons/main/assets/Person/SVG/ic_fluent_person_16_regular.svg") center / contain no-repeat;
 }
 
-/* Keep the official-source navbar link metrics; only project content/order changes. */
-.pixel-shell-nav .mc-shell-nav__item--link {
-  white-space: nowrap;
-}
+/* --------------------------------------------------------------------------
+   Responsive adaptation — desktop lock above; controlled collapse below
+   -------------------------------------------------------------------------- */
 
-@media (max-width: 1390px) {
+@media (max-width: 1280px) {
   .minecraft-web-shell__inner.pixel-shell-v2 {
-    width: calc(100% - 32px);
+    width: calc(100% - 40px);
   }
 
-  .pixel-shell-v2 .mc-shell-logo {
-    width: 180px;
-    flex-basis: 180px;
-    margin-right: 10px;
+  .pixel-shell-brand-slot {
+    width: 190px;
+    flex-basis: 190px;
+    margin-right: 14px;
   }
 
-  .pixel-shell-v2 .mc-shell-logo img {
-    width: 180px;
-  }
-
-  .pixel-shell-v2 .pixel-shell-identity {
-    flex-basis: 112px;
-    width: 112px;
-    padding-left: 10px;
+  .pixel-shell-brand-slot strong {
+    font-size: 13px;
   }
 
   .pixel-shell-nav .mc-shell-nav__item {
@@ -118,19 +270,62 @@
     font-size: 11px;
   }
 
-  .pixel-shell-actions {
-    gap: 9px;
+  .mc-shell-wallet--nav {
+    width: 68px;
+    flex-basis: 68px;
+    padding-inline: 4px;
   }
 }
 
-@media (max-width: 1180px) {
-  .pixel-shell-nav .mc-shell-nav__item:last-child {
+@media (max-width: 1120px) {
+  .pixel-shell-nav .mc-shell-nav__item:nth-child(4) {
     display: none;
   }
 }
 
-@media (max-width: 1060px) {
+@media (max-width: 1020px) {
   .pixel-shell-nav {
     display: none;
+  }
+
+  .pixel-shell-actions {
+    margin-left: auto;
+  }
+}
+
+@media (max-width: 760px) {
+  .pixel-shell-brand-slot {
+    width: 170px;
+    flex-basis: 170px;
+  }
+
+  .pixel-shell-brand-slot span,
+  .mc-shell-search-group {
+    display: none;
+  }
+}
+
+@media (max-width: 620px) {
+  .minecraft-web-shell__inner.pixel-shell-v2 {
+    width: calc(100% - 20px);
+  }
+
+  .pixel-shell-brand-slot {
+    width: 145px;
+    flex-basis: 145px;
+    margin-right: 10px;
+  }
+
+  .pixel-shell-actions {
+    width: auto;
+    flex-basis: auto;
+  }
+
+  .pixel-shell-actions .mc-web-cta {
+    display: none;
+  }
+
+  .pixel-shell-actions .mc-shell-account {
+    margin-left: 0;
   }
 }
