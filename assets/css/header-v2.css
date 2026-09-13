@@ -1,58 +1,56 @@
 /*
-  Pixel shell — measured Marketplace slot mapping
+  Pixel shell — Marketplace desktop geometry v3
 
-  Desktop reference:
+  Primary visual reference:
   https://www.minecraft.net/es-es/marketplace/category/texture-packs
 
-  Source-backed rules:
-  - Mojang web-theme-bootstrap _navbar.scss:
-      .nav-link padding .5rem .75rem
-      line-height 1
-      uppercase
-      letter-spacing 1px
-      .nav-item margin 0 2px
-  - Mojang _variables.scss: "Noto Sans", sans-serif
-  - official desktop capture at 1365 px wide:
-      centered shell ≈1240 px
-      left edge ≈62 px
-      original brand/logo slot ≈220 px
-      nav begins ≈306 px
-      green CTA ≈x953–1107 (154 px)
-      search rail ≈x1123–1167 (44 px)
-      account rail ≈x1191–1285 (94 px)
+  Important correction from the previous pass:
+  the desktop shell is not a permanently capped 1240px container. At wide desktop
+  widths the live composition keeps roughly 60px outer gutters, so the brand stays
+  near the left edge while the action rail stays near the right edge.
 
-  Pixel-specific mapping:
-  - PIXEL NETWORK replaces the original Minecraft brand slot.
-  - The fifth institutional navigation slot stays reserved so CTA/search/account keep
-    the same measured desktop positions.
-  - Minecoins are appended visually after Account in the original outer-right breathing
-    room instead of stealing a navigation slot or moving the action rail.
+  Source-backed rules retained from Mojang web-theme-bootstrap:
+  - Noto Sans
+  - .nav-link padding .5rem .75rem
+  - line-height: 1
+  - uppercase
+  - letter-spacing: 1px
+  - .nav-item margin: 0 2px
+
+  Pixel mapping:
+  - PIXEL NETWORK replaces the original Minecraft brand/logo slot.
+  - Project navigation occupies the centered navigation cluster.
+  - COMPRAR AHORA / search / account keep the compact official right-rail rhythm.
+  - Minecoins sit after Account in the available outer-right breathing room.
 */
 
 /* --------------------------------------------------------------------------
-   Desktop slot skeleton
+   Desktop shell: three rigid zones — brand / centered navigation / actions
    -------------------------------------------------------------------------- */
 
 .minecraft-web-shell__inner.pixel-shell-v2 {
-  width: min(1240px, calc(100% - 120px));
+  width: calc(100% - 120px);
+  max-width: none;
   height: 79px;
-  margin: 0 auto;
+  margin: 0 60px;
   position: relative;
-  display: flex;
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr) 340px;
   align-items: center;
   white-space: nowrap;
   overflow: visible;
 }
 
-/* Replaces the single 220px Minecraft-logo slot. */
+/* Pixel Network occupies exactly the original desktop brand slot. */
 .pixel-shell-brand-slot {
   width: 220px;
   height: 38px;
-  flex: 0 0 220px;
-  margin-right: 24px;
+  min-width: 220px;
+  margin: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: flex-start;
   gap: 3px;
   color: #fff;
   text-decoration: none;
@@ -86,18 +84,19 @@
 }
 
 /*
-  At the 1365px reference width this block spans approximately x306–953.
-  The first four slots are Pixel navigation. The fifth original slot is deliberately
-  preserved as empty geometry to keep the right action rail in its official position.
+  The official wide-desktop navbar behaves as a compact cluster between brand
+  and actions. It must not stretch each item across all available space.
 */
 .pixel-shell-nav {
-  height: 79px;
+  width: auto;
   min-width: 0;
-  flex: 1 1 auto;
+  height: 79px;
+  margin: 0;
+  justify-self: center;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  margin: 0;
+  justify-content: center;
+  gap: 24px;
   overflow: visible;
 }
 
@@ -118,25 +117,21 @@
   white-space: nowrap;
 }
 
-/* Keeps the original fifth nav slot without showing fake content. */
+/* The previous fake fifth-width spacer distorted wide desktop centering. */
 .mc-shell-nav__reserved-slot {
-  width: 80px;
-  height: 36px;
-  flex: 0 0 80px;
-  margin: 0 2px;
-  display: block;
-  pointer-events: none;
+  display: none;
 }
 
 /* --------------------------------------------------------------------------
-   Right rail — measured against the official desktop screenshot
+   Compact right rail — Buy / Search / Account
    -------------------------------------------------------------------------- */
 
 .pixel-shell-actions {
-  width: 349px;
+  width: 340px;
   height: 79px;
-  flex: 0 0 349px;
-  margin-left: 0;
+  min-width: 340px;
+  margin: 0;
+  justify-self: end;
   position: relative;
   display: flex;
   align-items: center;
@@ -153,7 +148,6 @@
   flex: 0 0 154px;
 }
 
-/* Official-current-icon fallback rail: x≈1123–1167 at the 1365 reference. */
 .mc-shell-search-group {
   width: 44px;
   height: 36px;
@@ -181,10 +175,7 @@
   cursor: pointer;
 }
 
-/*
-  Official Microsoft Fluent System Icons — Search 16 Regular.
-  Temporary official-source fallback; NOT claimed as the exact minecraft.net glyph.
-*/
+/* Official Microsoft Fluent Search 16 Regular — documented temporary fallback. */
 .mc-shell-search-icon {
   width: 16px;
   height: 16px;
@@ -200,7 +191,6 @@
   color: #fff;
 }
 
-/* Account rail begins ≈24px after search and occupies ≈94px. */
 .pixel-shell-actions .mc-shell-account {
   width: 94px;
   min-width: 94px;
@@ -222,7 +212,7 @@
   text-transform: uppercase;
 }
 
-/* Official Microsoft Fluent System Icons — Person 16 Regular fallback. */
+/* Official Microsoft Fluent Person 16 Regular — documented temporary fallback. */
 .mc-shell-person-icon {
   width: 16px;
   height: 16px;
@@ -234,9 +224,9 @@
 }
 
 /*
-  Pixel wallet follows Account without moving the official action rail.
-  At the 1365px reference, the official inner container ends around x≈1302 and the page
-  still has ≈63px of right breathing room. The 64px wallet uses that outer room.
+  At ~1907px wide the original account group still leaves roughly one small
+  right-side gutter. Pixel uses that gutter for its Minecoin balance instead
+  of shifting the official Buy/Search/Account rhythm to the left.
 */
 .mc-shell-wallet--after-account {
   width: 64px;
@@ -266,22 +256,27 @@
 }
 
 /* --------------------------------------------------------------------------
-   Responsive adaptation — desktop lock above; controlled collapse below
+   Responsive adaptation
    -------------------------------------------------------------------------- */
 
 @media (max-width: 1280px) {
   .minecraft-web-shell__inner.pixel-shell-v2 {
     width: calc(100% - 40px);
+    margin: 0 20px;
+    grid-template-columns: 190px minmax(0, 1fr) 340px;
   }
 
   .pixel-shell-brand-slot {
     width: 190px;
-    flex-basis: 190px;
-    margin-right: 14px;
+    min-width: 190px;
   }
 
   .pixel-shell-brand-slot strong {
     font-size: 13px;
+  }
+
+  .pixel-shell-nav {
+    gap: 8px;
   }
 
   .pixel-shell-nav .mc-shell-nav__item {
@@ -289,13 +284,8 @@
     font-size: 11px;
   }
 
-  .mc-shell-nav__reserved-slot {
-    width: 60px;
-    flex-basis: 60px;
-  }
-
   .mc-shell-wallet--after-account {
-    right: -2px;
+    right: -18px;
     transform: translate(100%, -50%);
   }
 }
@@ -307,13 +297,16 @@
 }
 
 @media (max-width: 1120px) {
-  .pixel-shell-nav .mc-shell-nav__item:nth-child(4),
-  .mc-shell-nav__reserved-slot {
+  .pixel-shell-nav .mc-shell-nav__item:nth-child(4) {
     display: none;
   }
 }
 
 @media (max-width: 1020px) {
+  .minecraft-web-shell__inner.pixel-shell-v2 {
+    display: flex;
+  }
+
   .pixel-shell-nav {
     display: none;
   }
@@ -326,7 +319,7 @@
 @media (max-width: 760px) {
   .pixel-shell-brand-slot {
     width: 170px;
-    flex-basis: 170px;
+    min-width: 170px;
   }
 
   .pixel-shell-brand-slot span,
@@ -338,17 +331,18 @@
 @media (max-width: 620px) {
   .minecraft-web-shell__inner.pixel-shell-v2 {
     width: calc(100% - 20px);
+    margin: 0 10px;
   }
 
   .pixel-shell-brand-slot {
     width: 145px;
-    flex-basis: 145px;
+    min-width: 145px;
     margin-right: 10px;
   }
 
   .pixel-shell-actions {
     width: auto;
-    flex-basis: auto;
+    min-width: 0;
   }
 
   .pixel-shell-actions .mc-web-cta {
