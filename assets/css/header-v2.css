@@ -1,25 +1,24 @@
 /*
-  Pixel shell — Marketplace desktop geometry v4
+  Pixel shell — Marketplace desktop geometry v5
 
-  Primary visual reference:
+  Primary live reference:
   https://www.minecraft.net/es-es/marketplace/category/texture-packs
 
-  Source-backed rules retained from Mojang web-theme-bootstrap:
-  - Noto Sans for the global web-shell navigation/actions
-  - .nav-link padding .5rem .75rem
-  - line-height: 1
-  - uppercase
-  - letter-spacing: 1px
-  - .nav-item margin: 0 2px
+  Exact source-backed shell resources:
+  - Mojang NotoSans-Regular / NotoSans-Bold from web-theme-bootstrap
+  - Mojang pixel-caret.svg
+  - Mojang pixel-arrow-right.svg
+  - official Minecoin SVG hosted on minecraft.net
 
-  Pixel-specific adaptations:
-  - PIXEL is a project-owned wordmark using Mojang's OFL-licensed Minecraft Five Bold.
-  - the wordmark occupies the original Minecraft brand slot; it is not presented as a Mojang logo.
-  - the Minecoin wallet sits immediately before Account in the right action cluster.
+  STRICT RULE:
+  Search/account pictograms are intentionally NOT approximated here. The previous
+  Microsoft Fluent fallbacks were removed because they are not the exact live
+  minecraft.net glyphs. Their 16px geometry slots remain neutral until the exact
+  live assets are positively identified and gated.
 */
 
 /* --------------------------------------------------------------------------
-   Desktop shell: three rigid zones — brand / centered navigation / actions
+   Desktop shell — brand / centered navigation / actions
    -------------------------------------------------------------------------- */
 
 .minecraft-web-shell__inner.pixel-shell-v2 {
@@ -29,23 +28,27 @@
   margin: 0 60px;
   position: relative;
   display: grid;
-  grid-template-columns: 220px minmax(0, 1fr) 404px;
+  grid-template-columns: 240px minmax(0, 1fr) 404px;
   align-items: center;
   white-space: nowrap;
   overflow: visible;
+  font-family: var(--font-mc-web);
 }
 
-/* Pixel wordmark replaces the original Minecraft-logo slot. */
+/*
+  Project-owned wordmark inside the original Minecraft brand zone.
+  This is the ONLY intentionally original visual in the global shell.
+*/
 .pixel-shell-brand-slot {
-  width: 220px;
+  width: 240px;
   height: 46px;
-  min-width: 220px;
+  min-width: 240px;
   margin: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 1px;
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 12px;
   color: #fff;
   text-decoration: none;
   line-height: 1;
@@ -58,30 +61,32 @@
 }
 
 .pixel-wordmark {
-  display: block;
-  font-family: var(--font-pixel-wordmark, "MinecraftFiveBold", "Arial Black", sans-serif);
-  font-size: 28px;
+  display: inline-block;
+  flex: 0 0 auto;
+  font-family: var(--font-pixel-wordmark);
+  font-size: 29px;
   font-weight: 700;
   line-height: .82;
-  letter-spacing: .8px;
+  letter-spacing: .7px;
   text-transform: uppercase;
   white-space: nowrap;
 }
 
 .pixel-wordmark-caption {
-  display: block;
-  margin-left: 2px;
-  color: rgba(255, 255, 255, .76);
-  font-family: "Noto Sans", sans-serif;
+  display: inline-block;
+  flex: 0 0 auto;
+  margin: 1px 0 0;
+  color: #e67834;
+  font-family: var(--font-mc-web);
   font-size: 8px;
   font-weight: 700;
   line-height: 1;
-  letter-spacing: .9px;
+  letter-spacing: .75px;
   text-transform: uppercase;
   white-space: nowrap;
 }
 
-/* Compact navigation cluster between brand and right rail. */
+/* Compact navigation cluster; no space-between stretching. */
 .pixel-shell-nav {
   width: auto;
   min-width: 0;
@@ -100,7 +105,7 @@
   min-height: 36px;
   margin: 0 2px;
   padding: .5rem .75rem;
-  font-family: "Noto Sans", sans-serif;
+  font-family: var(--font-mc-web);
   font-size: 12px;
   font-weight: 700;
   line-height: 1;
@@ -131,7 +136,7 @@
   align-items: center;
   justify-content: flex-end;
   gap: 0;
-  font-family: "Noto Sans", sans-serif;
+  font-family: var(--font-mc-web);
 }
 
 .pixel-shell-actions .mc-web-cta {
@@ -140,6 +145,7 @@
   max-width: 154px;
   height: 36px;
   flex: 0 0 154px;
+  font-family: var(--font-mc-web);
 }
 
 .mc-shell-search-group {
@@ -169,15 +175,16 @@
   cursor: pointer;
 }
 
-/* Official Microsoft Fluent Search 16 Regular — documented temporary fallback. */
+/*
+  Neutral geometry only. No substitute glyph is permitted.
+  The exact live minecraft.net search asset is still awaiting identification.
+*/
 .mc-shell-search-icon {
   width: 16px;
   height: 16px;
   flex: 0 0 16px;
   display: block;
-  background: currentColor;
-  -webkit-mask: url("https://raw.githubusercontent.com/microsoft/fluentui-system-icons/main/assets/Search/SVG/ic_fluent_search_16_regular.svg") center / contain no-repeat;
-  mask: url("https://raw.githubusercontent.com/microsoft/fluentui-system-icons/main/assets/Search/SVG/ic_fluent_search_16_regular.svg") center / contain no-repeat;
+  background: transparent;
 }
 
 .mc-shell-search-caret {
@@ -185,7 +192,7 @@
   color: #fff;
 }
 
-/* Official Minecoin artwork, placed directly before Account. */
+/* Official Minecoin artwork immediately before Account. */
 .mc-shell-wallet--before-account {
   width: 64px;
   height: 36px;
@@ -197,7 +204,7 @@
   justify-content: flex-start;
   gap: 6px;
   color: #fff;
-  font-family: "Noto Sans", sans-serif;
+  font-family: var(--font-mc-web);
   font-size: 12px;
   font-weight: 700;
   line-height: 1;
@@ -224,7 +231,7 @@
   justify-content: flex-start;
   gap: 6px;
   color: #fff;
-  font-family: "Noto Sans", sans-serif;
+  font-family: var(--font-mc-web);
   font-size: 12px;
   font-weight: 700;
   line-height: 1;
@@ -232,18 +239,18 @@
   text-transform: uppercase;
 }
 
-/* Official Microsoft Fluent Person 16 Regular — documented temporary fallback. */
+/*
+  Neutral geometry only. No substitute glyph is permitted.
+  The exact live minecraft.net account/profile asset is still awaiting identification.
+*/
 .mc-shell-person-icon {
   width: 16px;
   height: 16px;
   flex: 0 0 16px;
-  display: inline-block;
-  background: currentColor;
-  -webkit-mask: url("https://raw.githubusercontent.com/microsoft/fluentui-system-icons/main/assets/Person/SVG/ic_fluent_person_16_regular.svg") center / contain no-repeat;
-  mask: url("https://raw.githubusercontent.com/microsoft/fluentui-system-icons/main/assets/Person/SVG/ic_fluent_person_16_regular.svg") center / contain no-repeat;
+  display: block;
+  background: transparent;
 }
 
-/* Remove obsolete wallet placement from earlier iterations. */
 .mc-shell-wallet--after-account {
   display: none !important;
 }
@@ -256,20 +263,22 @@
   .minecraft-web-shell__inner.pixel-shell-v2 {
     width: calc(100% - 40px);
     margin: 0 20px;
-    grid-template-columns: 190px minmax(0, 1fr) 392px;
+    grid-template-columns: 215px minmax(0, 1fr) 392px;
   }
 
   .pixel-shell-brand-slot {
-    width: 190px;
-    min-width: 190px;
+    width: 215px;
+    min-width: 215px;
+    gap: 9px;
   }
 
   .pixel-wordmark {
-    font-size: 24px;
+    font-size: 25px;
   }
 
   .pixel-wordmark-caption {
     font-size: 7px;
+    letter-spacing: .55px;
   }
 
   .pixel-shell-nav {
